@@ -71,7 +71,7 @@ $(document).ready(function(){
                 data: xData,
                 success:function(data){
                     console.log(data);
-                    console.log("La empresa se "+field.value+" abrió con éxito...");
+                    console.log("La empresa se "+field.value+" abrió con XXXX éxito...");
                 }
             });
         }
