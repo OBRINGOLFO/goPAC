@@ -60,7 +60,7 @@ $(document).ready(function(){
         width: 420,
         height: goTasaH(70)
     });
-    //# ************************************************ #
+    //# *********************************************** #
     $("#cmdEMPRESA").click(function() {
         var field = $('#listaEMPRESAS').datalist('getSelected');
         
