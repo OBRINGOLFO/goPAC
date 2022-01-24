@@ -21,7 +21,7 @@ class Usuario extends EntidadBase{
     private $estado;
     private $observaciones;
 
-    # ********************************************************** #
+    # ********************************************************* #
     public function __construct($adapter) {
         try {
 
