@@ -63,6 +63,7 @@ $(document).ready(function(){
     //# ************************************************ #
     $("#cmdEMPRESA").click(function() {
         var field = $('#listaEMPRESAS').datalist('getSelected');
+        
         if (field){
             var xData = { txtRFC: field.value };
             $.ajax({
@@ -71,7 +72,7 @@ $(document).ready(function(){
                 data: xData,
                 success:function(data){
                     console.log(data);
-                    console.log("La empresa se "+field.value+" abrió con XXXXéxito...");
+                    console.log("La empresa se "+field.value+" abrió con éxito...");
                 }
             });
         }
