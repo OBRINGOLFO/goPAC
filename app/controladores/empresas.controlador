@@ -73,7 +73,7 @@ class EmpresasControlador extends ControladorBase{
     public function borrar(){
         try {
             header('Content-Type: application/json; charset=UTF8');
-            $xRespuesta =  array();
+            $xRespuesta = array();
             $xRespuesta["error"] = 0;
             return json_encode($xRespuesta);
 
