@@ -71,8 +71,9 @@ $(document).ready(function(){
                 url: '<?php echo $helper->url("Empresas", "abrir"); ?>',
                 data: xData,
                 success:function(data){
-                    console.log(data);
                     console.log("La empresa se "+field.value+" abrió con éxito...");
+                    winEMPRESAS.window('close');
+                    goRedirect("Escritorio", "index");
                 }
             });
         }
