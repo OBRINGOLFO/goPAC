@@ -1,0 +1,150 @@
+<?php
+/**
+ * @autor Rixio Danilo Iguarán Chourio.
+ * @cédula-profesional 12196442
+ * @correo-eletrónico atencion.clientes@obringolfo.com
+ * @denominacion OBRAS INFORMÁTICAS DEL GOLFO
+ * @empresa OBRINGOLFO S.A.S. DE C.V.
+ * @proyecto  goPAC.
+ * @copyright 2021
+ */
+
+
+class Usuario extends EntidadBase{
+    private $uid;
+    private $uid_persona;
+    private $usuario;
+    private $secreto;
+    private $creacion;
+    private $acceso;
+    private $ip;
+    private $estado;
+    private $observaciones;
+
+    # ********************************************************** #
+    public function __construct($adapter) {
+        try {
+
+            $table = "c_usuarios";
+            parent::__construct($table, $adapter);
+
+        } catch (Exception $e) {
+            mostrar_error($e);
+        }
+    }
+    # ********************************************************** #
+    public function getUid(){ return $this->uid; }
+    public function setUid($uid){ $this->uid = $uid; }
+    # ********************************************************** #
+    public function getUid_persona(){ return $this->uid_persona; }
+    public function setUid_persona($uid_persona){ $this->uid_persona = $uid_persona; }
+    # ********************************************************** #
+    public function getUsuario(){ return $this->usuario; }
+    public function setUsuario($usuario){ $this->usuario = $usuario; }
+    # ********************************************************** #
+    public function getSecreto(){ return $this->secreto; }
+    public function setSecreto($secreto){ $this->secreto = $secreto; }
+    # ********************************************************** #
+    public function getCreacion(){ return $this->creacion; }
+    public function setCreacion($creacion){ $this->creacion = $creacion; }
+    # ********************************************************** #
+    public function getAcceso(){ return $this->acceso; }
+    public function setAcceso($acceso){ $this->acceso = $acceso; }
+    # ********************************************************** #
+    public function getIp(){ return $this->ip; }
+    public function setIp($ip){ $this->ip = $ip; }
+    # ********************************************************** #
+    public function getEstado(){ return $this->estado; }
+    public function setEstado($estado){ $this->estado = $estado; }
+    # ********************************************************** #
+    public function getObservaciones(){ return $this->observaciones; }
+    public function setObservaciones($observaciones){ $this->observaciones = $observaciones; }
+    # ********************************************************** #
+    public function guardar(){
+        try {
+
+            $query = "INSERT INTO c_usuarios (uid, uid_persona, usuario, secreto, creacion, acceso, ip, estado, observaciones)
+                      VALUES(
+                           '".$this->uid."',
+                           '".$this->uid_persona."',
+                           '".$this->usuario."',
+                           '".$this->secreto."',
+                           '".$this->creacion."',
+                           '".$this->acceso."',
+                           '".$this->ip."',
+                           '".$this->estado."',
+                           '".$this->observaciones."'
+                      );";
+            $save = $this->db()->query($query);
+            //$this->db()->error;
+            return $save;
+
+        } catch (Exception $e) {
+            mostrar_error($e);
+        }
+    }
+    # ********************************************************** #
+    public function actualizar($varUID){
+        try {
+            /** [VALIDANDO DATOS EN ALGUNO DE LOS CAMPOS] **/
+            if(($this->uid_persona      == null) &&
+               ($this->usuario          == null) &&
+               ($this->secreto          == null) &&
+               ($this->creacion         == null) &&
+               ($this->acceso           == null) &&
+               ($this->ip               == null) &&
+               ($this->estado           == null) &&
+               ($this->observaciones    == null)){
+                auditar("[Excepci�n][403] Actualizaci�n ejecutada sin datos.");
+                throw new Exception('[403] Actualizaci�n ejecutada sin datos.');
+            }
+
+            /** [FORMANDO LA EXPRESI�N DE ACTUALIZACI�N] **/
+            $Campos = Array();
+            if($this->uid_persona != null){ //Tiene datos para actualizar
+                $Campos['uid_persona'] = $this->uid_persona;
+            }
+            if($this->usuario != null){ //Tiene datos para actualizar
+                $Campos['usuario'] = $this->usuario;
+            }
+            if($this->secreto != null){ //Tiene datos para actualizar
+                $Campos['secreto'] = $this->secreto;
+            }
+            if($this->creacion != null){ //Tiene datos para actualizar
+                $Campos['creacion'] = $this->creacion;
+            }
+            if($this->acceso != null){ //Tiene datos para actualizar
+                $Campos['acceso'] = $this->acceso;
+            }
+            if($this->ip != null){ //Tiene datos para actualizar
+                $Campos['ip'] = $this->ip;
+            }
+            if($this->estado != null){ //Tiene datos para actualizar
+                $Campos['estado'] = $this->estado;
+            }
+            if($this->observaciones != null){ //Tiene datos para actualizar
+                $Campos['observaciones'] = $this->observaciones;
+            }
+
+            $qCampos = ""; //acumulador de query
+            foreach ($Campos as $Campo => $valor) {
+                $qCampos .= $Campo." = '".$valor."', ";
+            }
+            $qCampos = substr($qCampos, 0, strlen($qCampos)-2); //le quito la coma y el espacio al final
+            //Armo la instrucci�n SQL
+            $query = "UPDATE c_usuarios SET ".$qCampos." WHERE uid='".$varUID."';";
+
+            /** [ENVIANDO INSTRUCCIONES DE ACTUALIZACI�N] **/
+            $save = $this->db()->query($query);
+            //auditar("Query: ".$query);
+            //$this->db()->error;
+            return $save;
+
+        } catch (Exception $e) {
+            mostrar_error($e);
+        }
+    }
+    # ********************************************************** #
+
+}
+?>

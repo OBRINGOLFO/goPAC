@@ -1,0 +1,64 @@
+<?php
+/**
+ * @autor Rixio Danilo Iguarán Chourio.
+ * @cédula-profesional 12196442
+ * @correo-eletrónico atencion.clientes@obringolfo.com
+ * @denominacion OBRAS INFORMÁTICAS DEL GOLFO
+ * @empresa OBRINGOLFO S.A.S. DE C.V.
+ * @proyecto  goPAC.
+ * @copyright 2021
+ */
+
+/*
+    # CONFIGURACION DE RUTAS A DIRECTORIOS DE LA APLICACI�N
+    define('DS', DIRECTORY_SEPARATOR);
+    define('ROOT_DIR', $_SERVER['DOCUMENT_ROOT']);
+    define('PATH_CLASES',           ROOT_DIR . DS . 'app'   . DS . 'clases'          . DS);
+    define('PATH_CONTROLADORES',    ROOT_DIR . DS . 'app'   . DS . 'controladores'   . DS);
+    define('PATH_NUCLEO',           ROOT_DIR . DS . 'app'   . DS . 'nucleos'         . DS);
+    define('PATH_DATOS',            ROOT_DIR . DS . 'app'   . DS . 'datos'           . DS);
+    define('PATH_AYUDANTES',        ROOT_DIR . DS . 'app'   . DS . 'ayudantes'       . DS);
+    define('PATH_MODELOS',          ROOT_DIR . DS . 'app'   . DS . 'modelos'         . DS);
+    define('PATH_VISTAS',           ROOT_DIR . DS . 'app'   . DS . 'vistas'          . DS);
+    define('PATH_CONFIGURACIONES',  ROOT_DIR . DS . 'app'   . DS . 'configuraciones' . DS);
+    define('PATH_LIBRERIAS',        ROOT_DIR . DS . 'app'   . DS . 'librerias'       . DS);
+    define('PATH_CACHE',            ROOT_DIR . DS . 'temp'  . DS . 'cache'           . DS);
+    define('PATH_REGISTROS',        ROOT_DIR . DS . 'temp'  . DS . 'registros'       . DS);
+    define('PATH_SESIONES',         ROOT_DIR . DS . 'temp'  . DS . 'sesiones'        . DS);
+*/
+    # CONFIGURACION DE RUTAS A DIRECTORIOS DE LA APLICACI�N
+    define('DS', DIRECTORY_SEPARATOR);
+    define('ROOT_DIR', $_SERVER['DOCUMENT_ROOT']);
+    define('PATH_CLASES',           ROOT_DIR.'/app/clases');
+    define('PATH_CONTROLADORES',    ROOT_DIR.'/app/controladores');
+    define('PATH_NUCLEO',           ROOT_DIR.'/app/nucleos');
+    define('PATH_DATOS',            ROOT_DIR.'/app/datos');
+    define('PATH_AYUDANTES',        ROOT_DIR.'/app/ayudantes');
+    define('PATH_MODELOS',          ROOT_DIR.'/app/modelos');
+    define('PATH_VISTAS',           ROOT_DIR.'/app/vistas');
+    define('PATH_CONFIGURACIONES',  ROOT_DIR.'/app/configuraciones');
+    define('PATH_LIBRERIAS',        ROOT_DIR.'/app/librerias');
+    define('PATH_CSS',              ROOT_DIR.'/app/librerias/css');
+    define('PATH_JS',               ROOT_DIR.'/app/librerias/js');
+    define('PATH_IMAGENES',         ROOT_DIR.'/app/librerias/img');
+    define('PATH_CACHE',            ROOT_DIR.'/temp/cache');
+    define('PATH_REGISTROS',        ROOT_DIR.'/temp/registros');
+    define('PATH_SESIONES',         ROOT_DIR.'/temp/sesiones');
+
+    #CONFIGURACION DE LOS PARAMETROS DE CONEXIÓN CON LA BASE DE DATOS
+    define('DB_DRIVER',     "mysql");
+    define('DB_HOST',       "localhost");
+    define('DB_USUARIO',    "goadmin");
+    define('DB_SECRETO',    "_OKiH#p0o!27");
+    define('DB_PREFIJO',    "goadmin_");
+    define('DB_NOMBRE',     "master");
+    define('DB_CHARSET',    "utf8");
+
+    # CONTROLADOR QUE SE CARGA DE FORMA AUTOMATICA AL INICIAR
+    define("CONTROLADOR_DEFECTO", "Index");
+    # ACCION QUE EJECUTA EL CONTROLADOR AL CARGAR
+    define("ACCION_DEFECTO", "index");
+    
+    
+    //Más constantes de configuración
+?>

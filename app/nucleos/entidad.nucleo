@@ -1,0 +1,144 @@
+<?php
+/**
+ * @autor Rixio Danilo Iguarán Chourio.
+ * @cédula-profesional 12196442
+ * @correo-eletrónico atencion.clientes@obringolfo.com
+ * @denominacion OBRAS INFORMÁTICAS DEL GOLFO
+ * @empresa OBRINGOLFO S.A.S. DE C.V.
+ * @proyecto  goPAC.
+ * @copyright 2021
+ */
+
+class EntidadBase{
+    private $table;
+    private $db;
+    private $conectar;
+ 
+    public function __construct($table, $adapter) {
+        try {
+
+            $this->table = (string) $table;
+
+            //$this->conectar=new Conectar();
+            //$this->db=$this->conectar->conexion();
+
+            $this->conectar = null;
+            $this->db = $adapter;
+
+        } catch (Exception $e) {
+            mostrar_error($e);
+        }
+    }
+
+    public function getConetar(){
+        try {
+
+            return $this->conectar;
+
+        } catch (Exception $e) {
+            mostrar_error($e);
+        }
+    }
+
+    public function db(){
+        try {
+
+            return $this->db;
+
+        } catch (Exception $e) {
+            mostrar_error($e);
+        }
+    }
+
+    public function getAll(){
+        #SOBRECARGANDO EL METODO
+        try {
+
+            $args = func_get_args();
+            if(count(func_get_args()) == 2){ //TENEMOS EL CAMPO Y ORDEN
+                $queryORDERBY = " ORDER BY ".$args[0]." ".$args[1];
+            }elseif(count(func_get_args()) == 1){ //SOLO TENEMOS EL CAMPO
+                $queryORDERBY = " ORDER BY ".$args[0]." ASC";
+            }else{ //NO TENEMOS NADA
+                $queryORDERBY = "";
+            }
+            $query=$this->db->query("SELECT * FROM $this->table".$queryORDERBY);
+            if($query){
+                while ($row = $query->fetch_object()) { //Devolvemos el resultset en forma de array de objetos
+                   $resultSet[] = $row;
+                }
+                return $resultSet;
+            }else{ return false; }
+
+        } catch (Exception $e) {
+            mostrar_error($e);
+        }
+    }
+
+    public function getById($uid){
+        try {
+
+            $query = $this->db->query("SELECT * FROM $this->table WHERE uid=$uid");
+            if($query){
+                if($row = $query->fetch_object()) {
+                   $resultSet = $row;
+                }
+                return $resultSet;
+            }else{ return false; }
+
+        } catch (Exception $e) {
+            mostrar_error($e);
+        }
+    }
+
+    public function getBy($column, $value){
+        try {
+
+            $resultSet = null;
+            $query = $this->db->query("SELECT * FROM $this->table WHERE $column='$value'");
+            if($query){
+                while($row = $query->fetch_object()) {
+                   $resultSet[] = $row;
+                }
+                return $resultSet;
+            }else{ return false; }
+
+        } catch (Exception $e) {
+            mostrar_error($e);
+        }
+    }
+
+    public function deleteById($uid){
+        try {
+
+            $query = $this->db->query("DELETE FROM $this->table WHERE uid=$uid");
+            if($query){
+                return $query;
+            }else{ return false; }
+
+        } catch (Exception $e) {
+            mostrar_error($e);
+        }
+    }
+
+    public function deleteBy($column, $value){
+        try {
+
+            $query = $this->db->query("DELETE FROM $this->table WHERE $column='$value'");
+            if($query){
+                return $query;
+            }else{ return false; }
+
+        } catch (Exception $e) {
+            mostrar_error($e);
+        }
+    }
+
+
+    /*
+     * Aquí podemos montarnos un montón de métodos que nos ayuden
+     * a hacer operaciones con la base de datos de la entidad
+     */
+
+}
+?>

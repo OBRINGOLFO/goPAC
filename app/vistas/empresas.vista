@@ -1,0 +1,110 @@
+<?php
+/**
+ * @autor Rixio Danilo Iguarán Chourio.
+ * @cédula-profesional 12196442
+ * @correo-eletrónico atencion.clientes@obringolfo.com
+ * @denominacion OBRAS INFORMÁTICAS DEL GOLFO
+ * @empresa OBRINGOLFO S.A.S. DE C.V.
+ * @proyecto  goPAC.
+ * @copyright 2021
+ */
+
+?>
+
+    <div id="winEMPRESAS" style="display: none; padding:0px 20px;">
+        <form name="FrmEMPRESAS" id="FrmEMPRESAS" method="post" autocomplete="off" style="margin-top: 16px;">
+            <!-- ## ************************* ## -->
+            <input id="txtBUSCAR" name="txtBUSCAR" style="width: 100%;"></input>
+            <!-- ## ************************* ## -->
+            <ul id="listaEMPRESAS" name="listaEMPRESAS"
+                class="easyui-datalist"
+                data-options="lines: false"
+                title="Empresas a las que tiene acceso:"
+                style="width:100%;">
+
+                <?php
+                    foreach($empresas_usuario as $xEmpresa) {
+                        echo '<li value="' . $xEmpresa["rfc"] . '">' . $xEmpresa["razon"] . '</li>';
+                    }
+                ?>
+
+            </ul>
+        </form>
+        <div style="display: block ruby; text-align: right;">
+            <a id="cmdEMPRESA" name="cmdEMPRESA"
+                class="easyui-linkbutton"
+                data-options="iconCls: 'fas fa-sign-in-alt fa-lg'"
+                style="padding: 5px 0px; width: 40%; margin-top: 10px;">
+                <span style="font-size: 14px;">Abrir empresa</span>
+            </a>
+        </div>
+    </div>
+
+
+<!-- ## ********************************************* ## -->
+<script type="text/javascript">
+$(document).ready(function(){
+    document.title = "goPAC® - Empresas.";
+    console.clear();
+    //# ************************************************ #
+    var winEMPRESAS = $('#winEMPRESAS').window({
+        title: 'goPAC® - Seleccione la empresa.',
+        iconCls: 'fas fa-file-invoice-dollar',
+        modal: true,
+        collapsible: false,
+        minimizable: false,
+        maximizable: false,
+        closable: false,
+        resizable: false,
+        draggable: false,
+        width: 420,
+        height: goTasaH(70)
+    });
+    //# ************************************************ #
+    $("#cmdEMPRESA").click(function() {
+        var field = $('#listaEMPRESAS').datalist('getSelected');
+        if (field){
+            var xData = { txtRFC: field.value };
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo $helper->url("Empresas", "abrir"); ?>',
+                data: xData,
+                success:function(data){
+                    console.log(data);
+                    console.log("La empresa se "+field.value+" abrió con éxito...");
+                }
+            });
+        }
+    });
+    //# ************************************************ #
+    $('#listaEMPRESAS').datalist({
+        height: goTasaH(70) - 160,
+        onDblClickRow: function(index, field){
+            console.log(field.value);
+        }
+    });
+    //# ************************************************ #
+    $('#txtBUSCAR').searchbox({
+        searcher: function(value, name){
+            if(value){
+                console.log(value);
+            }
+        },
+        prompt:'Buscar en la lista de empresas'
+    });
+    //# ************************************************ #
+    $('#txtBUSCAR').searchbox('textbox').bind('keydown', function(e){
+        console.log(e.keyCode);
+    });
+    //# ************************************************ #
+    //# ************************************************ #
+    //# ************************************************ #
+    //# ************************************************ #
+    //# ************************************************ #
+
+});
+$(window).resize(function() {
+    $('#winEMPRESAS').window('center');
+});
+</script>
+<!-- ## ********************************************* ## -->

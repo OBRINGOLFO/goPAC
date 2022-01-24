@@ -1,0 +1,35 @@
+ @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;600;900&display=swap');
+body {
+    font-family:Cairo;
+    padding:20px;
+    font-size:12px;
+    margin:0;
+}
+
+h2 {
+    font-size:18px;
+    font-weight:bold;
+    margin:0;
+    margin-bottom:15px;
+}
+
+.demo-info{
+	padding:0 0 12px 0;
+}
+
+.demo-tip{
+	display:none;
+}
+
+.label-top{
+    display: block;
+    height: 22px;
+    line-height: 22px;
+    vertical-align: middle;
+}
+
+.login_logo{
+    background-image: url("/app/librerias/img/logo_login.png");
+    background-repeat: no-repeat;
+    background-position: top center;
+}

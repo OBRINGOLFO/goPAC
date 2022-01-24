@@ -1,0 +1,42 @@
+<?php
+/**
+ * @autor Rixio Danilo Iguarán Chourio.
+ * @cédula-profesional 12196442
+ * @correo-eletrónico atencion.clientes@obringolfo.com
+ * @denominacion OBRAS INFORMÁTICAS DEL GOLFO
+ * @empresa OBRINGOLFO S.A.S. DE C.V.
+ * @proyecto  goPAC.
+ * @copyright 2021
+ */
+
+
+class EmpresasModel extends ModeloBase{
+    private $table;
+     
+    public function __construct($adapter){
+        try {
+
+            $this->table="c_empresas";
+            parent::__construct($this->table, $adapter);
+
+        } catch (Exception $e) {
+            mostrar_error($e);
+        }
+    }
+
+    /* ***************************************************************************
+    *
+    *************************************************************************** */
+    public function get_empresas_todas(){
+        try {
+
+            $xQuery = "SELECT * FROM c_empresas";
+            $xRespuesta = $this->ejecutarSql($xQuery);
+            return $xRespuesta;
+
+        } catch (Exception $e) {
+            mostrar_error($e);
+        }
+    }
+}
+?>

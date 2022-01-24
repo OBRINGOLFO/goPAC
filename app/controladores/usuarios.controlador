@@ -1,0 +1,155 @@
+<?php
+/**
+ * @autor Rixio Danilo Iguarán Chourio.
+ * @cédula-profesional 12196442
+ * @correo-eletrónico atencion.clientes@obringolfo.com
+ * @denominacion OBRAS INFORMÁTICAS DEL GOLFO
+ * @empresa OBRINGOLFO S.A.S. DE C.V.
+ * @proyecto  goPAC.
+ * @copyright 2021
+ */
+
+
+class UsuariosControlador extends ControladorBase{
+    public $conectar;
+    public $adapter;
+    /** ****************************************************** **/
+    public function __construct() {
+        try {
+
+            parent::__construct();
+            $this->conectar = new Conectar();
+            $this->adapter  = $this->conectar->conexion();
+            //goSesion();
+
+        } catch (Exception $e) {
+            mostrar_error($e);
+        }
+    }
+    /** ****************************************************** **/
+    public function index(){
+        //Creamos el objeto usuario
+        $usuario = new Usuario($this->adapter);
+        //Conseguimos todos los usuarios
+        $allusers = $usuario->getAll();
+        //Cargamos la vista index y le pasamos valores
+        $this->view("index",array(
+            "allusers" => $allusers
+        ));
+    }
+    /** ****************************************************** **/
+    public function logedin(){
+        try {
+
+            header('Content-Type: application/json; charset=UTF8');
+            $xLogin = array();
+            $xLogin["estado"] = null;
+            if(isset($_POST["txtUSUARIO"]) && isset($_POST["txtSECRETO"])){ //Validamos campos principales
+                //Creamos el objeto << usuario >>
+                $usuario = new Usuario($this->adapter);
+                $MyUser = $usuario->getBy('usuario', $_POST["txtUSUARIO"]);
+                if(!empty($MyUser)){ //tenemos un usuario valido
+                    if(password_verify($_POST["txtSECRETO"], $MyUser[0]->secreto)){ //Clave correcta
+                        if(strtoupper($MyUser[0]->estado) == "A"){ //Usuario activo
+                            //Cargamos las variables de sesion del usuario
+                            $_SESSION["logined"]    = true;
+                            $_SESSION["usuario"]    = ucwords($MyUser[0]->usuario);
+                            $_SESSION["lastaccess"] = $MyUser[0]->acceso;
+                            $_SESSION["lastip"]     = $MyUser[0]->ip;
+                            $update_user = new Usuario($this->adapter);
+                            $update_user->setAcceso(date('Y-m-d H:i:s'));
+                            $update_user->setIp(get_cliente_ip());
+                            $save = $update_user->actualizar($MyUser[0]->uid);
+                            $xLogin["estado"] = 0;
+                        }else{ //Usuario inactivo
+                            auditar("[1402] Intento de acceso del usuario ".$_POST["txtUSUARIO"]." con limitaciones de acceso.");
+                            $xLogin["estado"] = 1402;
+
+                        }
+                    }else{ //Clave incorrecta
+                        auditar("[1403] Intento de acceso del usuario ".$_POST["txtUSUARIO"]." con credenciales incorrectas.");
+                        $xLogin["estado"] = 1403;
+                    }
+                }else{ //usuario no existe
+                        auditar("[1404] No se reconoce el acceso para el usuario ".$_POST["txtUSUARIO"]);
+                        $xLogin["estado"] = 1404;
+                }
+            }
+            echo json_encode($xLogin);
+
+        } catch (Exception $e) {
+            mostrar_error($e);
+        }
+
+    }
+    /** ****************************************************** **/
+    public function restore_code(){
+        try {
+
+            header('Content-Type: application/json; charset=UTF8');
+            $xRestore = array();
+            $xRestore["estado"] = null;
+            if(isset($_POST["txtMAIL"])){ //Validamos campos principales
+                //Creamos el objeto << usuario >>
+                $usuario = new Usuario($this->adapter);
+                $MyUser = $usuario->getBy('mail', $_POST["txtMAIL"]);
+                if(!empty($MyUser)){ //tenemos un usuario valido
+                    auditar("Mail: ".$_POST["txtMAIL"]);
+                    //Cargamos las variables de sesion del usuario
+                    //$update_user = new Usuario($this->adapter);
+                    //$update_user->setAcceso(date('Y-m-d H:i:s'));
+                    //$update_user->setIp(get_cliente_ip());
+                    //$save = $update_user->actualizar($MyUser[0]->uid);
+                    $xRestore["estado"] = 0;
+                }else{ //usuario no existe
+                        auditar("[1410] No se reconoce la cuenta de correo ".$_POST["txtMAIL"]." para recuperación");
+                        $xRestore["estado"] = 1410;
+                }
+            }
+            echo json_encode($xRestore);
+
+        } catch (Exception $e) {
+            mostrar_error($e);
+        }
+
+    }
+    /** ****************************************************** **/
+    public function crear(){
+        auditar("Intentando crear un nuevo usuario en el sistema.");
+        if(isset($_POST["usuario"]) && isset($_POST["passw"])){ //Validamos campos principales
+            //Creamos un usuario
+            $usuario = new Usuario($this->adapter);
+            $usuario->setUid(getUUID());
+            $usuario->setUid_persona(getUUID());
+            $usuario->setUsuario($_POST["usuario"]);
+            $usuario->setSecreto($_POST["passw"]);
+            $usuario->setCreacion(date('Y-m-d H:i:s'));
+            $usuario->setAcceso(null);
+            $usuario->setIp(null);
+            $usuario->setEstado('A');
+            $usuario->setObservaciones(null);
+            $save = $usuario->save();
+        }
+        auditar("Usuario creado correctamente: ".$this->uid);
+        $this->redirect("Usuarios", "index");
+    }
+    /** ****************************************************** **/
+    public function borrar(){
+        auditar("Intentando eliminar un usuario en el sistema.");
+        if(isset($_GET["uid"])){
+            $uid=(int)$_GET["uid"];
+            $usuario = new Usuario($this->adapter);
+            $usuario->deleteById($uid);
+        }
+        auditar("Usuario eliminado correctamente: ".$uid);
+        $this->redirect();
+    }
+    /** ****************************************************** **/
+    public function hola(){
+        $usuarios=new UsuariosModel($this->adapter);
+        $usu=$usuarios->getUnUsuario();
+        var_dump($usu);
+    }
+
+}
+?>
