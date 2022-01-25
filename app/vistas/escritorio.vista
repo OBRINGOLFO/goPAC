@@ -11,20 +11,27 @@
 
 ?>
 
-<div id="MyEscritorio" class="easyui-layout" style="width:600px;height:400px;">
-    <div data-options="region:'north',title:'',split:false" style="height:100px;"></div>
-    <div data-options="region:'south',title:'South Title',split:true" style="height:100px;"></div>
-    <div data-options="region:'east',title:'East',split:true" style="width:100px;"></div>
-    <div data-options="region:'west',title:'West',split:true" style="width:100px;"></div>
-    <div data-options="region:'center',title:'center title'" style="padding:5px;background:#eee;"></div>
+<div id="MyEscritorio" name="MyEscritorio" class="easyui-layout">
+    <div id="ly-centro"     name="ly-centro"    data-options="region: 'center'" style="padding: 5px; background: #eee;"></div>
+    <div id="ly-arriba"     name="ly-arriba"    data-options="region: 'north', split: false, border: false" style="height: 100px;">
+        <?php echo load_Menu("escritorio_main"); ?>
+    </div>
+    <div id="ly-abajo"      name="ly-abajo"     data-options="region: 'south', split: true" style="height: 48px;"></div>
+    <div id="ly-derecha"    name="ly-derecha"   data-options="region: 'east', title:'Herramientas', split: true" style="width: 100px;"></div>
+    <div id="ly-izquierda"  name="ly-izquierda" data-options="region: 'west', title:'Módulos', split: true" style="width: 100px;"></div>
 </div> 
 
 
 <!-- ## ********************************************* ## -->
 <script type="text/javascript">
+    var MyW = goTasaW(96);
+    var MyH = goTasaH(96);
+
     $(document).ready(function(){
         document.title = "goPAC® - <?php echo $_SESSION["empresa_razon"] ?>";
         //# ************************************************ #
+        $("#MyEscritorio").width(MyW+"px"); $("#MyEscritorio").height(MyH+"px"); 
+        $('#MyEscritorio').layout('resize', { width: MyW+"px", height: MyH+"px" });
         //# ************************************************ #
         //# ************************************************ #
         //# ************************************************ #
@@ -37,7 +44,10 @@
     });
 
     $(window).resize(function() {
-        $('#MyEscritorio').layout('resize', { width: "100%", height:goTasaW(95) });
+        var MyW = goTasaW(96);
+        var MyH = goTasaH(96);
+        $("#MyEscritorio").width(MyW+"px"); $("#MyEscritorio").height(MyH+"px"); 
+        $('#MyEscritorio').layout('resize', { width: MyW+"px", height: MyH+"px" });
     });
 </script>
 <!-- ## ********************************************* ## -->

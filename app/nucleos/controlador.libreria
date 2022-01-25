@@ -300,6 +300,17 @@
         echo $output;
     }
 /** *************************************************************************** **/
+function load_Menu($mnu_load){
+    $mnuFILE = PATH_AJAX."/".strtolower($mnu_load).".mnu";
+    if(file_exists($mnuFILE)){
+        ob_start(); //Activo la captura de buffer de salida
+        require($mnuFILE); //requiero el archivo de MENU para que se ejecute
+        $mnuCONTENT = ob_get_clean(); //retorno la salida del archivo ejecutado            
+    }else{
+        $mnuCONTENT = "[404] Menú no encontrado (".$mnuFILE.")";
+    }
+    return $mnuCONTENT;
+}
 /** *************************************************************************** **/
 /** *************************************************************************** **/
 /** *************************************************************************** **/
