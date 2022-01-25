@@ -26,7 +26,7 @@
     define('PATH_REGISTROS',        ROOT_DIR . DS . 'temp'  . DS . 'registros'       . DS);
     define('PATH_SESIONES',         ROOT_DIR . DS . 'temp'  . DS . 'sesiones'        . DS);
 */
-    # CONFIGURACION DE RUTAS A DIRECTORIOS DE LA APLICACI�N
+    # CONFIGURACION DE RUTAS A DIRECTORIOS DE LA APLICACIÓN
     define('DS', DIRECTORY_SEPARATOR);
     define('ROOT_DIR', $_SERVER['DOCUMENT_ROOT']);
     define('PATH_CLASES',           ROOT_DIR.'/app/clases');
@@ -41,7 +41,7 @@
     define('PATH_AJAX',             ROOT_DIR.'/app/librerias/ajax');    
     define('PATH_CSS',              ROOT_DIR.'/app/librerias/css');
     define('PATH_JS',               ROOT_DIR.'/app/librerias/js');
-    define('PATH_IMAGENES',         ROOT_DIR.'/app/librerias/img');
+    define('PATH_IMAGENES',         '/app/librerias/img');
     define('PATH_CACHE',            ROOT_DIR.'/temp/cache');
     define('PATH_REGISTROS',        ROOT_DIR.'/temp/registros');
     define('PATH_SESIONES',         ROOT_DIR.'/temp/sesiones');
