@@ -13,7 +13,7 @@
 
 <div id="MyEscritorio" name="MyEscritorio" class="easyui-layout">
     <div id="ly-centro"     name="ly-centro"    data-options="region: 'center'" style="padding: 5px; background: #eee;"></div>
-    <div id="ly-arriba"     name="ly-arriba"    data-options="region: 'north', split: false, border: false" style="height: 100px;">
+    <div id="ly-arriba"     name="ly-arriba"    data-options="region: 'north', split: false, border: false" style="height: 300px;">
         <?php echo load_Menu("escritorio_main"); ?>
     </div>
     <div id="ly-abajo"      name="ly-abajo"     data-options="region: 'south', split: true" style="height: 48px;"></div>

@@ -73,7 +73,7 @@ $(document).ready(function(){
     $('#txtUSUARIO').textbox('clear');
     $('#txtSECRETO').textbox('clear');
     $('#txtMAIL').textbox('clear');
-    console.clear();
+    //console.clear();
     //# ************************************************ #
     var winLOGIN = $('#winLOGIN').window({
         title: 'goPAC® - Acceso al sistema.',
@@ -108,7 +108,7 @@ $(document).ready(function(){
                 }
             }
         });
-        console.clear();
+        //console.clear();
     });
     //# ************************************************ #
     $("#cmdRECUPERAR").click(function() {

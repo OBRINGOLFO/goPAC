@@ -45,7 +45,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
     document.title = "goPAC® - Empresas.";
-    console.clear();
+    //console.clear();
     //# ************************************************ #
     var winEMPRESAS = $('#winEMPRESAS').window({
         title: 'goPAC® - Seleccione la empresa.',
