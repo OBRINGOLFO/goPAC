@@ -22,12 +22,12 @@
 				Opciones generales y configuración para éste módulo.<br/><br/>
 							
 				<div class="button big" id="cmdGASTOS_CAT_PROVEEDORES">
-					<img src="<?php echo PATH_IMAGE; ?>/icons/tools/normal/proveedor.png" alt="Proveedores" />
+					<img src="<?php echo PATH_IMAGENES; ?>/icons/tools/normal/proveedor.png" alt="Proveedores" />
 					<span class="label">Proveedores</span>
 					<span class="desc">Catálogo de proveedores del sistema.</span>
 				</div><br/>
 				<div class="button big" id="cmdGASTOS_CAT_PROYECTOS">
-					<img src="<?php echo PATH_IMAGE; ?>/icons/tools/normal/proyecto.png" alt="Proyectos" />
+					<img src="<?php echo PATH_IMAGENES; ?>/icons/tools/normal/proyecto.png" alt="Proyectos" />
 					<span class="label">Proyectos</span>
 					<span class="desc">Catálogo de proyectos del sistema.</span>
 				</div>
@@ -43,9 +43,9 @@
 				<div class="ribbon-button ribbon-button-large" id="cmdGASTOS_GRAFICA_COMP">
 					<span class="button-title">Gráfica<br/>Mensual</span>
 					<span class="button-help">Muesta una gráfica de estado mensual para los gatos globales.</span>
-					<img class="ribbon-icon ribbon-normal" src="<?php echo PATH_IMAGE; ?>/icons/tools/normal/chartb.png" />
-					<img class="ribbon-icon ribbon-hot" src="<?php echo PATH_IMAGE; ?>/icons/tools/hot/chartb.png" />
-					<img class="ribbon-icon ribbon-disabled" src="<?php echo PATH_IMAGE; ?>/icons/tools/disabled/chartb.png" />
+					<img class="ribbon-icon ribbon-normal" src="<?php echo PATH_IMAGENES; ?>/icons/tools/normal/chartb.png" />
+					<img class="ribbon-icon ribbon-hot" src="<?php echo PATH_IMAGENES; ?>/icons/tools/hot/chartb.png" />
+					<img class="ribbon-icon ribbon-disabled" src="<?php echo PATH_IMAGENES; ?>/icons/tools/disabled/chartb.png" />
 				</div>
             </div>
 			<div class="ribbon-section">
@@ -53,30 +53,30 @@
 				<div class="ribbon-button ribbon-button-large" id="cmdGASTOS_ADD_COMP">
 					<span class="button-title">Agregar<br/>Gasto</span>
 					<span class="button-help">Agrega un gasto operativo dentro del proyecto seleccionado.</span>
-					<img class="ribbon-icon ribbon-normal" src="<?php echo PATH_IMAGE; ?>/icons/tools/normal/new-table.png" />
-					<img class="ribbon-icon ribbon-hot" src="<?php echo PATH_IMAGE; ?>/icons/tools/hot/new-table.png" />
-					<img class="ribbon-icon ribbon-disabled" src="<?php echo PATH_IMAGE; ?>/icons/tools/disabled/new-table.png" />
+					<img class="ribbon-icon ribbon-normal" src="<?php echo PATH_IMAGENES; ?>/icons/tools/normal/new-table.png" />
+					<img class="ribbon-icon ribbon-hot" src="<?php echo PATH_IMAGENES; ?>/icons/tools/hot/new-table.png" />
+					<img class="ribbon-icon ribbon-disabled" src="<?php echo PATH_IMAGENES; ?>/icons/tools/disabled/new-table.png" />
 				</div>
 				<div class="ribbon-button ribbon-button-large" id="cmdGASTOS_SAVE_COMP">
 					<span class="button-title">Guardar<br/>Gasto</span>
 					<span class="button-help">Guarda el gasto actual dentro del proyecto seleccionado.</span>
-					<img class="ribbon-icon ribbon-normal" src="<?php echo PATH_IMAGE; ?>/icons/tools/normal/save-page.png" />
-					<img class="ribbon-icon ribbon-hot" src="<?php echo PATH_IMAGE; ?>/icons/tools/hot/save-page.png" />
-					<img class="ribbon-icon ribbon-disabled" src="<?php echo PATH_IMAGE; ?>/icons/tools/disabled/save-page.png" />
+					<img class="ribbon-icon ribbon-normal" src="<?php echo PATH_IMAGENES; ?>/icons/tools/normal/save-page.png" />
+					<img class="ribbon-icon ribbon-hot" src="<?php echo PATH_IMAGENES; ?>/icons/tools/hot/save-page.png" />
+					<img class="ribbon-icon ribbon-disabled" src="<?php echo PATH_IMAGENES; ?>/icons/tools/disabled/save-page.png" />
 				</div>
 				<div class="ribbon-button ribbon-button-large" id="cmdGASTOS_GET_COMP">
 					<span class="button-title">Buscar<br/>Gasto</span>
 					<span class="button-help">Busca un gasto dentro del proyecto y muestra su información.</span>
-					<img class="ribbon-icon ribbon-normal" src="<?php echo PATH_IMAGE; ?>/icons/tools/normal/open-table.png" />
-					<img class="ribbon-icon ribbon-hot" src="<?php echo PATH_IMAGE; ?>/icons/tools/hot/open-table.png" />
-					<img class="ribbon-icon ribbon-disabled" src="<?php echo PATH_IMAGE; ?>/icons/tools/disabled/open-table.png" />
+					<img class="ribbon-icon ribbon-normal" src="<?php echo PATH_IMAGENES; ?>/icons/tools/normal/open-table.png" />
+					<img class="ribbon-icon ribbon-hot" src="<?php echo PATH_IMAGENES; ?>/icons/tools/hot/open-table.png" />
+					<img class="ribbon-icon ribbon-disabled" src="<?php echo PATH_IMAGENES; ?>/icons/tools/disabled/open-table.png" />
 				</div>
 				<div class="ribbon-button ribbon-button-large disabled" id="cmdGASTOS_DEL_COMP">
 					<span class="button-title">Quitar<br/>Gasto</span>
 					<span class="button-help">Elimina el gasto actual y reprocesa los saldos.</span>
-					<img class="ribbon-icon ribbon-normal" src="<?php echo PATH_IMAGE; ?>/icons/tools/normal/delete-table.png" />
-					<img class="ribbon-icon ribbon-hot" src="<?php echo PATH_IMAGE; ?>/icons/tools/hot/delete-table.png" />
-					<img class="ribbon-icon ribbon-disabled" src="<?php echo PATH_IMAGE; ?>/icons/tools/disabled/delete-table.png" />
+					<img class="ribbon-icon ribbon-normal" src="<?php echo PATH_IMAGENES; ?>/icons/tools/normal/delete-table.png" />
+					<img class="ribbon-icon ribbon-hot" src="<?php echo PATH_IMAGENES; ?>/icons/tools/hot/delete-table.png" />
+					<img class="ribbon-icon ribbon-disabled" src="<?php echo PATH_IMAGENES; ?>/icons/tools/disabled/delete-table.png" />
 				</div>
 			</div>
 
@@ -85,9 +85,9 @@
 				<div class="ribbon-button ribbon-button-large" id="cmdGASTOS_CANCEL_COMP">
 					<span class="button-title">Cancelar<br/>Proceso</span>
 					<span class="button-help">Cancela el proceso de registro.</span>
-					<img class="ribbon-icon ribbon-normal" src="<?php echo PATH_IMAGE; ?>/icons/tools/normal/cancel.png" />
-					<img class="ribbon-icon ribbon-hot" src="<?php echo PATH_IMAGE; ?>/icons/tools/hot/cancel.png" />
-					<img class="ribbon-icon ribbon-disabled" src="<?php echo PATH_IMAGE; ?>/icons/tools/disabled/cancel.png" />
+					<img class="ribbon-icon ribbon-normal" src="<?php echo PATH_IMAGENES; ?>/icons/tools/normal/cancel.png" />
+					<img class="ribbon-icon ribbon-hot" src="<?php echo PATH_IMAGENES; ?>/icons/tools/hot/cancel.png" />
+					<img class="ribbon-icon ribbon-disabled" src="<?php echo PATH_IMAGENES; ?>/icons/tools/disabled/cancel.png" />
 				</div>
 			</div>
 
@@ -104,9 +104,9 @@
 				<div class="ribbon-button ribbon-button-large" id="cmdGASTOS_GRAFICA_NOCO">
 					<span class="button-title">Gráfica<br/>Mensual</span>
 					<span class="button-help">Muesta una gráfica de estado mensual para los gatos globales.</span>
-					<img class="ribbon-icon ribbon-normal" src="<?php echo PATH_IMAGE; ?>/icons/tools/normal/chartb.png" />
-					<img class="ribbon-icon ribbon-hot" src="<?php echo PATH_IMAGE; ?>/icons/tools/hot/chartb.png" />
-					<img class="ribbon-icon ribbon-disabled" src="<?php echo PATH_IMAGE; ?>/icons/tools/disabled/chartb.png" />
+					<img class="ribbon-icon ribbon-normal" src="<?php echo PATH_IMAGENES; ?>/icons/tools/normal/chartb.png" />
+					<img class="ribbon-icon ribbon-hot" src="<?php echo PATH_IMAGENES; ?>/icons/tools/hot/chartb.png" />
+					<img class="ribbon-icon ribbon-disabled" src="<?php echo PATH_IMAGENES; ?>/icons/tools/disabled/chartb.png" />
 				</div>
             </div>
 			<div class="ribbon-section">
@@ -114,30 +114,30 @@
 				<div class="ribbon-button ribbon-button-large" id="cmdGASTOS_ADD_NOCO">
 					<span class="button-title">Agregar<br/>Gasto</span>
 					<span class="button-help">Agrega un gasto operativo dentro del proyecto seleccionado.</span>
-					<img class="ribbon-icon ribbon-normal" src="<?php echo PATH_IMAGE; ?>/icons/tools/normal/new-table.png" />
-					<img class="ribbon-icon ribbon-hot" src="<?php echo PATH_IMAGE; ?>/icons/tools/hot/new-table.png" />
-					<img class="ribbon-icon ribbon-disabled" src="<?php echo PATH_IMAGE; ?>/icons/tools/disabled/new-table.png" />
+					<img class="ribbon-icon ribbon-normal" src="<?php echo PATH_IMAGENES; ?>/icons/tools/normal/new-table.png" />
+					<img class="ribbon-icon ribbon-hot" src="<?php echo PATH_IMAGENES; ?>/icons/tools/hot/new-table.png" />
+					<img class="ribbon-icon ribbon-disabled" src="<?php echo PATH_IMAGENES; ?>/icons/tools/disabled/new-table.png" />
 				</div>
 				<div class="ribbon-button ribbon-button-large" id="cmdGASTOS_SAVE_NOCO">
 					<span class="button-title">Guardar<br/>Gasto</span>
 					<span class="button-help">Guarda el gasto actual dentro del proyecto seleccionado.</span>
-					<img class="ribbon-icon ribbon-normal" src="<?php echo PATH_IMAGE; ?>/icons/tools/normal/save-page.png" />
-					<img class="ribbon-icon ribbon-hot" src="<?php echo PATH_IMAGE; ?>/icons/tools/hot/save-page.png" />
-					<img class="ribbon-icon ribbon-disabled" src="<?php echo PATH_IMAGE; ?>/icons/tools/disabled/save-page.png" />
+					<img class="ribbon-icon ribbon-normal" src="<?php echo PATH_IMAGENES; ?>/icons/tools/normal/save-page.png" />
+					<img class="ribbon-icon ribbon-hot" src="<?php echo PATH_IMAGENES; ?>/icons/tools/hot/save-page.png" />
+					<img class="ribbon-icon ribbon-disabled" src="<?php echo PATH_IMAGENES; ?>/icons/tools/disabled/save-page.png" />
 				</div>
 				<div class="ribbon-button ribbon-button-large" id="cmdGASTOS_GET_NOCO">
 					<span class="button-title">Buscar<br/>Gasto</span>
 					<span class="button-help">Busca un gasto dentro del proyecto y muestra su información.</span>
-					<img class="ribbon-icon ribbon-normal" src="<?php echo PATH_IMAGE; ?>/icons/tools/normal/open-table.png" />
-					<img class="ribbon-icon ribbon-hot" src="<?php echo PATH_IMAGE; ?>/icons/tools/hot/open-table.png" />
-					<img class="ribbon-icon ribbon-disabled" src="<?php echo PATH_IMAGE; ?>/icons/tools/disabled/open-table.png" />
+					<img class="ribbon-icon ribbon-normal" src="<?php echo PATH_IMAGENES; ?>/icons/tools/normal/open-table.png" />
+					<img class="ribbon-icon ribbon-hot" src="<?php echo PATH_IMAGENES; ?>/icons/tools/hot/open-table.png" />
+					<img class="ribbon-icon ribbon-disabled" src="<?php echo PATH_IMAGENES; ?>/icons/tools/disabled/open-table.png" />
 				</div>
 				<div class="ribbon-button ribbon-button-large disabled" id="cmdGASTOS_DEL_NOCO">
 					<span class="button-title">Quitar<br/>Gasto</span>
 					<span class="button-help">Elimina el gasto actual y reprocesa los saldos.</span>
-					<img class="ribbon-icon ribbon-normal" src="<?php echo PATH_IMAGE; ?>/icons/tools/normal/delete-table.png" />
-					<img class="ribbon-icon ribbon-hot" src="<?php echo PATH_IMAGE; ?>/icons/tools/hot/delete-table.png" />
-					<img class="ribbon-icon ribbon-disabled" src="<?php echo PATH_IMAGE; ?>/icons/tools/disabled/delete-table.png" />
+					<img class="ribbon-icon ribbon-normal" src="<?php echo PATH_IMAGENES; ?>/icons/tools/normal/delete-table.png" />
+					<img class="ribbon-icon ribbon-hot" src="<?php echo PATH_IMAGENES; ?>/icons/tools/hot/delete-table.png" />
+					<img class="ribbon-icon ribbon-disabled" src="<?php echo PATH_IMAGENES; ?>/icons/tools/disabled/delete-table.png" />
 				</div>
 			</div>
 
@@ -146,9 +146,9 @@
 				<div class="ribbon-button ribbon-button-large" id="cmdGASTOS_CANCEL_NOCO">
 					<span class="button-title">Cancelar<br/>Proceso</span>
 					<span class="button-help">Cancela el proceso de registro.</span>
-					<img class="ribbon-icon ribbon-normal" src="<?php echo PATH_IMAGE; ?>/icons/tools/normal/cancel.png" />
-					<img class="ribbon-icon ribbon-hot" src="<?php echo PATH_IMAGE; ?>/icons/tools/hot/cancel.png" />
-					<img class="ribbon-icon ribbon-disabled" src="<?php echo PATH_IMAGE; ?>/icons/tools/disabled/cancel.png" />
+					<img class="ribbon-icon ribbon-normal" src="<?php echo PATH_IMAGENES; ?>/icons/tools/normal/cancel.png" />
+					<img class="ribbon-icon ribbon-hot" src="<?php echo PATH_IMAGENES; ?>/icons/tools/hot/cancel.png" />
+					<img class="ribbon-icon ribbon-disabled" src="<?php echo PATH_IMAGENES; ?>/icons/tools/disabled/cancel.png" />
 				</div>
 			</div>
 
@@ -163,16 +163,16 @@
 				<div id="cmdGASTOS_AYUDAMOD" class="ribbon-button ribbon-button-large">
 					<span class="button-title">Manual del<br/>módulo</span>
 					<span class="button-help">Abre el tema de ayuda para opciones de ingresos.</span>
-					<img class="ribbon-icon ribbon-normal" src="<?php echo PATH_IMAGE; ?>/icons/tools/normal/help_main.png" />
-					<img class="ribbon-icon ribbon-hot" src="<?php echo PATH_IMAGE; ?>/icons/tools/hot/help_main.png" />
-					<img class="ribbon-icon ribbon-disabled" src="<?php echo PATH_IMAGE; ?>/icons/tools/disabled/help_main.png" />
+					<img class="ribbon-icon ribbon-normal" src="<?php echo PATH_IMAGENES; ?>/icons/tools/normal/help_main.png" />
+					<img class="ribbon-icon ribbon-hot" src="<?php echo PATH_IMAGENES; ?>/icons/tools/hot/help_main.png" />
+					<img class="ribbon-icon ribbon-disabled" src="<?php echo PATH_IMAGENES; ?>/icons/tools/disabled/help_main.png" />
 				</div>
 				<div id="cmdGASTOS_AYUDAGEN" class="ribbon-button ribbon-button-large" id="other-btn-2">
 					<span class="button-title">Ayuda del<br/>sistema</span>
 					<span class="button-help">Abrir el manual de ayuda general del sistema.</span>
-					<img class="ribbon-icon ribbon-normal" src="<?php echo PATH_IMAGE; ?>/icons/tools/normal/help_main.png" />
-					<img class="ribbon-icon ribbon-hot" src="<?php echo PATH_IMAGE; ?>/icons/tools/hot/help_main.png" />
-					<img class="ribbon-icon ribbon-disabled" src="<?php echo PATH_IMAGE; ?>/icons/tools/disabled/help_main.png" />
+					<img class="ribbon-icon ribbon-normal" src="<?php echo PATH_IMAGENES; ?>/icons/tools/normal/help_main.png" />
+					<img class="ribbon-icon ribbon-hot" src="<?php echo PATH_IMAGENES; ?>/icons/tools/hot/help_main.png" />
+					<img class="ribbon-icon ribbon-disabled" src="<?php echo PATH_IMAGENES; ?>/icons/tools/disabled/help_main.png" />
 
 				</div>
 			</div>            
@@ -181,9 +181,9 @@
 				<div id="cmdGASTOS_ACERCADE" class="ribbon-button ribbon-button-large">
 					<span class="button-title">Acerca del<br/>módulo</span>
 					<span class="button-help">Información sobre el módulo.</span>
-					<img class="ribbon-icon ribbon-normal" src="<?php echo PATH_IMAGE; ?>/icons/tools/normal/acerca.png" />
-					<img class="ribbon-icon ribbon-hot" src="<?php echo PATH_IMAGE; ?>/icons/tools/hot/acerca.png" />
-					<img class="ribbon-icon ribbon-disabled" src="<?php echo PATH_IMAGE; ?>/icons/tools/disabled/acerca.png" />
+					<img class="ribbon-icon ribbon-normal" src="<?php echo PATH_IMAGENES; ?>/icons/tools/normal/acerca.png" />
+					<img class="ribbon-icon ribbon-hot" src="<?php echo PATH_IMAGENES; ?>/icons/tools/hot/acerca.png" />
+					<img class="ribbon-icon ribbon-disabled" src="<?php echo PATH_IMAGENES; ?>/icons/tools/disabled/acerca.png" />
 
 				</div>
 			</div>
