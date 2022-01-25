@@ -44,6 +44,20 @@ class Conectar{
         }
     }
     # ********************************************************** #
+    public function conexion_empresa($rfc_empresa){
+        try {
+            $this->database = $db_cfg["prefix"] . $rfc_empresa;
+            if($this->driver == "mysql" || $this->driver == null){
+                $con = new mysqli($this->host, $this->user, $this->pass, $this->database);
+                $con->query("SET NAMES '".$this->charset."'");
+            }
+            return $con;
+
+        } catch (Exception $e) {
+            mostrar_error($e);
+        }
+    }
+    # ********************************************************** #
     public function startFluent(){
         try {
 

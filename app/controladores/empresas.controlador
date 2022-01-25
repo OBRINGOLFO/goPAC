@@ -85,8 +85,13 @@ class EmpresasControlador extends ControladorBase{
     public function abrir(){
         try {
             header('Content-Type: application/json; charset=UTF8');
+            $txtRFC = $_POST["txtRFC"];
             $xRespuesta = array();
             $xRespuesta["error"] = 0;
+            /** REGISTRANDO LAS VARIABLES DE SESIÓN DE LA EMPRESA **/
+            $_SESSION["empresa_rfc"]        = $txtRFC;
+            $_SESSION["empresa_razon"]      = "XX Razón XX";
+            /** ****************************************************** **/
             echo json_encode($xRespuesta);
 
         } catch (Exception $e) {

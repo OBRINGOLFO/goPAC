@@ -19,7 +19,7 @@ class EscritorioControlador extends ControladorBase{
 
             parent::__construct();
             $this->conectar = new Conectar();
-            $this->adapter  = $this->conectar->conexion();
+            $this->adapter  = $this->conectar->conexion_empresa($_SESSION["empresa_rfc"]);
 
         } catch (Exception $e) {
             mostrar_error($e);
