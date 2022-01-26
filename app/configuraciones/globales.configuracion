@@ -41,7 +41,7 @@
     define('PATH_AJAX',             ROOT_DIR.'/app/librerias/ajax');    
     define('PATH_CSS',              ROOT_DIR.'/app/librerias/css');
     define('PATH_JS',               ROOT_DIR.'/app/librerias/js');
-    define('PATH_IMAGENES',         ROOT_DIR.'/app/librerias/img');
+    define('PATH_IMAGENES',         '/app/librerias/img');
     define('PATH_CACHE',            ROOT_DIR.'/temp/cache');
     define('PATH_REGISTROS',        ROOT_DIR.'/temp/registros');
     define('PATH_SESIONES',         ROOT_DIR.'/temp/sesiones');
