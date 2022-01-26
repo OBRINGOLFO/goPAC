@@ -39,6 +39,7 @@
         <link rel="stylesheet" type="text/css" href="/app/librerias/js/ui/themes/material-teal/easyui.css">
         <link rel="stylesheet" type="text/css" href="/app/librerias/js/ui/themes/icon.css">
         <link rel="stylesheet" type="text/css" href="/app/librerias/css/go_master.css">
+        <link rel="stylesheet" type="text/css" href="/app/librerias/css/go_menus.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <!-- [ ICONO PRIMARIO DE LA APP ] -->
@@ -49,6 +50,7 @@
         <script type="text/javascript" src="/app/librerias/js/ui/jquery.min.js"></script>
         <script type="text/javascript" src="/app/librerias/js/ui/jquery.easyui.min.js"></script>
         <script type="text/javascript" src="/app/librerias/js/ui/locale/easyui-lang-es.js"></script>
+        <script type="text/javascript" src="/app/librerias/js/jquery.tooltip.min.js"></script>
         <script type="text/javascript" src="/app/librerias/js/go_master.js"></script>
         <script type="text/javascript" src="/app/librerias/js/go_menus.js"></script>
 
