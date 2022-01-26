@@ -1,3 +1,14 @@
+.page
+{
+	border: 1px solid #a5acb5;
+	margin: 20px;
+	padding: 15px;
+	-webkit-box-shadow: #000000 0px 0px 10px;
+	-moz-box-shadow: #000000 0px 0px 10px;
+	box-shadow: #000000 0px 0px 10px;
+	background: #FFF;
+	behavior: url(/PIE.htc);
+}
 
 #ribbon
 {

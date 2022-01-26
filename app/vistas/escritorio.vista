@@ -11,15 +11,15 @@
 
 ?>
 
-<div id="MyEscritorio" name="MyEscritorio" class="easyui-layout">
-    <div id="ly-centro"     name="ly-centro"    data-options="region: 'center'" style="padding: 5px; background: #eee;"></div>
-    <div id="ly-arriba"     name="ly-arriba"    data-options="region: 'north', split: false, border: false" style="height: 200px;">
-        <?php echo load_Menu("escritorio_main"); ?>
-    </div>
-    <div id="ly-abajo"      name="ly-abajo"     data-options="region: 'south', split: true" style="height: 48px;"></div>
-    <div id="ly-derecha"    name="ly-derecha"   data-options="region: 'east', title:'Herramientas', split: true" style="width: 100px;"></div>
-    <div id="ly-izquierda"  name="ly-izquierda" data-options="region: 'west', title:'Módulos', split: true" style="width: 100px;"></div>
-</div> 
+    <div id="MyEscritorio" name="MyEscritorio" class="easyui-layout">
+        <div id="ly-centro"     name="ly-centro"    data-options="region: 'center'" style="padding: 5px; background: #eee;"></div>
+        <div id="ly-arriba"     name="ly-arriba"    data-options="region: 'north', split: false, border: false" style="height: 130px;">
+            <?php echo load_Menu("escritorio_main"); ?>
+        </div>
+        <div id="ly-abajo"      name="ly-abajo"     data-options="region: 'south', split: true" style="height: 48px;"></div>
+        <div id="ly-derecha"    name="ly-derecha"   data-options="region: 'east', title:'Herramientas', split: true" style="width: 100px;"></div>
+        <div id="ly-izquierda"  name="ly-izquierda" data-options="region: 'west', title:'Módulos', split: true" style="width: 100px;"></div>
+    </div> 
 
 
 <!-- ## ********************************************* ## -->
