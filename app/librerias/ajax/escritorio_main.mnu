@@ -12,6 +12,7 @@
 ?>
 <!-- [BEGIN][CINTA DE OPCIONES DINAMICA] -->
 <div class="easyui-ribbon" style="width: 100%;">
+	<!-- *********************************************************************************************** -->
 	<!-- [BEGIN][PESTAÑA GENERAL] -->
     <div title="Generales">
 		<!-- [BEGIN][OPCIONES DE EMPRESA] -->
@@ -25,21 +26,21 @@
 				">Respaldar<br>empresa</a>
             </div>
             <div class="ribbon-toolbar">
-                <a href="#" class="easyui-linkbutton" style="text-align: left;" data-options="
+                <a href="#" class="easyui-linkbutton" data-options="
 					name: 'cmd_EMPRESAS_CREAR',
 					iconCls: 'fas fa-plus-circle fa-lg',
 					plain: true,
 					width: '100%',
 					iconAlign: 'left'"
 				>Nueva</a><br>
-                <a href="#" class="easyui-linkbutton" style="text-align: left;" data-options="
+                <a href="#" class="easyui-linkbutton" data-options="
 					name: 'cmd_EMPRESAS_BORRAR',
 					iconCls: 'fas fa-minus-circle fa-lg',
 					plain: true,
 					width: '100%',
 					iconAlign: 'left'"
 				>Borrar</a><br>
-                <a href="#" class="easyui-linkbutton" style="text-align: left;" data-options="
+                <a href="#" class="easyui-linkbutton" data-options="
 					name: 'cmd_EMPRESAS_RESTAURAR',
 					iconCls: 'fas fa-trash-restore fa-lg',
 					plain: true,
@@ -55,28 +56,107 @@
         <div class="ribbon-group">
             <div class="ribbon-toolbar" >
 				<a href="#" class="easyui-menubutton" data-options="
-						name: 'cmd_EMPRESAS_RESPALDAR',
+						name: 'cmd_USUARIOS_NUEVO',
 						iconCls: 'fas fa-user-plus fa-lg',
 						iconAlign: 'top',
 						size: 'large'
 				">Nuevo<br>usuario</a>
 				<a href="#" class="easyui-menubutton" data-options="
-						name: 'cmd_EMPRESAS_RESPALDAR',
+						name: 'cmd_USUARIOS_PERMISOS',
 						iconCls: 'fas fa-user-shield fa-lg',
 						iconAlign: 'top',
 						size: 'large'
 				">Permisos<br>de acceso</a>
 			</div>
 			<div class="ribbon-toolbar">
-					<a href="#" class="easyui-linkbutton" style="text-align: left;" data-options="
-						name: 'cmd_EMPRESAS_BORRAR',
+					<a href="#" class="easyui-linkbutton" data-options="
+						name: 'cmd_USUARIOS_ELIMINAR',
 						iconCls: 'fas fa-user-minus fa-lg',
 						plain: true,
 						width: '100%',
 						iconAlign: 'left'"
 					>Eliminar</a><br>
-					<a href="#" class="easyui-linkbutton" style="text-align: left;" data-options="
-						name: 'cmd_EMPRESAS_RESTAURAR',
+					<a href="#" class="easyui-linkbutton" data-options="
+						name: 'cmd_USUARIOS_MODIFICAR',
+						iconCls: 'fas fa-user-edit fa-lg',
+						plain: true,
+						width: '100%',
+						iconAlign: 'left'"
+					>Modificar</a>
+				</div>
+
+            <div class="ribbon-group-title">Configuración de usuarios</div>
+        </div>
+		<!-- [END][OPCIONES DE USUARIOS] -->
+        <div class="ribbon-group-sep"></div>
+    </div>
+	<!-- [END][PESTAÑA GENERAL] -->
+	<!-- *********************************************************************************************** -->
+	<!-- [BEGIN][PESTAÑA GENERAL] -->
+    <div title="Acerca de...">
+		<!-- [BEGIN][OPCIONES DE EMPRESA] -->
+        <div class="ribbon-group" style="width: 250px">
+            <div class="ribbon-toolbar">
+                <a href="#" class="easyui-menubutton" data-options="
+					name: 'cmd_EMPRESAS_RESPALDAR',
+					iconCls: 'fas fa-archive fa-lg',
+					iconAlign: 'top',
+					size: 'large'
+				">Respaldar<br>empresa</a>
+            </div>
+            <div class="ribbon-toolbar">
+                <a href="#" class="easyui-linkbutton" data-options="
+					name: 'cmd_EMPRESAS_CREAR',
+					iconCls: 'fas fa-plus-circle fa-lg',
+					plain: true,
+					width: '100%',
+					iconAlign: 'left'"
+				>Nueva</a><br>
+                <a href="#" class="easyui-linkbutton" data-options="
+					name: 'cmd_EMPRESAS_BORRAR',
+					iconCls: 'fas fa-minus-circle fa-lg',
+					plain: true,
+					width: '100%',
+					iconAlign: 'left'"
+				>Borrar</a><br>
+                <a href="#" class="easyui-linkbutton" data-options="
+					name: 'cmd_EMPRESAS_RESTAURAR',
+					iconCls: 'fas fa-trash-restore fa-lg',
+					plain: true,
+					width: '100%',
+					iconAlign: 'left'"
+				>Restaurar</a>
+            </div>
+            <div class="ribbon-group-title">Opciones de la empresa</div>
+        </div>
+		<!-- [END][OPCIONES DE EMPRESA] -->
+        <div class="ribbon-group-sep"></div>
+		<!-- [BEGIN][OPCIONES DE USUARIOS] -->
+        <div class="ribbon-group">
+            <div class="ribbon-toolbar" >
+				<a href="#" class="easyui-menubutton" data-options="
+						name: 'cmd_USUARIOS_NUEVO',
+						iconCls: 'fas fa-user-plus fa-lg',
+						iconAlign: 'top',
+						size: 'large'
+				">Nuevo<br>usuario</a>
+				<a href="#" class="easyui-menubutton" data-options="
+						name: 'cmd_USUARIOS_PERMISOS',
+						iconCls: 'fas fa-user-shield fa-lg',
+						iconAlign: 'top',
+						size: 'large'
+				">Permisos<br>de acceso</a>
+			</div>
+			<div class="ribbon-toolbar">
+					<a href="#" class="easyui-linkbutton" data-options="
+						name: 'cmd_USUARIOS_ELIMINAR',
+						iconCls: 'fas fa-user-minus fa-lg',
+						plain: true,
+						width: '100%',
+						iconAlign: 'left'"
+					>Eliminar</a><br>
+					<a href="#" class="easyui-linkbutton" data-options="
+						name: 'cmd_USUARIOS_MODIFICAR',
 						iconCls: 'fas fa-user-edit fa-lg',
 						plain: true,
 						width: '100%',
