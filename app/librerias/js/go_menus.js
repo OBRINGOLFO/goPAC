@@ -1,204 +1,196 @@
-(function ($) {
-    $.fn.extend({
-        size: function () {
-            return $(this).length;
-        }
-    });
-})(jQuery);
-/** ***************************************************************** **/
-(function( $ ){ 
-	$.fn.ribbon = function(id) {
-		if (!id) {
-			if (this.attr('id')) {
-				id = this.attr('id');
+(function($){
+	function buildRibbon(target){
+		var opts = $.data(target, 'ribbon').options;
+		
+		// $(target).addClass('ribbon').tabs(opts);
+		$(target).addClass('ribbon').tabs($.extend({},opts,{
+			onSelect: function(title,index){
+				$(this).ribbon('resizeGroups');
+				opts.onSelect.call(this,title,index)
 			}
+		}));
+		var tabs = $(target).tabs('tabs');
+		for(var i=0; i<tabs.length; i++){
+			tabs[i].addClass('ribbon-tab');
 		}
+	}
+	
+	function bindEvents(target){
+		var opts = $.data(target, 'ribbon').options;
 		
-		var that = function() { 
-			return thatRet;
-		};
-		
-		
-		
-		var thatRet = that;
-		
-		that.selectedTabIndex = -1;
-		
-		var tabNames = [];
-		
-		that.goToBackstage = function() {
-			ribObj.addClass('backstage');
-		}
-			
-		that.returnFromBackstage = function() {
-			ribObj.removeClass('backstage');
-		}	
-		var ribObj = null;
-		
-		that.init = function(id) {
-			if (!id) {
-				id = 'ribbon';
-			}
-		
-			ribObj = $('#'+id);
-			ribObj.find('.ribbon-window-title').after('<div id="ribbon-tab-header-strip"></div>');
-			var header = ribObj.find('#ribbon-tab-header-strip');
-			
-			ribObj.find('.ribbon-tab').each(function(index) {
-				var id = $(this).attr('id');
-				if (id == undefined || id == null)
-				{
-					$(this).attr('id', 'tab-'+index);
-					id = 'tab-'+index;
-				}
-				tabNames[index] = id;
-			
-				var title = $(this).find('.ribbon-title');
-				var isBackstage = $(this).hasClass('file');
-				header.append('<div id="ribbon-tab-header-'+index+'" class="ribbon-tab-header"></div>');
-				var thisTabHeader = header.find('#ribbon-tab-header-'+index);
-				thisTabHeader.append(title);
-				if (isBackstage) {
-					thisTabHeader.addClass('file');
-					
-					thisTabHeader.click(function() {
-						that.switchToTabByIndex(index);
-						that.goToBackstage();
-					});
-				} else {
-					if (that.selectedTabIndex==-1) {
-						that.selectedTabIndex = index;
-						thisTabHeader.addClass('sel');
+		$(target).find('.l-btn').unbind('.ribbon').bind('click.ribbon', function(e){
+			var bopts = $(this).linkbutton('options');
+			opts.onClick.call(target, bopts.name, this);
+		});
+		$(target).find('.m-btn').each(function(){
+			var m = $($(this).menubutton('options').menu);
+			if (m.length){
+				var mopts = m.menu('options');
+				var onClick = mopts.onClick;
+				mopts.onClick = function(item){
+					onClick.call(this, item);
+					if (mopts.timer){
+						clearTimeout(mopts.timer);
 					}
-					
-					thisTabHeader.click(function() {
-						that.returnFromBackstage();
-						that.switchToTabByIndex(index);
+					mopts.timer = setTimeout(function(){
+						opts.onClick.call(target, item.name, m[0]);
+					},0);
+				}
+			}
+		});
+	}
+
+	function resizeGroups(target){
+		var r = $(target);
+		var p = r.tabs('getSelected').find('.ribbon-groups');
+		var width = 0;
+		p.children().each(function(){
+			width += $(this)._outerWidth();
+		});
+		p._outerWidth(Math.ceil(width));
+	}
+	
+	function loadData(target, data){
+		var opts = $.data(target, 'ribbon').options;
+		var r = $(target);
+		for(var i=r.ribbon('tabs').length-1; i>=0; i--){
+			r.ribbon('close', i);
+		}
+		if (data){
+			opts.data = data;
+		}
+		opts.data.tabs = opts.data.tabs || [];
+		for(var i=0; i<opts.data.tabs.length; i++){
+			var tab = opts.data.tabs[i];
+			r.ribbon('add', $.extend({}, tab, {
+				bodyCls:'ribbon-tab'
+			}));
+			
+			var p = r.ribbon('getTab', i);
+			buildGroups(tab.groups, p);
+		}
+		if (opts.data.selected == undefined){
+			opts.data.selected = 0;
+		}
+		r.ribbon('select', opts.data.selected);
+		
+		bindEvents(target);
+		
+		function buildGroups(groups, p){
+			p.empty();
+			p = $('<div class="ribbon-groups"></div>').appendTo(p);
+			groups = groups || [];
+			for(var i=0; i<groups.length; i++){
+				var group = groups[i];
+				group.dir = group.dir || 'h';
+				var g = $('<div class="ribbon-group"></div>').appendTo(p);
+				$('<div class="ribbon-group-sep"></div>').appendTo(p);
+				$('<div class="ribbon-group-title"></div>').html(group.title||'').appendTo(g);
+				group.tools = group.tools || [];
+				$.map(group.tools, function(tool){
+					var type = tool.type || 'linkbutton';
+					if (type == 'toolbar'){
+						var toolbar = $('<div class="ribbon-toolbar"></div>').appendTo(g);
+						toolbar.css(tool.style||{});
+						if (group.dir == 'v'){
+							toolbar.css('clear', 'both');
+						}
+						var dir = tool.dir || 'h';
+						$.map(tool.tools, function(tool){
+							buildTool(tool, toolbar, dir);
+						});
+						toolbar.append('<div style="clear:both"></div>');
+					} else {
+						buildTool(tool, g, group.dir);
+					}
+				});
+				g.find('.ribbon-group-title')._outerWidth(g.outerWidth()-2);
+			}
+
+			function buildTool(options, p, dir){
+				var type = options.type || 'linkbutton';
+				options.plain = options.plain || true;
+				if (options.menuItems){
+					var m = $('<div></div>').appendTo('body');
+					m.menu();
+					$.map(options.menuItems, function(item){
+						m.menu('appendItem', item);
 					});
+					options.menu = m;
 				}
-				
-				
-				
-				$(this).hide();
-			});
-			
-			ribObj.find('.ribbon-button').each(function(index) {
-				var title = $(this).find('.button-title');
-				title.detach();
-				$(this).append(title);
-				
-				var el = $(this);
-				
-				this.enable = function() {
-					el.removeClass('disabled');
+				var btn = $('<a href="javascript:void(0)"></a>').appendTo(p);
+				if (options.id){
+					btn.attr('id', options.id);
 				}
-				this.disable = function() {
-					el.addClass('disabled');
+				btn[type](options);
+				if (dir == 'v'){
+					btn.css('clear','both');
 				}
-				this.isEnabled = function() {
-					return !el.hasClass('disabled');
+				if (options.tooltip){
+					if (btn.hasClass('textbox-f')){
+						btn.next().tooltip({content:options.tooltip});
+					} else {
+						btn.tooltip({content:options.tooltip});
+					}
 				}
-								
-				if ($(this).find('.ribbon-hot').length==0) {
-					$(this).find('.ribbon-normal').addClass('ribbon-hot');
-				}			
-				if ($(this).find('.ribbon-disabled').length==0) {
-					$(this).find('.ribbon-normal').addClass('ribbon-disabled');
-					$(this).find('.ribbon-normal').addClass('ribbon-implicit-disabled');
-				}
-				
-				$(this).tooltip({
-					bodyHandler: function () {
-						if (!$(this).isEnabled()) { 
-							$('#tooltip').css('visibility', 'hidden');
-							return '';
-						}
-						
-						var tor = '';
-
-						if (jQuery(this).children('.button-help').size() > 0)
-							tor = (jQuery(this).children('.button-help').html());
-						else
-							tor = '';
-
-						if (tor == '') {
-							$('#tooltip').css('visibility', 'hidden');
-							return '';
-						}
-
-						$('#tooltip').css('visibility', 'visible');
-
-						return tor;
-					},
-					left: 0,
-					extraClass: 'ribbon-tooltip'
-				});
-			});
-			
-			ribObj.find('.ribbon-section').each(function(index) {
-				$(this).after('<div class="ribbon-section-sep"></div>');
-			});
-
-			ribObj.find('div').attr('unselectable', 'on');
-			ribObj.find('span').attr('unselectable', 'on');
-			ribObj.attr('unselectable', 'on');
-
-			that.switchToTabByIndex(that.selectedTabIndex);
-		}
-		
-		that.switchToTabByIndex = function(index) {
-			var headerStrip = $('#ribbon #ribbon-tab-header-strip');
-			headerStrip.find('.ribbon-tab-header').removeClass('sel');
-			headerStrip.find('#ribbon-tab-header-'+index).addClass('sel');
-
-			$('#ribbon .ribbon-tab').hide();
-			$('#ribbon #'+tabNames[index]).show();
-		}
-		
-		$.fn.enable = function() {
-			if (this.hasClass('ribbon-button')) {
-				if (this[0] && this[0].enable) {
-					this[0].enable();
-				}	
 			}
-			else {
-				this.find('.ribbon-button').each(function() {
-					$(this).enable();
-				});
-			}				
 		}
-		
-		
-			
-				
-		$.fn.disable = function() {
-			if (this.hasClass('ribbon-button')) {
-				if (this[0] && this[0].disable) {
-					this[0].disable();
-				}	
-			}
-			else {
-				this.find('.ribbon-button').each(function() {
-					$(this).disable();
-				});
-			}				
-		}
+	}
 	
-		$.fn.isEnabled = function() {
-			if (this[0] && this[0].isEnabled) {
-				return this[0].isEnabled();
+	$.fn.ribbon = function(options, param){
+		if (typeof options == 'string'){
+			var method = $.fn.ribbon.methods[options];
+			if (method){
+				return method(this, param);
 			} else {
-				return true;
+				return this.tabs(options, param);
 			}
 		}
-	
-	
-		that.init(id);
-	
-		$.fn.ribbon = that;
+		
+		options = options || {};
+		return this.each(function(){
+			var state = $.data(this, 'ribbon');
+			if (state){
+				$.extend(state.options, options);
+			} else {
+				state = $.data(this, 'ribbon', {
+					options: $.extend({}, $.fn.ribbon.defaults, $.fn.ribbon.parseOptions(this), options)
+				});
+			}
+			buildRibbon(this);
+			bindEvents(this);
+			if (state.options.data){
+				loadData(this, state.options.data);
+			}
+		});
 	};
-
-})( jQuery );
-/** ***************************************************************** **/
-/** ***************************************************************** **/
-/** ***************************************************************** **/
+	
+	$.fn.ribbon.methods = {
+		options: function(jq){
+			return $.data(jq[0], 'ribbon').options;
+		},
+		loadData: function(jq, data){
+			return jq.each(function(){
+				loadData(this, data);
+			});
+		},
+		resizeGroups: function(jq){
+			return jq.each(function(){
+				resizeGroups(this);
+			});
+		}
+	};
+	
+	$.fn.ribbon.parseOptions = function(target){
+		return $.extend({}, $.fn.tabs.parseOptions(target), {
+			
+		});
+	};
+	
+	$.fn.ribbon.defaults = $.extend({}, $.fn.tabs.defaults, {
+		onClick:function(name, target){}
+	});
+	
+	////////////////////////////////
+	$.parser.plugins.push('ribbon');
+})(jQuery);
