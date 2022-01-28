@@ -22,7 +22,7 @@
 					iconCls: 'fas fa-archive fa-lg',
 					iconAlign: 'top',
 					size: 'large'
-				">Respaldar</a>
+				">Respaldar<br>empresa</a>
             </div>
             <div class="ribbon-toolbar">
                 <a href="#" class="easyui-linkbutton" style="text-align: left;" data-options="
@@ -31,7 +31,7 @@
 					plain: true,
 					width: '100%',
 					iconAlign: 'left'"
-				>Crear</a><br>
+				>Nueva</a><br>
                 <a href="#" class="easyui-linkbutton" style="text-align: left;" data-options="
 					name: 'cmd_EMPRESAS_BORRAR',
 					iconCls: 'fas fa-minus-circle fa-lg',
@@ -53,7 +53,37 @@
         <div class="ribbon-group-sep"></div>
 		<!-- [BEGIN][OPCIONES DE USUARIOS] -->
         <div class="ribbon-group">
-            <div class="ribbon-toolbar" style="width: 200px"></div>
+            <div class="ribbon-toolbar" >
+				<a href="#" class="easyui-menubutton" data-options="
+						name: 'cmd_EMPRESAS_RESPALDAR',
+						iconCls: 'fas fa-user-plus fa-lg',
+						iconAlign: 'top',
+						size: 'large'
+				">Nuevo<br>usuario</a>
+				<a href="#" class="easyui-menubutton" data-options="
+						name: 'cmd_EMPRESAS_RESPALDAR',
+						iconCls: 'fas fa-user-shield fa-lg',
+						iconAlign: 'top',
+						size: 'large'
+				">Permisos<br>de acceso</a>
+			</div>
+			<div class="ribbon-toolbar">
+					<a href="#" class="easyui-linkbutton" style="text-align: left;" data-options="
+						name: 'cmd_EMPRESAS_BORRAR',
+						iconCls: 'fas fa-user-minus fa-lg',
+						plain: true,
+						width: '100%',
+						iconAlign: 'left'"
+					>Eliminar</a><br>
+					<a href="#" class="easyui-linkbutton" style="text-align: left;" data-options="
+						name: 'cmd_EMPRESAS_RESTAURAR',
+						iconCls: 'fas fa-user-edit fa-lg',
+						plain: true,
+						width: '100%',
+						iconAlign: 'left'"
+					>Modificar</a>
+				</div>
+
             <div class="ribbon-group-title">Configuración de usuarios</div>
         </div>
 		<!-- [END][OPCIONES DE USUARIOS] -->

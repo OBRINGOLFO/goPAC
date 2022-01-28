@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap');
 
-.ribbon-tab{
+.ribbon-tab {
 	background:-webkit-gradient(linear, 0 0, 0 bottom, from(#ffffff), to(#eaedf1));
 	padding:4px;
 }
 
-.ribbon-groups{
+.ribbon-groups {
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: -moz-flex;
@@ -14,7 +14,7 @@
 	position: relative;
 }
 
-.ribbon-group{
+.ribbon-group {
 	position:relative;
 	height:106px;
 	float:left;
@@ -28,7 +28,7 @@
 	font-family: "Roboto Condensed";
 }
 
-.ribbon-group-title{
+.ribbon-group-title {
 	position:absolute;
 	left:0;
 	bottom:0;
@@ -41,16 +41,35 @@
 	font-size: small;
 }
 
-.ribbon-toolbar{
+.ribbon-toolbar {
 	position:relative;
 	float:left;
 }
 
-.ribbon-group .l-btn{
+.ribbon-group .l-btn {
 	float:left;
 }
 
-.ribbon-group-sep{
+.ribbon-group .easyui-menubutton .l-btn-text {
+	line-height: 16px !important;
+	width: 60px !important;
+}
+
+.ribbon-group .easyui-menubutton .l-btn-icon {
+	margin: 0 0 0 -13px;
+}
+
+.ribbon-group .m-btn-downarrow {
+	display: none !important;
+}
+
+.ribbon-group .easyui-linkbutton {
+	padding-left: 4px;
+	height: 28px;
+	padding-top: 1px;
+}
+
+.ribbon-group-sep {
 	float:left;
 	width:0;
 	height:112px;
@@ -61,7 +80,7 @@
 }
 
 .ribbon-groups .ribbon-group,
-.ribbon-groups .ribbon-group-sep{
+.ribbon-groups .ribbon-group-sep {
 	float: none;
 	flex: none;
 }
