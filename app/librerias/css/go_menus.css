@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap');
+
 .ribbon-tab{
 	background:-webkit-gradient(linear, 0 0, 0 bottom, from(#ffffff), to(#eaedf1));
 	padding:4px;
@@ -23,6 +25,7 @@
 	-moz-box-sizing:content-box;
 	-webkit-box-sizing:content-box;
 	box-sizing:content-box;
+	font-family: "Roboto Condensed";
 }
 
 .ribbon-group-title{
@@ -34,6 +37,8 @@
 	height:14px;
 	line-height:14px;
 	color:#15428b;
+	font-family: "Roboto Condensed";
+	font-size: small;
 }
 
 .ribbon-toolbar{

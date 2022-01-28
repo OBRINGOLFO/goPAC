@@ -13,7 +13,7 @@
 
     <div id="MyEscritorio" name="MyEscritorio" class="easyui-layout">
         <div id="ly-centro"     name="ly-centro"    data-options="region: 'center'" style="padding: 5px; background: #eee;"></div>
-        <div id="ly-arriba"     name="ly-arriba"    data-options="region: 'north', split: false, border: false" style="height: 130px;">
+        <div id="ly-arriba"     name="ly-arriba"    data-options="region: 'north', split: false, border: false" style="height: 200px;">
             <?php echo load_Menu("escritorio_main"); ?>
         </div>
         <div id="ly-abajo"      name="ly-abajo"     data-options="region: 'south', split: true" style="height: 48px;"></div>
@@ -26,11 +26,9 @@
 <script type="text/javascript">
     var MyW = goTasaW(96);
     var MyH = goTasaH(96);
-
+    //# **************************************************** #
     $(document).ready(function(){
         document.title = "goPAC® - <?php echo $_SESSION["empresa_razon"] ?>";
-        //# ************************************************ #
-        $('#ribbon').ribbon();
         //# ************************************************ #
         $("#MyEscritorio").width(MyW+"px"); $("#MyEscritorio").height(MyH+"px"); 
         $('#MyEscritorio').layout('resize', { width: MyW+"px", height: MyH+"px" });
@@ -44,12 +42,14 @@
         //# ************************************************ #
         //# ************************************************ #
     });
-
+    //# **************************************************** #
     $(window).resize(function() {
         var MyW = goTasaW(96);
         var MyH = goTasaH(96);
         $("#MyEscritorio").width(MyW+"px"); $("#MyEscritorio").height(MyH+"px"); 
         $('#MyEscritorio').layout('resize', { width: MyW+"px", height: MyH+"px" });
     });
+    //# **************************************************** #
+    //# **************************************************** #
 </script>
 <!-- ## ********************************************* ## -->

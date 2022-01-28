@@ -10,25 +10,68 @@
  */
 	
 ?>
-
-<div class="easyui-ribbon" style="width:700px;">
-    <div title="Home">
+<!-- [BEGIN][CINTA DE OPCIONES DINAMICA] -->
+<div class="easyui-ribbon" style="width: 100%;">
+	<!-- [BEGIN][PESTAÑA GENERAL] -->
+    <div title="Generales">
+		<!-- [BEGIN][OPCIONES DE EMPRESA] -->
         <div class="ribbon-group">
             <div class="ribbon-toolbar">
-                <a href="#" class="easyui-menubutton" data-options="name:'paste',iconCls:'icon-paste-large',iconAlign:'top',size:'large'">Paste</a>
+                <a href="#" class="easyui-menubutton" data-options="
+					name: 'cmd_EMPRESAS_RESPALDAR',
+					iconCls: 'fas fa-archive fa-lg',
+					iconAlign: 'top',
+					size: 'large'
+				">Respaldar</a>
             </div>
             <div class="ribbon-toolbar">
-                <a href="#" class="easyui-linkbutton" data-options="name:'cut',iconCls:'icon-cut',plain:true">Cut</a><br>
-                <a href="#" class="easyui-linkbutton" data-options="name:'copy',iconCls:'icon-copy',plain:true">Copy</a><br>
-                <a href="#" class="easyui-linkbutton" data-options="name:'format',iconCls:'icon-format',plain:true">Format</a>
+                <a href="#" class="easyui-linkbutton" style="text-align: left;" data-options="
+					name: 'cmd_EMPRESAS_CREAR',
+					iconCls: 'fas fa-plus-circle fa-lg',
+					plain: true,
+					width: '100%',
+					iconAlign: 'left'"
+				>Crear</a><br>
+                <a href="#" class="easyui-linkbutton" style="text-align: left;" data-options="
+					name: 'cmd_EMPRESAS_BORRAR',
+					iconCls: 'fas fa-minus-circle fa-lg',
+					plain: true,
+					width: '100%',
+					iconAlign: 'left'"
+				>Borrar</a><br>
+                <a href="#" class="easyui-linkbutton" style="text-align: left;" data-options="
+					name: 'cmd_EMPRESAS_RESTAURAR',
+					iconCls: 'fas fa-trash-restore fa-lg',
+					plain: true,
+					width: '100%',
+					iconAlign: 'left'"
+				>Restaurar</a>
             </div>
-            <div class="ribbon-group-title">Clipboard</div>
+            <div class="ribbon-group-title">Opciones de la empresa</div>
         </div>
+		<!-- [END][OPCIONES DE EMPRESA] -->
         <div class="ribbon-group-sep"></div>
+		<!-- [BEGIN][OPCIONES DE USUARIOS] -->
         <div class="ribbon-group">
-            <div class="ribbon-toolbar" style="width:200px"></div>
-            <div class="ribbon-group-title">other title</div>
+            <div class="ribbon-toolbar" style="width: 200px"></div>
+            <div class="ribbon-group-title">Configuración de usuarios</div>
         </div>
+		<!-- [END][OPCIONES DE USUARIOS] -->
         <div class="ribbon-group-sep"></div>
     </div>
+	<!-- [END][PESTAÑA GENERAL] -->
+
 </div>
+<!-- [END][CINTA DE OPCIONES DINAMICA] -->
+
+<!-- ## ********************************************* ## -->
+<script type="text/javascript">
+
+    $('.easyui-ribbon').ribbon({
+        onClick: function(name, target){
+            alert(name+' OnClick');
+        }
+    });
+
+</script>
+<!-- ## ********************************************* ## -->
