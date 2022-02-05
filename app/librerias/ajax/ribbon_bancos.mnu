@@ -1,0 +1,66 @@
+<?php
+/**
+ * @autor Rixio Danilo Iguarán Chourio.
+ * @cédula-profesional 12196442
+ * @correo-eletrónico atencion.clientes@obringolfo.com
+ * @denominacion OBRAS INFORMÁTICAS DEL GOLFO
+ * @empresa OBRINGOLFO S.A.S. DE C.V.
+ * @proyecto  WINDOWS PAQUETE ADMINISTRATIVO CONTABLE (WinPAC).
+ * @copyright 2022
+ */
+	
+?>
+
+    <!-- *********************************************************************************************** -->
+    	<!-- [BEGIN][PESTAÑA BANCOS] -->
+        <div title="Bancos">
+		<!-- [BEGIN][OPCIONES DE INFORMACIÓN] -->
+        <div class="ribbon-group">
+            <div class="ribbon-toolbar" >
+				<a class="easyui-menubutton" data-options="
+					name: 'cmd_INFORMACION_ACERCA',
+					iconCls: 'fas fa-address-card fa-lg',
+					iconAlign: 'top',
+					size: 'large'"
+					onmouseover='statusMSG("Mustra información sobre el equipo de desarrollo.");'
+					onmouseout='statusMSG_clear();'
+				>Acerca del<br>software</a>
+			</div>
+			<div class="ribbon-toolbar" style="width: 110px">
+					<a class="easyui-linkbutton" data-options="
+						name: 'cmd_INFORMACION_LICENCIAMIENTO',
+						iconCls: 'fas fa-id-badge fa-lg',
+						plain: true,
+						width: '100%',
+						iconAlign: 'left'"
+						onmouseover='statusMSG("Elimina un usuario autorizado dentro del sistema");'
+						onmouseout='statusMSG_clear();'
+					>Licenciamiento</a><br>
+					<a class="easyui-linkbutton" data-options="
+						name: 'cmd_INFORMACION_PRIVACIDAD',
+						iconCls: 'fas fa-user-secret fa-lg',
+						plain: true,
+						width: '100%',
+						iconAlign: 'left'"
+						onmouseover='statusMSG("Modifica la información de un usuario específico.");'
+						onmouseout='statusMSG_clear();'
+					>Privacidad</a>
+					<a class="easyui-linkbutton" data-options="
+						name: 'cmd_INFORMACION_POLITICAS',
+						iconCls: 'fas fa-people-arrows fa-lg',
+						plain: true,
+						width: '100%',
+						iconAlign: 'left'"
+						onmouseover='statusMSG("Revoca el acceso de un usuario, sin eliminar su perfil del sistema.");'
+						onmouseout='statusMSG_clear();'
+					>Póliticas</a>
+
+				</div>
+
+            <div class="ribbon-group-title">Información del sistema</div>
+        </div>
+		<!-- [END][OPCIONES DE INFORMACIÓN] -->
+        <div class="ribbon-group-sep"></div>
+    </div>
+	<!-- [END][PESTAÑA BANCOS] -->
+	<!-- *********************************************************************************************** -->

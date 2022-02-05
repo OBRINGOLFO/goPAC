@@ -1,0 +1,109 @@
+<?php
+/**
+ * @autor Rixio Danilo Iguarán Chourio.
+ * @cédula-profesional 12196442
+ * @correo-eletrónico atencion.clientes@obringolfo.com
+ * @denominacion OBRAS INFORMÁTICAS DEL GOLFO
+ * @empresa OBRINGOLFO S.A.S. DE C.V.
+ * @proyecto  WINDOWS PAQUETE ADMINISTRATIVO CONTABLE (WinPAC).
+ * @copyright 2022
+ */
+	
+?>
+
+    <!-- *********************************************************************************************** -->
+	<!-- [BEGIN][PESTAÑA AYUDA] -->
+    <div title="Ayuda">
+		<!-- [BEGIN][OPCIONES DE INFORMACIÓN] -->
+        <div class="ribbon-group">
+            <div class="ribbon-toolbar" >
+				<a class="easyui-menubutton" data-options="
+					name: 'cmd_INFORMACION_ACERCA',
+					iconCls: 'fas fa-address-card fa-lg',
+					iconAlign: 'top',
+					size: 'large'"
+					onmouseover='statusMSG("Mustra información sobre el equipo de desarrollo.");'
+					onmouseout='statusMSG_clear();'
+				>Acerca del<br>software</a>
+			</div>
+			<div class="ribbon-toolbar" style="width: 110px">
+					<a class="easyui-linkbutton" data-options="
+						name: 'cmd_INFORMACION_LICENCIAMIENTO',
+						iconCls: 'fas fa-id-badge fa-lg',
+						plain: true,
+						width: '100%',
+						iconAlign: 'left'"
+						onmouseover='statusMSG("Elimina un usuario autorizado dentro del sistema");'
+						onmouseout='statusMSG_clear();'
+					>Licenciamiento</a><br>
+					<a class="easyui-linkbutton" data-options="
+						name: 'cmd_INFORMACION_PRIVACIDAD',
+						iconCls: 'fas fa-user-secret fa-lg',
+						plain: true,
+						width: '100%',
+						iconAlign: 'left'"
+						onmouseover='statusMSG("Modifica la información de un usuario específico.");'
+						onmouseout='statusMSG_clear();'
+					>Privacidad</a>
+					<a class="easyui-linkbutton" data-options="
+						name: 'cmd_INFORMACION_POLITICAS',
+						iconCls: 'fas fa-people-arrows fa-lg',
+						plain: true,
+						width: '100%',
+						iconAlign: 'left'"
+						onmouseover='statusMSG("Revoca el acceso de un usuario, sin eliminar su perfil del sistema.");'
+						onmouseout='statusMSG_clear();'
+					>Póliticas</a>
+
+				</div>
+
+            <div class="ribbon-group-title">Información del sistema</div>
+        </div>
+		<!-- [END][OPCIONES DE INFORMACIÓN] -->
+        <div class="ribbon-group-sep"></div>
+		<!-- [BEGIN][OPCIONES DE MANUALES] -->
+        <div class="ribbon-group">
+            <div class="ribbon-toolbar" >
+				<a class="easyui-menubutton" data-options="
+					name: 'cmd_MANUALES_FACTURACION',
+					iconCls: 'fas fa-file-invoice-dollar fa-lg',
+					iconAlign: 'top',
+					size: 'large'"
+					onmouseover='statusMSG("Abre el manual de usuario para el módulo de facturación.");'
+					onmouseout='statusMSG_clear();'
+				>Manual de<br>facturación</a>
+				<a class="easyui-menubutton" data-options="
+					name: 'cmd_MANUALES_CONTABILIDAD',
+					iconCls: 'fas fa-calculator fa-lg',
+					iconAlign: 'top',
+					size: 'large'"
+					onmouseover='statusMSG("Abre el manual de usuario para el módulo de contabilidad.");'
+					onmouseout='statusMSG_clear();'
+				>Manual de<br>contabilidad</a>
+				<a class="easyui-menubutton" data-options="
+					name: 'cmd_MANUALES_NOMINAS',
+					iconCls: 'fas fa-people-carry fa-lg',
+					iconAlign: 'top',
+					size: 'large'"
+					onmouseover='statusMSG("Abre el manual de usuario para el módulo de nóminas.");'
+					onmouseout='statusMSG_clear();'
+				>Manual de<br>nóminas</a>
+				<a class="easyui-menubutton" data-options="
+					name: 'cmd_MANUALES_COMERCIAL',
+					iconCls: 'fas fa-store-alt fa-lg',
+					iconAlign: 'top',
+					size: 'large'"
+					onmouseover='statusMSG("Abre el manual de usuario para el módulo de administración y comercio.");'
+					onmouseout='statusMSG_clear();'
+				>Manual de<br>comercio</a>
+
+			</div>
+
+            <div class="ribbon-group-title">Manuales de ayuda</div>
+        </div>
+		<!-- [END][OPCIONES DE MANUALES] -->
+        <div class="ribbon-group-sep"></div>
+
+    </div>
+	<!-- [END][PESTAÑA AYUDA] -->
+	<!-- *********************************************************************************************** -->
