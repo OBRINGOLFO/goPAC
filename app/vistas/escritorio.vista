@@ -17,13 +17,13 @@
             <?php echo load_Menu("escritorio_main"); ?>
         </div>
         <div id="ly-abajo"      name="ly-abajo"     data-options="region: 'south', split: true" style="display: flex; align-items: flex-end; height: 30px;">
-            <div id="mensaje_escritorio" name="mensaje_escritorio" class="status_escritorio" style="width: 43%; margin-left: 2px; text-align: left !important; padding-left: 5px;"></div>
+            <div id="mensaje_escritorio" name="mensaje_escritorio" class="status_escritorio" style="width: 41%; margin-left: 2px; text-align: left !important; padding-left: 5px;"></div>
             <div id="progreso_escritorio" name="progreso_escritorio" class="status_escritorio" style="width: 20%;">
                 <div id="ctr_progreso" class="easyui-progressbar" data-options="value:0" style="display:none;"></div>
             </div>
             <div id="ip_escritorio" name="ip_escritorio" class="status_escritorio" style="width: 9%;"><?php echo $_SESSION['actualip'] ?></div>
             <div id="usuario_escritorio" name="usuario_escritorio" class="status_escritorio" style="width: 12%;"><?php echo $_SESSION['usuario'] ?></div>
-            <div id="fecha_escritorio" name="fecha_escritorio" class="status_escritorio" style="width: 16%;">Miércoles 00 de Septiembre del 0000</div>
+            <div id="fecha_escritorio" name="fecha_escritorio" class="status_escritorio" style="width: 18%;"></div>
         </div>
         <div id="ly-derecha"    name="ly-derecha"   data-options="region: 'east', title:'Herramientas', split: true" style="width: 100px;"></div>
         <div id="ly-izquierda"  name="ly-izquierda" data-options="region: 'west', title:'Módulos', split: true" style="width: 100px;"></div>
@@ -44,6 +44,7 @@
         $('#MyEscritorio').layout('collapse','east');
         $('#MyEscritorio').layout('collapse','west');
         //# ************************************************ #
+        let statusDATE = setInterval(status_getFecha, 1000);
         //# ************************************************ #
         //# ************************************************ #
         //# ************************************************ #

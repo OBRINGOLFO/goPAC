@@ -14,7 +14,10 @@
 <div id="escritorio_main" name="escritorio_main" class="easyui-ribbon">
 	<!-- *********************************************************************************************** -->
 	<!-- [BEGIN][PESTAÑA GENERAL] -->
-    <div title="Generales">
+    <div title="Generales"
+			onmouseover='statusMSG("Opciones generales del sistema.");'
+			onmouseout='statusMSG_clear();'
+		>
 		<!-- [BEGIN][OPCIONES DE EMPRESA] -->
         <div class="ribbon-group">
             <div class="ribbon-toolbar">

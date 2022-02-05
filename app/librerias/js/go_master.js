@@ -30,8 +30,12 @@
     function statusMSG_clear(){
         $("#mensaje_escritorio").html('');
     }
-
     /** ****************************************************** **/
+    function status_getFecha() {
+        const d = new Date();
+        var options = { weekday: "long", year: "numeric", month: "long", day: "numeric", hour: "numeric",  minute: "numeric", hour12: "false" };
+        document.getElementById("fecha_escritorio").innerHTML = d.toLocaleString("es-MX", options);
+    }    
     /** ****************************************************** **/
     /** ****************************************************** **/
     /** ****************************************************** **/
