@@ -18,34 +18,42 @@
 		<!-- [BEGIN][OPCIONES DE EMPRESA] -->
         <div class="ribbon-group">
             <div class="ribbon-toolbar">
-                <a href="#" class="easyui-menubutton" data-options="
+                <a class="easyui-menubutton" data-options="
 					name: 'cmd_EMPRESAS_RESPALDAR',
 					iconCls: 'fas fa-archive fa-lg',
 					iconAlign: 'top',
-					size: 'large'
-				">Respaldar<br>empresa</a>
+					size: 'large'"
+				onmouseover='statusMSG("Respalda la empresa activa.");'
+				onmouseout='statusMSG_clear();'
+				>Respaldar<br>empresa</a>
             </div>
             <div class="ribbon-toolbar">
-                <a href="#" class="easyui-linkbutton" data-options="
+                <a class="easyui-linkbutton" data-options="
 					name: 'cmd_EMPRESAS_CREAR',
 					iconCls: 'fas fa-plus-circle fa-lg',
 					plain: true,
 					width: '100%',
 					iconAlign: 'left'"
+					onmouseover='statusMSG("Inserta una nueva empresa en el sistema.");'
+					onmouseout='statusMSG_clear();'
 				>Nueva</a><br>
-                <a href="#" class="easyui-linkbutton" data-options="
+                <a class="easyui-linkbutton" data-options="
 					name: 'cmd_EMPRESAS_BORRAR',
 					iconCls: 'fas fa-minus-circle fa-lg',
 					plain: true,
 					width: '100%',
 					iconAlign: 'left'"
-				>Borrar</a><br>
-                <a href="#" class="easyui-linkbutton" data-options="
+					onmouseover='statusMSG("Elimina una de las empresas autorizadas.");'
+					onmouseout='statusMSG_clear();'
+					>Borrar</a><br>
+                <a class="easyui-linkbutton" data-options="
 					name: 'cmd_EMPRESAS_RESTAURAR',
 					iconCls: 'fas fa-trash-restore fa-lg',
 					plain: true,
 					width: '100%',
 					iconAlign: 'left'"
+					onmouseover='statusMSG("Recupera la información de respaldo de una empresa.");'
+					onmouseout='statusMSG_clear();'
 				>Restaurar</a>
             </div>
             <div class="ribbon-group-title">Opciones de la empresa</div>
@@ -55,40 +63,50 @@
 		<!-- [BEGIN][OPCIONES DE USUARIOS] -->
         <div class="ribbon-group">
             <div class="ribbon-toolbar" >
-				<a href="#" class="easyui-menubutton" data-options="
-						name: 'cmd_USUARIOS_NUEVO',
-						iconCls: 'fas fa-user-plus fa-lg',
-						iconAlign: 'top',
-						size: 'large'
-				">Nuevo<br>usuario</a>
-				<a href="#" class="easyui-menubutton" data-options="
-						name: 'cmd_USUARIOS_PERMISOS',
-						iconCls: 'fas fa-user-shield fa-lg',
-						iconAlign: 'top',
-						size: 'large'
-				">Permisos<br>de acceso</a>
+				<a class="easyui-menubutton" data-options="
+					name: 'cmd_USUARIOS_NUEVO',
+					iconCls: 'fas fa-user-plus fa-lg',
+					iconAlign: 'top',
+					size: 'large'"
+					onmouseover='statusMSG("Inserta un nuevo usuario autorizado para el sistema.");'
+					onmouseout='statusMSG_clear();'
+				>Nuevo<br>usuario</a>
+				<a class="easyui-menubutton" data-options="
+					name: 'cmd_USUARIOS_PERMISOS',
+					iconCls: 'fas fa-user-shield fa-lg',
+					iconAlign: 'top',
+					size: 'large'"
+					onmouseover='statusMSG("Configura los privilegios de acceso de un usuario.");'
+					onmouseout='statusMSG_clear();'
+				>Permisos<br>de acceso</a>
 			</div>
 			<div class="ribbon-toolbar" style="width: 95px">
-					<a href="#" class="easyui-linkbutton" data-options="
+					<a class="easyui-linkbutton" data-options="
 						name: 'cmd_USUARIOS_ELIMINAR',
 						iconCls: 'fas fa-user-minus fa-lg',
 						plain: true,
 						width: '100%',
 						iconAlign: 'left'"
+						onmouseover='statusMSG("Elimina un usuario autorizado dentro del sistema");'
+						onmouseout='statusMSG_clear();'
 					>Eliminar</a><br>
-					<a href="#" class="easyui-linkbutton" data-options="
+					<a class="easyui-linkbutton" data-options="
 						name: 'cmd_USUARIOS_MODIFICAR',
 						iconCls: 'fas fa-user-edit fa-lg',
 						plain: true,
 						width: '100%',
 						iconAlign: 'left'"
+						onmouseover='statusMSG("Modifica la información de un usuario específico.");'
+						onmouseout='statusMSG_clear();'
 					>Modificar</a>
-					<a href="#" class="easyui-linkbutton" data-options="
+					<a class="easyui-linkbutton" data-options="
 						name: 'cmd_USUARIOS_SUSPENDER',
 						iconCls: 'fas fa-user-edit fa-lg',
 						plain: true,
 						width: '100%',
 						iconAlign: 'left'"
+						onmouseover='statusMSG("Revoca el acceso de un usuario, sin eliminar su perfil del sistema.");'
+						onmouseout='statusMSG_clear();'
 					>Suspender</a>
 
 				</div>
@@ -105,7 +123,7 @@
 		<!-- [BEGIN][OPCIONES DE EMPRESA] -->
         <div class="ribbon-group" style="width: 250px">
             <div class="ribbon-toolbar">
-                <a href="#" class="easyui-menubutton" data-options="
+                <a class="easyui-menubutton" data-options="
 					name: 'cmd_EMPRESAS_RESPALDAR',
 					iconCls: 'fas fa-archive fa-lg',
 					iconAlign: 'top',
@@ -113,21 +131,21 @@
 				">Respaldar<br>empresa</a>
             </div>
             <div class="ribbon-toolbar">
-                <a href="#" class="easyui-linkbutton" data-options="
+                <a class="easyui-linkbutton" data-options="
 					name: 'cmd_EMPRESAS_CREAR',
 					iconCls: 'fas fa-plus-circle fa-lg',
 					plain: true,
 					width: '100%',
 					iconAlign: 'left'"
 				>Nueva</a><br>
-                <a href="#" class="easyui-linkbutton" data-options="
+                <a class="easyui-linkbutton" data-options="
 					name: 'cmd_EMPRESAS_BORRAR',
 					iconCls: 'fas fa-minus-circle fa-lg',
 					plain: true,
 					width: '100%',
 					iconAlign: 'left'"
 				>Borrar</a><br>
-                <a href="#" class="easyui-linkbutton" data-options="
+                <a class="easyui-linkbutton" data-options="
 					name: 'cmd_EMPRESAS_RESTAURAR',
 					iconCls: 'fas fa-trash-restore fa-lg',
 					plain: true,
@@ -142,13 +160,13 @@
 		<!-- [BEGIN][OPCIONES DE USUARIOS] -->
         <div class="ribbon-group">
             <div class="ribbon-toolbar" >
-				<a href="#" class="easyui-menubutton" data-options="
+				<a class="easyui-menubutton" data-options="
 						name: 'cmd_USUARIOS_NUEVO',
 						iconCls: 'fas fa-user-plus fa-lg',
 						iconAlign: 'top',
 						size: 'large'
 				">Nuevo<br>usuario</a>
-				<a href="#" class="easyui-menubutton" data-options="
+				<a class="easyui-menubutton" data-options="
 						name: 'cmd_USUARIOS_PERMISOS',
 						iconCls: 'fas fa-user-shield fa-lg',
 						iconAlign: 'top',
@@ -156,14 +174,14 @@
 				">Permisos<br>de acceso</a>
 			</div>
 			<div class="ribbon-toolbar">
-					<a href="#" class="easyui-linkbutton" data-options="
+					<a class="easyui-linkbutton" data-options="
 						name: 'cmd_USUARIOS_ELIMINAR',
 						iconCls: 'fas fa-user-minus fa-lg',
 						plain: true,
 						width: '100%',
 						iconAlign: 'left'"
 					>Eliminar</a><br>
-					<a href="#" class="easyui-linkbutton" data-options="
+					<a class="easyui-linkbutton" data-options="
 						name: 'cmd_USUARIOS_MODIFICAR',
 						iconCls: 'fas fa-user-edit fa-lg',
 						plain: true,
@@ -184,8 +202,8 @@
 
 <!-- ## ********************************************* ## -->
 <script type="text/javascript">
-    var MyW = goTasaW(96);
-    var MyH = goTasaH(96);
+    var MyW = goTasaW(99);
+    var MyH = goTasaH(98);
 	//$("#escritorio_main").width(MyW+"px");
     //# **************************************************** #
     $('.easyui-ribbon').ribbon({
@@ -195,8 +213,8 @@
     });
     //# **************************************************** #
     $(window).resize(function() {
-        var MyW = goTasaW(96);
-        var MyH = goTasaH(96);
+        var MyW = goTasaW(99);
+        var MyH = goTasaH(98);
         $("#escritorio_main").width(MyW+"px");
 		$(".tabs-header").width(MyW+"px");
 		$(".tabs-panels").width(MyW+"px");

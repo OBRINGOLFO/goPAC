@@ -1,7 +1,8 @@
  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;600;900&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap');
 body {
     font-family:Cairo;
-    padding:20px;
+    padding: 8px 8px 8px 8px;
     font-size:12px;
     margin:0;
 }
@@ -32,4 +33,26 @@ h2 {
     background-image: url("/app/librerias/img/logo_login.png");
     background-repeat: no-repeat;
     background-position: top center;
+}
+
+.status_escritorio {
+    text-align: center;
+    margin-right: 3px;
+    font-family: "Roboto Condensed";
+    font-size: 13px;
+    line-height: 18px;
+    background-color: gainsboro;
+    height: 19px;
+    margin-top: 2px;
+    margin-bottom: 2px;   
+}
+
+#ctr_progreso {
+    width: 99%;
+    height: 15px !important;
+    margin: 2px 0px 0px 2px;
+}
+
+#ctr_progreso .progressbar-text {
+    font-size: 11px !important;
 }

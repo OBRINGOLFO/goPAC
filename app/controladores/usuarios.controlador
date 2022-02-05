@@ -56,6 +56,7 @@ class UsuariosControlador extends ControladorBase{
                             $_SESSION["usuario"]    = ucwords($MyUser[0]->usuario);
                             $_SESSION["lastaccess"] = $MyUser[0]->acceso;
                             $_SESSION["lastip"]     = $MyUser[0]->ip;
+                            $_SESSION["actualip"]     = get_cliente_ip();
                             $update_user = new Usuario($this->adapter);
                             $update_user->setAcceso(date('Y-m-d H:i:s'));
                             $update_user->setIp(get_cliente_ip());

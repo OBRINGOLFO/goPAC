@@ -16,7 +16,15 @@
         <div id="ly-arriba"     name="ly-arriba"    data-options="region: 'north', split: false, border: false" style="height: 162px; overflow: hidden;">
             <?php echo load_Menu("escritorio_main"); ?>
         </div>
-        <div id="ly-abajo"      name="ly-abajo"     data-options="region: 'south', split: true" style="height: 48px;"></div>
+        <div id="ly-abajo"      name="ly-abajo"     data-options="region: 'south', split: true" style="display: flex; align-items: flex-end; height: 30px;">
+            <div id="mensaje_escritorio" name="mensaje_escritorio" class="status_escritorio" style="width: 43%; margin-left: 2px; text-align: left !important; padding-left: 5px;"></div>
+            <div id="progreso_escritorio" name="progreso_escritorio" class="status_escritorio" style="width: 20%;">
+                <div id="ctr_progreso" class="easyui-progressbar" data-options="value:0" style="display:none;"></div>
+            </div>
+            <div id="ip_escritorio" name="ip_escritorio" class="status_escritorio" style="width: 9%;"><?php echo $_SESSION['actualip'] ?></div>
+            <div id="usuario_escritorio" name="usuario_escritorio" class="status_escritorio" style="width: 12%;"><?php echo $_SESSION['usuario'] ?></div>
+            <div id="fecha_escritorio" name="fecha_escritorio" class="status_escritorio" style="width: 16%;">Miércoles 00 de Septiembre del 0000</div>
+        </div>
         <div id="ly-derecha"    name="ly-derecha"   data-options="region: 'east', title:'Herramientas', split: true" style="width: 100px;"></div>
         <div id="ly-izquierda"  name="ly-izquierda" data-options="region: 'west', title:'Módulos', split: true" style="width: 100px;"></div>
     </div> 
@@ -24,8 +32,8 @@
 
 <!-- ## ********************************************* ## -->
 <script type="text/javascript">
-    var MyW = goTasaW(96);
-    var MyH = goTasaH(96);
+    var MyW = goTasaW(99);
+    var MyH = goTasaH(98);
     //# **************************************************** #
     $(document).ready(function(){
         document.title = "goPAC® - <?php echo $_SESSION["empresa_razon"] ?>";
@@ -47,9 +55,10 @@
     });
     //# **************************************************** #
     $(window).resize(function() {
-        var MyW = goTasaW(96);
-        var MyH = goTasaH(96);
-        $("#MyEscritorio").width(MyW+"px"); $("#MyEscritorio").height(MyH+"px"); 
+        var MyW = goTasaW(99);
+        var MyH = goTasaH(98);
+        $("#MyEscritorio").width(MyW+"px"); $("#MyEscritorio").height(MyH+"px");
+        $("#ctr_progreso").progressbar('resize');
         $('#MyEscritorio').layout('resize', { width: MyW+"px", height: MyH+"px" });
     });
     //# **************************************************** #
