@@ -53,6 +53,7 @@
 .ribbon-group .easyui-menubutton .l-btn-text {
 	line-height: 16px !important;
 	width: 60px !important;
+	font-size: 12px;
 }
 
 .ribbon-group .easyui-menubutton .l-btn-icon {
@@ -70,6 +71,9 @@
 	text-align: left;
 }
 
+.ribbon-group .easyui-linkbutton .l-btn-text {
+	font-size: 12px;
+}
 .ribbon-group-sep {
 	float:left;
 	width:0;

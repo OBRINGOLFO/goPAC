@@ -11,7 +11,7 @@
 	
 ?>
 <!-- [BEGIN][CINTA DE OPCIONES DINAMICA] -->
-<div class="easyui-ribbon" style="width: 100%;">
+<div id="escritorio_main" name="escritorio_main" class="easyui-ribbon">
 	<!-- *********************************************************************************************** -->
 	<!-- [BEGIN][PESTAÑA GENERAL] -->
     <div title="Generales">
@@ -68,7 +68,7 @@
 						size: 'large'
 				">Permisos<br>de acceso</a>
 			</div>
-			<div class="ribbon-toolbar">
+			<div class="ribbon-toolbar" style="width: 95px">
 					<a href="#" class="easyui-linkbutton" data-options="
 						name: 'cmd_USUARIOS_ELIMINAR',
 						iconCls: 'fas fa-user-minus fa-lg',
@@ -83,6 +83,14 @@
 						width: '100%',
 						iconAlign: 'left'"
 					>Modificar</a>
+					<a href="#" class="easyui-linkbutton" data-options="
+						name: 'cmd_USUARIOS_SUSPENDER',
+						iconCls: 'fas fa-user-edit fa-lg',
+						plain: true,
+						width: '100%',
+						iconAlign: 'left'"
+					>Suspender</a>
+
 				</div>
 
             <div class="ribbon-group-title">Configuración de usuarios</div>
@@ -176,12 +184,27 @@
 
 <!-- ## ********************************************* ## -->
 <script type="text/javascript">
-
+    var MyW = goTasaW(96);
+    var MyH = goTasaH(96);
+	//$("#escritorio_main").width(MyW+"px");
+    //# **************************************************** #
     $('.easyui-ribbon').ribbon({
         onClick: function(name, target){
             alert(name+' OnClick');
         }
     });
-
+    //# **************************************************** #
+    $(window).resize(function() {
+        var MyW = goTasaW(96);
+        var MyH = goTasaH(96);
+        $("#escritorio_main").width(MyW+"px");
+		$(".tabs-header").width(MyW+"px");
+		$(".tabs-panels").width(MyW+"px");
+		$(".panel").width(MyW+"px");
+		$(".panel-htop").width(MyW+"px");
+		$(".panel-body").width(MyW+"px");
+		
+    });
+    //# **************************************************** #
 </script>
 <!-- ## ********************************************* ## -->
