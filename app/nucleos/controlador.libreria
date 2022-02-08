@@ -54,6 +54,18 @@
         }
     }
 /** *************************************************************************** **/
+function goRedirect($MyObjControlador, $MyAction){
+    try {
+
+        if(($MyObjControlador != "") && ($MyAction != "")){
+            header("Location: /index.php?goExec=".$MyObjControlador."&goAcc=".$MyAction);
+        }
+
+    } catch (Exception $e) {
+        mostrar_error($e);
+    }
+}    
+/** *************************************************************************** **/
     function getUUID(){
         try {
 
@@ -273,7 +285,20 @@
         ';
         exit();
     }
-/** *************************************************************************** **/
+    /** *************************************************************************** **/
+    function chkSesion(){
+
+        if(isset($_SESSION["usuario"]['logined'])){
+            if($_SESSION["usuario"]['logined'] != true){
+                //Cerramos en forzado el sistema
+                goRedirect("Usuarios", "logedout");
+            }
+        }else{
+            //Cerramos en forzado el sistema
+            goRedirect("Usuarios", "logedout");
+        }
+    }
+    /** *************************************************************************** **/
     function goSesion(){
         if(!isset($_SESSION["time"])){ //No hay tiempo establecido
             $_SESSION["time"] = time(); //Asigno tiempo de arranque de la sesión

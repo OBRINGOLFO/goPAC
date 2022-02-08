@@ -21,20 +21,4 @@
     session_save_path(PATH_SESIONES);
     session_start();
 
-    //--
-    if(isset($_SESSION['logined'])){
-        if($_SESSION['logined'] != true){
-            if(!$_GET['goExec']){ //No se a llamado a ningun controlador
-                //Cargamos el login
-                header("Location: /index.php?goExec=Index&goAcc=index");
-            }
-        }
-    }else{
-        if(!isset($_GET['goExec'])){ //No se a llamado a ningun controlador
-            //Cargamos el login
-            header("Location: /index.php?goExec=Index&goAcc=index");
-        }
-    }
-
-
 ?>

@@ -72,6 +72,33 @@
                 case "cmd_USUARIOS_SUSPENDER":
                     break;
 
+
+
+
+
+                case "cmd_CERRAR_EMPRESA":
+                    $.messager.confirm({
+                        title: '¿Confirmar intención?',
+                        msg: '¿Seguro que desea cerrar la empresa activa?',
+                        fn: function(r){
+                            if (r){
+                                goRedirect("Empresas", "cerrar");
+                            }
+                        }
+                    });                    
+                    break;
+                case "cmd_CERRAR_SESION":
+                    $.messager.confirm({
+                        title: '¿Confirmar intención?',
+                        msg: '¿Seguro que desea salir del sistema?',
+                        fn: function(r){
+                            if (r){
+                                goRedirect("Usuarios", "logedout");
+                            }
+                        }
+                    });                    
+                    break;
+
                 default:
                     alert(name+' OnClick');
                     break;

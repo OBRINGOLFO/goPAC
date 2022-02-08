@@ -30,14 +30,15 @@ class EmpresasControlador extends ControladorBase{
     public function index(){
         try {
 
+            chkSesion();
             //Creamos el objeto empresa
             $xEmpresas = new Empresas($this->adapter);
-            if($_SESSION["uid_usuario"] == "5b661da4-5e66-4925-bdb3-e1f2c61ec549"){ //Es el usuario administrador y mostramos todas
+            if($_SESSION["usuario"]["uid_usuario"] == "5b661da4-5e66-4925-bdb3-e1f2c61ec549"){ //Es el usuario administrador y mostramos todas
                 //Conseguimos todas las empresas
                 $empresas_usuario = $xEmpresas->get_todas();
             }else{ //Es un usuario distinto al administrador
                 //Buscamos solo las empresas autorizadas para éste usuario
-                $empresas_usuario = $xEmpresas->get_empresas_usuario($_SESSION["uid_usuario"]);
+                $empresas_usuario = $xEmpresas->get_empresas_usuario($_SESSION["usuario"]["uid_usuario"]);
             }
             $this->view("_header", array());
             $this->view("empresas", array("empresas_usuario" => $empresas_usuario));
@@ -51,7 +52,7 @@ class EmpresasControlador extends ControladorBase{
     public function crear(){
         try {
 
-            auditar("1");
+            chkSesion();
             header('Content-Type: application/json; charset=UTF8');
             $xRespuesta = array();
             $xRespuesta["estado"] = null;
@@ -77,6 +78,8 @@ class EmpresasControlador extends ControladorBase{
     /** ****************************************************** **/
     public function borrar(){
         try {
+
+            chkSesion();
             header('Content-Type: application/json; charset=UTF8');
             $xRespuesta = array();
             $xRespuesta["error"] = 0;
@@ -90,7 +93,7 @@ class EmpresasControlador extends ControladorBase{
     public function abrir(){
         try {
             
-            auditar("empresas.controlador -> abrir");
+            chkSesion();
             header('Content-Type: application/json; charset=UTF8');
             $xRespuesta = array();
             $txtRFC = $_POST["txtRFC"];
@@ -125,9 +128,15 @@ class EmpresasControlador extends ControladorBase{
     /** ****************************************************** **/
     public function cerrar(){
         try {
+
+            chkSesion();
             header('Content-Type: application/json; charset=UTF8');
-            $xRespuesta = array();
-            $xRespuesta["error"] = 0;
+            if(isset($_SESSION['empresa'])){
+                unset($_SESSION['empresa']);
+                $xRespuesta = array();
+                $xRespuesta["error"] = 0;
+                goRedirect("Empresas", "index");
+            }
             echo json_encode($xRespuesta);
 
         } catch (Exception $e) {
@@ -137,6 +146,8 @@ class EmpresasControlador extends ControladorBase{
     /** ****************************************************** **/
     public function respaldar(){
         try {
+
+            chkSesion();
             header('Content-Type: application/json; charset=UTF8');
             $xRespuesta = array();
             $xRespuesta["error"] = 0;
@@ -149,6 +160,8 @@ class EmpresasControlador extends ControladorBase{
     /** ****************************************************** **/
     public function restaurar(){
         try {
+
+            chkSesion();
             header('Content-Type: application/json; charset=UTF8');
             $xRespuesta = array();
             $xRespuesta["error"] = 0;
@@ -165,6 +178,7 @@ class EmpresasControlador extends ControladorBase{
     public function iface_nuevo(){
         try {
 
+            chkSesion();
             $this->view("usuarios_nuevo", array(null));
 
         } catch (Exception $e) {

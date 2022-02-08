@@ -113,6 +113,40 @@
         </div>
 		<!-- [END][OPCIONES DE USUARIOS] -->
         <div class="ribbon-group-sep"></div>
+
+
+
+
+
+
+
+
+		<!-- [BEGIN][OPCIONES DE CIERRE] -->
+        <div class="ribbon-group">
+            <div class="ribbon-toolbar" >
+				<a class="easyui-menubutton" data-options="
+					name: 'cmd_CERRAR_EMPRESA',
+					iconCls: 'fas fa-user-plus fa-lg',
+					iconAlign: 'top',
+					size: 'large'"
+					onmouseover='statusMSG("Cierra la empresa activa y mantiene la sesión del usuario vigente.");'
+					onmouseout='statusMSG_clear();'
+				>Cerrar<br>empresa</a>
+				<a class="easyui-menubutton" data-options="
+					name: 'cmd_CERRAR_SESION',
+					iconCls: 'fas fa-user-shield fa-lg',
+					iconAlign: 'top',
+					size: 'large'"
+					onmouseover='statusMSG("Cierra la empresa y cierra la sesión del usuario activo.");'
+					onmouseout='statusMSG_clear();'
+				>Cerrar el<br>sistema</a>
+			</div>
+
+            <div class="ribbon-group-title">Salida y cierre</div>
+        </div>
+		<!-- [END][OPCIONES DE CIERRE] -->
+
+
     </div>
 	<!-- [END][PESTAÑA GENERAL] -->
 	<!-- *********************************************************************************************** -->

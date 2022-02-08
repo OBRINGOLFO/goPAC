@@ -29,6 +29,7 @@ class EscritorioControlador extends ControladorBase{
     public function index(){
         try {
 
+            chkSesion();
             $this->view("_header", null); //Cargamos el header del sistema
             $this->view("escritorio", null); //Cargamos la vista del escritorio
             $this->view("_footer", null); //Cargamos el footer del sistema
