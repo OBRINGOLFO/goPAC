@@ -13,14 +13,18 @@
 class Empresa_Parametros extends EntidadBase{
     private $uid;
     private $rfc;
+    private $curp;
     private $razon;
+    private $denominacion;
+    private $periodo;
+    private $ejercicio;
 
     # ********************************************************** #
-    public function __construct($adapter) {
+    public function __construct($adapter_empresa) {
         try {
 
-            $table = "c_empresas";
-            parent::__construct($table, $adapter);
+            $table = "empParametros";
+            parent::__construct($table, $adapter_empresa);
 
         } catch (Exception $e) {
             mostrar_error($e);
@@ -33,11 +37,43 @@ class Empresa_Parametros extends EntidadBase{
     public function getRfc(){ return $this->rfc; }
     public function setRfc($rfc){ $this->rfc = $rfc; }
     # ********************************************************** #
+    public function getCurp(){ return $this->curp; }
+    public function setCurp($curp){ $this->curp = $curp; }
+    # ********************************************************** #
     public function getRazon(){ return $this->razon; }
     public function setRazon($razon){ $this->razon = $razon; }
-    /* ***************************************************************************
-    *
-    *************************************************************************** */
+    # ********************************************************** #
+    public function getDenominacion(){ return $this->denominacion; }
+    public function setDenominacion($denominacion){ $this->denominacion = $denominacion; }
+    # ********************************************************** #
+    public function getPeriodo(){ return $this->periodo; }
+    public function setPeriodo($periodo){ $this->periodo = $periodo; }
+    # ********************************************************** #
+    public function getEjercicio(){ return $this->ejercicio; }
+    public function setEjercicio($ejercicio){ $this->ejercicio = $ejercicio; }
+
+    /** ********************************************************
+     *  BUSCA LOS PARAMETROS GENERALES DE LA EMPRESA SEGUN SU RFC
+     * ***************************************************** **/
+    public function get_parametros($RFC_Empresa){
+        try {
+
+            auditar("empresas_parametros.clase -> get_parametros(".$RFC_Empresa.")");
+            $xQuery = "SELECT * FROM empParametros WHERE rfc='".$RFC_Empresa."'";
+            $xRespuesta = $this->db()->query($xQuery);
+            if($xRespuesta){
+                return $xRespuesta->fetch_object();
+            }else{
+                return null;
+            }
+
+        } catch (Exception $e) {
+            mostrar_error($e);
+        }
+    }
+    /** ********************************************************
+     * 
+     * ***************************************************** **/
     public function get_todas(){
         try {
 
@@ -53,7 +89,9 @@ class Empresa_Parametros extends EntidadBase{
             mostrar_error($e);
         }
     }
-
+    /** ********************************************************
+     * 
+     * ***************************************************** **/
     public function guardar(){
         try {
 

@@ -36,7 +36,7 @@
     var MyH = goTasaH(98);
     //# **************************************************** #
     $(document).ready(function(){
-        document.title = "goPAC® - <?php echo $_SESSION["empresa_razon"] ?>";
+        document.title = "goPAC® - <?php echo $_SESSION['empresa']["razon"] ?>";
         document.body.style.overflow = "hidden";
         //# ************************************************ #
         $("#MyEscritorio").width(MyW+"px"); $("#MyEscritorio").height(MyH+"px"); 

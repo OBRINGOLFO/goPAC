@@ -11,7 +11,7 @@
 
 class Conectar{
     private $driver;
-    private $host, $user, $pass, $database, $charset;
+    private $host, $user, $pass, $prefix, $database, $charset;
 
     # ********************************************************** #
     public function __construct() {
@@ -22,7 +22,8 @@ class Conectar{
             $this->host     = $db_cfg["host"];
             $this->user     = $db_cfg["user"];
             $this->pass     = $db_cfg["pass"];
-            $this->database = $db_cfg["prefix"] . $db_cfg["database"];
+            $this->prefix   = $db_cfg["prefix"];
+            $this->database = $this->prefix . $db_cfg["database"];
             $this->charset  = $db_cfg["charset"];
 
         } catch (Exception $e) {
@@ -46,12 +47,17 @@ class Conectar{
     # ********************************************************** #
     public function conexion_empresa($rfc_empresa){
         try {
-            $this->database = $db_cfg["prefix"] . $rfc_empresa;
-            if($this->driver == "mysql" || $this->driver == null){
-                $con = new mysqli($this->host, $this->user, $this->pass, $this->database);
-                $con->query("SET NAMES '".$this->charset."'");
+
+            if(isset($rfc_empresa) && ($rfc_empresa != "")){
+                //auditar("conectar.dato -> conexion_empresa(".$rfc_empresa.")");
+                $this->database = $this->prefix . $rfc_empresa;
+                //auditar("intentando conexion con: ".$this->database);
+                if($this->driver == "mysql" || $this->driver == null){
+                    $con = new mysqli($this->host, $this->user, $this->pass, $this->database);
+                    $con->query("SET NAMES '".$this->charset."'");
+                }
+                return $con;
             }
-            return $con;
 
         } catch (Exception $e) {
             mostrar_error($e);

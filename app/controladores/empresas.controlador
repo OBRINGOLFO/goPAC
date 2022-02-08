@@ -13,6 +13,7 @@
 class EmpresasControlador extends ControladorBase{
     public $conector;
     public $adapter;
+    public $adapter_empresa;
     /** ****************************************************** **/
     public function __construct() {
         try {
@@ -47,16 +48,6 @@ class EmpresasControlador extends ControladorBase{
         }
     }
     /** ****************************************************** **/
-    public function iface_nuevo(){
-        try {
-
-            $this->view("usuarios_nuevo", array(null));
-
-        } catch (Exception $e) {
-            mostrar_error($e);
-        }
-    }
-    /** ****************************************************** **/
     public function crear(){
         try {
 
@@ -69,13 +60,13 @@ class EmpresasControlador extends ControladorBase{
                 $MyRFC = strtoupper(trim($_POST["txtRFC"]));
                 $connection = mysqli_connect(DB_HOST, DB_USUARIO, DB_SECRETO);
                 if (!$connection) {
-                    auditar('Could not connect: ' . mysql_error());
+                    auditar('Imposible realizar la conexión: ' . mysql_error());
                 }
                 $sql = 'CREATE DATABASE ' . DB_PREFIJO . $MyRFC;
                 if (mysqli_query($connection, $sql)) {
-                    auditar("Database my_db created successfully");
+                    auditar("Base de datos ".DB_PREFIJO.$MyRFC." creada con éxito.");
                 } else {
-                    auditar('Error creating database: ' . mysql_error());
+                    auditar('Error al crear la base de datos: ' . mysql_error());
                 }
             }
 
@@ -98,14 +89,33 @@ class EmpresasControlador extends ControladorBase{
     /** ****************************************************** **/
     public function abrir(){
         try {
+            
+            auditar("empresas.controlador -> abrir");
             header('Content-Type: application/json; charset=UTF8');
-            $txtRFC = $_POST["txtRFC"];
             $xRespuesta = array();
-            $xRespuesta["error"] = 0;
-            /** REGISTRANDO LAS VARIABLES DE SESIÓN DE LA EMPRESA **/
-            $_SESSION["empresa_rfc"]        = $txtRFC;
-            $_SESSION["empresa_razon"]      = "XX Razón XX";
-            /** ****************************************************** **/
+            $txtRFC = $_POST["txtRFC"];
+            if(isset($_POST["txtRFC"]) && ($_POST["txtRFC"] != "")){ //tenemos un RFC
+                //Conectamos con la DB de la empresa
+                $this->adapter_empresa  = $this->conector->conexion_empresa($txtRFC);
+                //Cargamos la clase de control para "PARAMETROS"
+                $MyEMPRESA = new Empresa_Parametros($this->adapter_empresa);
+                //Leemos los parametros generales de la empresa
+                $parametros_empresa = $MyEMPRESA->get_parametros($txtRFC);
+                /** REGISTRANDO LA VARIABLE DE SESIÓN DE LA EMPRESA **/
+                $_SESSION['empresa'] = array(
+                    'uid'           => $parametros_empresa->uid,
+                    'rfc'           => $parametros_empresa->rfc,
+                    'curp'          => $parametros_empresa->curp,
+                    'razon'         => $parametros_empresa->razon,
+                    'denominacion'  => $parametros_empresa->denominacion,
+                    'periodo'       => $parametros_empresa->periodo,
+                    'ejercicio'     => $parametros_empresa->ejercicio,
+                );
+                /** ****************************************************** **/  
+                $xRespuesta["error"] = 0;
+            }else{
+                $xRespuesta["error"] = 400; //No hay empresa cargada
+            }
             echo json_encode($xRespuesta);
 
         } catch (Exception $e) {
@@ -148,6 +158,20 @@ class EmpresasControlador extends ControladorBase{
             mostrar_error($e);
         }
     }
+
+    /**
+     * CONTROL DE INTERFACES PARA LA EMPRESA (Carga dinamica en ventanas de usuario)
+     *  **/
+    public function iface_nuevo(){
+        try {
+
+            $this->view("usuarios_nuevo", array(null));
+
+        } catch (Exception $e) {
+            mostrar_error($e);
+        }
+    }
+
     /** ****************************************************** **/
 }
 ?>
