@@ -22,7 +22,7 @@
 					iconCls: 'fas fa-address-card fa-lg',
 					iconAlign: 'top',
 					size: 'large'"
-					onmouseover='statusMSG("Mustra información sobre el equipo de desarrollo.");'
+					onmouseover='statusMSG("Muestra información sobre el equipo de desarrollo.");'
 					onmouseout='statusMSG_clear();'
 				>Acerca del<br>software</a>
 			</div>
@@ -33,7 +33,7 @@
 						plain: true,
 						width: '100%',
 						iconAlign: 'left'"
-						onmouseover='statusMSG("Elimina un usuario autorizado dentro del sistema");'
+						onmouseover='statusMSG("Observe el tipo de licenciamiento que ha contratado con éste software.");'
 						onmouseout='statusMSG_clear();'
 					>Licenciamiento</a><br>
 					<a class="easyui-linkbutton" data-options="
@@ -42,7 +42,7 @@
 						plain: true,
 						width: '100%',
 						iconAlign: 'left'"
-						onmouseover='statusMSG("Modifica la información de un usuario específico.");'
+						onmouseover='statusMSG("Muesta el contrato de privacidad entre los desarrolladores y los usuarios del software.");'
 						onmouseout='statusMSG_clear();'
 					>Privacidad</a>
 					<a class="easyui-linkbutton" data-options="
@@ -51,7 +51,7 @@
 						plain: true,
 						width: '100%',
 						iconAlign: 'left'"
-						onmouseover='statusMSG("Revoca el acceso de un usuario, sin eliminar su perfil del sistema.");'
+						onmouseover='statusMSG("Muestra las póliticas de privacidad aplicables a éste software.");'
 						onmouseout='statusMSG_clear();'
 					>Póliticas</a>
 

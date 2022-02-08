@@ -38,6 +38,16 @@ class UsuariosControlador extends ControladorBase{
         ));
     }
     /** ****************************************************** **/
+    public function iface_nuevo(){
+        try {
+
+            $this->view("usuarios_nuevo", array(null));
+
+        } catch (Exception $e) {
+            mostrar_error($e);
+        }
+    }
+    /** ****************************************************** **/
     public function logedin(){
         try {
 
@@ -52,11 +62,12 @@ class UsuariosControlador extends ControladorBase{
                     if(password_verify($_POST["txtSECRETO"], $MyUser[0]->secreto)){ //Clave correcta
                         if(strtoupper($MyUser[0]->estado) == "A"){ //Usuario activo
                             //Cargamos las variables de sesion del usuario
-                            $_SESSION["logined"]    = true;
-                            $_SESSION["usuario"]    = ucwords($MyUser[0]->usuario);
-                            $_SESSION["lastaccess"] = $MyUser[0]->acceso;
-                            $_SESSION["lastip"]     = $MyUser[0]->ip;
-                            $_SESSION["actualip"]     = get_cliente_ip();
+                            $_SESSION["logined"]        = true;
+                            $_SESSION["uid_usuario"]    = ucwords($MyUser[0]->uid);
+                            $_SESSION["usuario"]        = ucwords($MyUser[0]->usuario);
+                            $_SESSION["lastaccess"]     = $MyUser[0]->acceso;
+                            $_SESSION["lastip"]         = $MyUser[0]->ip;
+                            $_SESSION["actualip"]       = get_cliente_ip();
                             $update_user = new Usuario($this->adapter);
                             $update_user->setAcceso(date('Y-m-d H:i:s'));
                             $update_user->setIp(get_cliente_ip());

@@ -53,7 +53,29 @@ class Empresas extends EntidadBase{
             mostrar_error($e);
         }
     }
+    /* ***************************************************************************
+    *
+    *************************************************************************** */
+    public function get_empresas_usuario($xUID){
+        try {
 
+            //$xQuery = "SELECT * FROM c_empresas_usuarios WHERE uid_usuario='".$xUID."'";
+            
+            $xQuery = "SELECT * FROM c_empresas WHERE c_empresas.uid IN (SELECT c_empresas_usuarios.uid_empresa FROM c_empresas_usuarios WHERE c_empresas_usuarios.uid_usuario = '". $xUID ."')";
+            $xRespuesta = $this->db()->query($xQuery);
+            if($xRespuesta){
+                return $xRespuesta;
+            }else{
+                return null;
+            }
+
+        } catch (Exception $e) {
+            mostrar_error($e);
+        }
+    }
+    /* ***************************************************************************
+    *
+    *************************************************************************** */
     public function guardar(){
         try {
 
