@@ -57,9 +57,11 @@
 	font-size: 12px;
 }
 
+
 .ribbon-group .easyui-menubutton .l-btn-icon {
-	margin: 0 0 0 -13px;
+	margin: 0 0 0 -16px;
 }
+
 
 .ribbon-group .m-btn-downarrow {
 	display: none !important;

@@ -18,7 +18,7 @@
             <div class="ribbon-toolbar">
                 <a class="easyui-menubutton" data-options="
 					name: 'cmd_EMPRESAS_RESPALDAR',
-					iconCls: 'fas fa-archive fa-lg',
+					iconCls: 'icon-box-archive',
 					iconAlign: 'top',
 					size: 'large'"
 				onmouseover='statusMSG("Respalda la empresa activa.");'
@@ -28,7 +28,7 @@
             <div class="ribbon-toolbar">
                 <a class="easyui-linkbutton" data-options="
 					name: 'cmd_EMPRESAS_CREAR',
-					iconCls: 'fas fa-plus-circle fa-lg',
+					iconCls: 'icon-circle-plus',
 					plain: true,
 					width: '100%',
 					iconAlign: 'left'"
@@ -37,7 +37,7 @@
 				>Nueva</a><br>
                 <a class="easyui-linkbutton" data-options="
 					name: 'cmd_EMPRESAS_BORRAR',
-					iconCls: 'fas fa-minus-circle fa-lg',
+					iconCls: 'icon-circle-minus',
 					plain: true,
 					width: '100%',
 					iconAlign: 'left'"
@@ -46,7 +46,7 @@
 					>Borrar</a><br>
                 <a class="easyui-linkbutton" data-options="
 					name: 'cmd_EMPRESAS_RESTAURAR',
-					iconCls: 'fas fa-trash-restore fa-lg',
+					iconCls: 'icon-trash-arrow-up',
 					plain: true,
 					width: '100%',
 					iconAlign: 'left'"
@@ -63,7 +63,7 @@
             <div class="ribbon-toolbar" >
 				<a class="easyui-menubutton" data-options="
 					name: 'cmd_USUARIOS_NUEVO',
-					iconCls: 'fas fa-user-plus fa-lg',
+					iconCls: 'icon-user-plus',
 					iconAlign: 'top',
 					size: 'large'"
 					onmouseover='statusMSG("Inserta un nuevo usuario autorizado para el sistema.");'
@@ -71,7 +71,7 @@
 				>Nuevo<br>usuario</a>
 				<a class="easyui-menubutton" data-options="
 					name: 'cmd_USUARIOS_PERMISOS',
-					iconCls: 'fas fa-user-shield fa-lg',
+					iconCls: 'icon-user-shield',
 					iconAlign: 'top',
 					size: 'large'"
 					onmouseover='statusMSG("Configura los privilegios de acceso de un usuario.");'
@@ -81,7 +81,7 @@
 			<div class="ribbon-toolbar" style="width: 95px">
 					<a class="easyui-linkbutton" data-options="
 						name: 'cmd_USUARIOS_ELIMINAR',
-						iconCls: 'fas fa-user-minus fa-lg',
+						iconCls: 'icon-user-minus',
 						plain: true,
 						width: '100%',
 						iconAlign: 'left'"
@@ -90,7 +90,7 @@
 					>Eliminar</a><br>
 					<a class="easyui-linkbutton" data-options="
 						name: 'cmd_USUARIOS_MODIFICAR',
-						iconCls: 'fas fa-user-edit fa-lg',
+						iconCls: 'icon-user-pen',
 						plain: true,
 						width: '100%',
 						iconAlign: 'left'"
@@ -99,7 +99,7 @@
 					>Modificar</a>
 					<a class="easyui-linkbutton" data-options="
 						name: 'cmd_USUARIOS_SUSPENDER',
-						iconCls: 'fas fa-user-edit fa-lg',
+						iconCls: 'icon-user-clock',
 						plain: true,
 						width: '100%',
 						iconAlign: 'left'"
@@ -126,7 +126,7 @@
             <div class="ribbon-toolbar" >
 				<a class="easyui-menubutton" data-options="
 					name: 'cmd_CERRAR_EMPRESA',
-					iconCls: 'fas fa-user-plus fa-lg',
+					iconCls: 'icon-door-closed',
 					iconAlign: 'top',
 					size: 'large'"
 					onmouseover='statusMSG("Cierra la empresa activa y mantiene la sesión del usuario vigente.");'
@@ -134,7 +134,7 @@
 				>Cerrar<br>empresa</a>
 				<a class="easyui-menubutton" data-options="
 					name: 'cmd_CERRAR_SESION',
-					iconCls: 'fas fa-user-shield fa-lg',
+					iconCls: 'icon-power-off',
 					iconAlign: 'top',
 					size: 'large'"
 					onmouseover='statusMSG("Cierra la empresa y cierra la sesión del usuario activo.");'

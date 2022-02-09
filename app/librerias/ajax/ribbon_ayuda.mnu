@@ -19,7 +19,7 @@
             <div class="ribbon-toolbar" >
 				<a class="easyui-menubutton" data-options="
 					name: 'cmd_INFORMACION_ACERCA',
-					iconCls: 'fas fa-address-card fa-lg',
+					iconCls: 'icon-address-card',
 					iconAlign: 'top',
 					size: 'large'"
 					onmouseover='statusMSG("Muestra información sobre el equipo de desarrollo.");'
@@ -29,7 +29,7 @@
 			<div class="ribbon-toolbar" style="width: 110px">
 					<a class="easyui-linkbutton" data-options="
 						name: 'cmd_INFORMACION_LICENCIAMIENTO',
-						iconCls: 'fas fa-id-badge fa-lg',
+						iconCls: 'icon-id-badge',
 						plain: true,
 						width: '100%',
 						iconAlign: 'left'"
@@ -38,7 +38,7 @@
 					>Licenciamiento</a><br>
 					<a class="easyui-linkbutton" data-options="
 						name: 'cmd_INFORMACION_PRIVACIDAD',
-						iconCls: 'fas fa-user-secret fa-lg',
+						iconCls: 'icon-user-secret',
 						plain: true,
 						width: '100%',
 						iconAlign: 'left'"
@@ -47,7 +47,7 @@
 					>Privacidad</a>
 					<a class="easyui-linkbutton" data-options="
 						name: 'cmd_INFORMACION_POLITICAS',
-						iconCls: 'fas fa-people-arrows fa-lg',
+						iconCls: 'icon-people-arrows-left-right',
 						plain: true,
 						width: '100%',
 						iconAlign: 'left'"
@@ -66,7 +66,7 @@
             <div class="ribbon-toolbar" >
 				<a class="easyui-menubutton" data-options="
 					name: 'cmd_MANUALES_FACTURACION',
-					iconCls: 'fas fa-file-invoice-dollar fa-lg',
+					iconCls: 'icon-file-invoice-dollar',
 					iconAlign: 'top',
 					size: 'large'"
 					onmouseover='statusMSG("Abre el manual de usuario para el módulo de facturación.");'
@@ -74,7 +74,7 @@
 				>Manual de<br>facturación</a>
 				<a class="easyui-menubutton" data-options="
 					name: 'cmd_MANUALES_CONTABILIDAD',
-					iconCls: 'fas fa-calculator fa-lg',
+					iconCls: 'icon-calculator',
 					iconAlign: 'top',
 					size: 'large'"
 					onmouseover='statusMSG("Abre el manual de usuario para el módulo de contabilidad.");'
@@ -82,7 +82,7 @@
 				>Manual de<br>contabilidad</a>
 				<a class="easyui-menubutton" data-options="
 					name: 'cmd_MANUALES_NOMINAS',
-					iconCls: 'fas fa-people-carry fa-lg',
+					iconCls: 'icon-people-carry-box',
 					iconAlign: 'top',
 					size: 'large'"
 					onmouseover='statusMSG("Abre el manual de usuario para el módulo de nóminas.");'
@@ -90,7 +90,7 @@
 				>Manual de<br>nóminas</a>
 				<a class="easyui-menubutton" data-options="
 					name: 'cmd_MANUALES_COMERCIAL',
-					iconCls: 'fas fa-store-alt fa-lg',
+					iconCls: 'icon-store',
 					iconAlign: 'top',
 					size: 'large'"
 					onmouseover='statusMSG("Abre el manual de usuario para el módulo de administración y comercio.");'

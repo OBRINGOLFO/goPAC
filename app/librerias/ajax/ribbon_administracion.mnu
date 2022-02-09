@@ -19,7 +19,7 @@
             <div class="ribbon-toolbar" >
 				<a class="easyui-menubutton" data-options="
 					name: 'cmd_INFORMACION_ACERCA',
-					iconCls: 'fas fa-address-card fa-lg',
+					iconCls: 'icon-address-card',
 					iconAlign: 'top',
 					size: 'large'"
 					onmouseover='statusMSG("Mustra información sobre el equipo de desarrollo.");'
@@ -29,7 +29,7 @@
 			<div class="ribbon-toolbar" style="width: 110px">
 					<a class="easyui-linkbutton" data-options="
 						name: 'cmd_INFORMACION_LICENCIAMIENTO',
-						iconCls: 'fas fa-id-badge fa-lg',
+						iconCls: 'icon-id-badge',
 						plain: true,
 						width: '100%',
 						iconAlign: 'left'"
@@ -38,7 +38,7 @@
 					>Licenciamiento</a><br>
 					<a class="easyui-linkbutton" data-options="
 						name: 'cmd_INFORMACION_PRIVACIDAD',
-						iconCls: 'fas fa-user-secret fa-lg',
+						iconCls: 'icon-user-secret',
 						plain: true,
 						width: '100%',
 						iconAlign: 'left'"
@@ -47,7 +47,7 @@
 					>Privacidad</a>
 					<a class="easyui-linkbutton" data-options="
 						name: 'cmd_INFORMACION_POLITICAS',
-						iconCls: 'fas fa-people-arrows fa-lg',
+						iconCls: 'icon-people-arrows-left-right',
 						plain: true,
 						width: '100%',
 						iconAlign: 'left'"
