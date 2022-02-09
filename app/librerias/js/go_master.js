@@ -48,11 +48,11 @@
             type: 'POST',
             url: '/index.php?goExec=Index&goAcc=get_sesionTIME',
             success:function(data){
-                console.log(data);
+                //console.log(data);
                 if((data.restante == 60)){ //Ultimo minuto
                     var xHTML = '<div id="dlg_SESSION_EXPIRE" class="easyui-dialog" title="Tiempo de inactividad detectado" style="width: 350px; height: 150px;"';
                         xHTML += 'data-options="iconCls: \'fas fa-shield-alt\', buttons: \'#cmds_SESSION_EXPIRE\', resizable: false, modal: true, closed: false, cache: false, closable: false">';
-                        xHTML += '<center>Hemos detectado que no está usando el sistema, en <b>menos de un minuto</b> se cerrará por seguridad.</center>';
+                        xHTML += '<center>Hemos detectado que no usas el sistema por casi 10 minutos, en <b>menos de un minuto</b> se cerrará por seguridad.</center>';
                         xHTML += '</div>';
                         xHTML += '<div id="cmds_SESSION_EXPIRE">';
                         xHTML += '<a id="cmd_MASTIEMPO" href="#">Más tiempo</a>';
@@ -82,10 +82,10 @@
                         type: 'POST',
                         url: '/index.php?goExec=Index&goAcc=set_sesionTIME',
                         success:function(data){
+                            $('#dlg_SESSION_EXPIRE').dialog('close');
                             $('#dlg_SESSION_EXPIRE').remove();
                             $('#cmd_MASTIEMPO').remove();
                             $('#cmd_CERRARSESION').remove();
-                            $('#dlg_SESSION_EXPIRE').dialog('close');
                         }
                     });                    
                 });
