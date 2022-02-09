@@ -33,7 +33,7 @@
         <div style="display: block ruby; text-align: right;">
             <a id="cmdEMPRESA" name="cmdEMPRESA"
                 class="easyui-linkbutton"
-                data-options="iconCls: 'fas fa-sign-in-alt fa-lg'"
+                data-options="iconCls: 'icon-right-to-bracket'"
                 style="padding: 5px 0px; width: 40%; margin-top: 10px;">
                 <span style="font-size: 14px;">Abrir empresa</span>
             </a>
@@ -50,7 +50,7 @@ $(document).ready(function(){
     //# ************************************************ #
     var winEMPRESAS = $('#winEMPRESAS').window({
         title: 'goPAC® - Seleccione la empresa.',
-        iconCls: 'fas fa-file-invoice-dollar',
+        iconCls: 'icon-file-invoice-dollar',
         modal: true,
         collapsible: false,
         minimizable: false,
@@ -93,7 +93,7 @@ $(document).ready(function(){
                 console.log(value);
             }
         },
-        prompt:'Buscar en la lista de empresas'
+        prompt:'Buscar en la lista de empresas',
     });
     //# ************************************************ #
     $('#txtBUSCAR').searchbox('textbox').bind('keydown', function(e){

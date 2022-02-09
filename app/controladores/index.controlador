@@ -55,6 +55,14 @@ class IndexControlador extends ControladorBase{
         echo json_encode($xResponse);
     }
     /** ****************************************************** **/
+    function set_sesionTIME(){
+        header('Content-Type: application/json; charset=UTF8');
+        $xResponse = array();
+        chkSesion();
+        $xResponse["restante"] = (SESSION_INACTIVIDAD * 60);
+        echo json_encode($xResponse);
+    }
+    /** ****************************************************** **/
     /** ****************************************************** **/
 
    /**

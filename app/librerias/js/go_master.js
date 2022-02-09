@@ -8,6 +8,7 @@
  * @copyright 2021
  */
 
+
     /** ****************************************************** **/
     function goRedirect(controlador, accion){
         window.location.replace("/index.php?goExec=" + controlador + "&goAcc=" + accion);
@@ -51,7 +52,7 @@
                 if((data.restante == 60)){ //Ultimo minuto
                     var xHTML = '<div id="dlg_SESSION_EXPIRE" class="easyui-dialog" title="Tiempo de inactividad detectado" style="width: 350px; height: 150px;"';
                         xHTML += 'data-options="iconCls: \'fas fa-shield-alt\', buttons: \'#cmds_SESSION_EXPIRE\', resizable: false, modal: true, closed: false, cache: false, closable: false">';
-                        xHTML += 'Dialog Content.<br>';
+                        xHTML += '<center>Hemos detectado que no está usando el sistema, en <b>menos de un minuto</b> se cerrará por seguridad.</center>';
                         xHTML += '</div>';
                         xHTML += '<div id="cmds_SESSION_EXPIRE">';
                         xHTML += '<a id="cmd_MASTIEMPO" href="#">Más tiempo</a>';
@@ -60,12 +61,12 @@
                     document.body.insertAdjacentHTML('afterbegin', xHTML);
                     $('#dlg_SESSION_EXPIRE').dialog();
                     $('#cmd_MASTIEMPO').linkbutton({
-                        iconCls: 'icon-search',
+                        iconCls: 'icon-retweet',
                         width: '49%',
                         height: 32
                     });
                     $('#cmd_CERRARSESION').linkbutton({
-                        iconCls: 'fas fa-right-from-bracket',
+                        iconCls: 'icon-right-from-bracket',
                         width: '49%',
                         height: 32
                     });
@@ -76,6 +77,23 @@
                     clearInterval(window.TimerSESSION);
                     goRedirect("Usuarios", "logedout");
                 }
+                $('#cmd_MASTIEMPO').bind('click', function(){
+                    $.ajax({
+                        type: 'POST',
+                        url: '/index.php?goExec=Index&goAcc=set_sesionTIME',
+                        success:function(data){
+                            $('#dlg_SESSION_EXPIRE').remove();
+                            $('#cmd_MASTIEMPO').remove();
+                            $('#cmd_CERRARSESION').remove();
+                            $('#dlg_SESSION_EXPIRE').dialog('close');
+                        }
+                    });                    
+                });
+                $('#cmd_CERRARSESION').bind('click', function(){
+                    clearInterval(window.TimerSESSION);
+                    goRedirect("Usuarios", "logedout");
+                });
+            
             }
         });        
     }

@@ -3243,6 +3243,10 @@
  }
  
  .icon-icons{
+	background:url('icons/icons.css') no-repeat center center;
+ }
+ 
+ .icon-icons{
 	background:url('icons/icons.svg') no-repeat center center;
  }
  
@@ -4730,6 +4734,10 @@
 	background:url('icons/right-long.svg') no-repeat center center;
  }
  
+ .icon-right-to-bracket-solid{
+	background:url('icons/right-to-bracket-solid.svg') no-repeat center center;
+ }
+ 
  .icon-right-to-bracket{
 	background:url('icons/right-to-bracket.svg') no-repeat center center;
  }
@@ -4886,8 +4894,12 @@
 	background:url('icons/sd-card.svg') no-repeat center center;
  }
  
+ .icon-search-2{
+	background:url('icons/search-2.png') no-repeat center center;
+ }
+ 
  .icon-search{
-	background:url('icons/search.png') no-repeat center center;
+	background:url('icons/search.svg') no-repeat center center;
  }
  
  .icon-searchengin{
