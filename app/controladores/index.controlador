@@ -28,6 +28,7 @@ class IndexControlador extends ControladorBase{
     /** ****************************************************** **/
     public function index(){
         try {
+
             //Cargamos el header del sistema
             $this->view("_header", array());
             # **************** #
@@ -42,7 +43,37 @@ class IndexControlador extends ControladorBase{
         }
     }
     /** ****************************************************** **/
+    function get_sesionTIME(){
+        header('Content-Type: application/json; charset=UTF8');
+        $mEXPIRA = 1.1;
+        $sEXPIRA = ($mEXPIRA * 60);
+        $xResponse = array();
+        if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < $sEXPIRA)) {
+            $xResponse["restante"] = ($sEXPIRA - (time() - $_SESSION['LAST_ACTIVITY']));
+        }else{
+            $xResponse["restante"] = 0;
+        }
+        echo json_encode($xResponse);
+    }
     /** ****************************************************** **/
     /** ****************************************************** **/
+
+   /**
+     * CONTROL DE INTERFACES PARA EL USUARIO (Carga dinamica de interfaces)
+     *  **/
+    /** ****************************************************** **/
+    public function iface_SESSION_EXPIRE(){
+        try {
+
+            $this->view("index_session_expire", array(null));
+
+        } catch (Exception $e) {
+            mostrar_error($e);
+        }
+    }
+    /** ****************************************************** **/
+    /** ****************************************************** **/
+    /** ****************************************************** **/
+
 }
 ?>

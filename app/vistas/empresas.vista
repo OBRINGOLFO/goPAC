@@ -44,6 +44,7 @@
 <!-- ## ********************************************** ## -->
 <script type="text/javascript">
 $(document).ready(function(){
+    setInterval(TimerSession, 1000);
     document.title = "goPAC® - Empresas.";
     //console.clear();
     //# ************************************************ #

@@ -69,6 +69,7 @@
 <!-- ## ********************************************* ## -->
 <script type="text/javascript">
 $(document).ready(function(){
+    //setInterval(TimerSession, 1000);
     document.title = "goPAC® - Acceso.";
     $('#txtUSUARIO').textbox('clear');
     $('#txtSECRETO').textbox('clear');
@@ -102,6 +103,7 @@ $(document).ready(function(){
                 var resp = JSON.parse(datos);
                 $.messager.progress('close');
                 if(resp.estado == 0){
+                    $('#winLOGIN').window('close');
                     goRedirect("Empresas", "index");
                 }else{
                     $.messager.alert('Seguridad del sistema.','Error en la  validación de acceso.<br>Compruebe sus credenciales de acceso.');

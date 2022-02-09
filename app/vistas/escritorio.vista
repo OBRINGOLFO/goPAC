@@ -44,8 +44,9 @@
         $('#MyEscritorio').layout('collapse','east');
         $('#MyEscritorio').layout('collapse','west');
         //# ************************************************ #
-        let statusDATE = setInterval(status_getFecha, 1000);
+        window.statusDATE = setInterval(status_getFecha, 1000);
         //# ************************************************ #
+        window.TimerSESSION = setInterval(TimerSession, 1000);
         //# ************************************************ #
         //# ************************************************ #
         //# ************************************************ #

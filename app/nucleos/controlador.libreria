@@ -288,6 +288,7 @@ function goRedirect($MyObjControlador, $MyAction){
     /** *************************************************************************** **/
     function chkSesion(){
 
+        $_SESSION['LAST_ACTIVITY'] = time();
         if(isset($_SESSION["usuario"]['logined'])){
             if($_SESSION["usuario"]['logined'] != true){
                 //Cerramos en forzado el sistema

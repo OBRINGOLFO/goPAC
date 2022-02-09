@@ -28,7 +28,7 @@ class UsuariosControlador extends ControladorBase{
     }
     /** ****************************************************** **/
     public function index(){
-        chkSesion();
+        //chkSesion();
         //Creamos el objeto usuario
         $usuario = new Usuario($this->adapter);
         //Conseguimos todos los usuarios
@@ -45,6 +45,13 @@ class UsuariosControlador extends ControladorBase{
             // Destruir todas las variables de sesión.
             $_SESSION = array();
             // Destruir la session activa
+            if (ini_get("session.use_cookies")) {
+                $params = session_get_cookie_params();
+                setcookie(session_name(), '', time() - 42000,
+                    $params["path"], $params["domain"],
+                    $params["secure"], $params["httponly"]
+                );
+            }            
             session_destroy();
             session_commit();
             goRedirect("Index", "index");
@@ -77,6 +84,7 @@ class UsuariosControlador extends ControladorBase{
                                 'lastip'        => $MyUser[0]->ip,
                                 'actualip'      => get_cliente_ip(),
                             );
+                            $_SESSION['LAST_ACTIVITY'] = time();
                             //$_SESSION["logined"]        = true;
                             //$_SESSION["uid_usuario"]    = ucwords($MyUser[0]->uid);
                             //$_SESSION["usuario"]        = ucwords($MyUser[0]->usuario);
