@@ -45,8 +45,7 @@ class IndexControlador extends ControladorBase{
     /** ****************************************************** **/
     function get_sesionTIME(){
         header('Content-Type: application/json; charset=UTF8');
-        $mEXPIRA = 1.1;
-        $sEXPIRA = ($mEXPIRA * 60);
+        $sEXPIRA = (SESSION_INACTIVIDAD * 60);
         $xResponse = array();
         if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < $sEXPIRA)) {
             $xResponse["restante"] = ($sEXPIRA - (time() - $_SESSION['LAST_ACTIVITY']));
