@@ -179,7 +179,7 @@ class EmpresasControlador extends ControladorBase{
         try {
 
             chkSesion();
-            $this->view("usuarios_nuevo", array(null));
+            $this->view("empresas_nuevo", array(null));
 
         } catch (Exception $e) {
             mostrar_error($e);
