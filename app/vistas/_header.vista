@@ -40,7 +40,8 @@
         <link rel="stylesheet" type="text/css" href="/app/librerias/js/ui/themes/icon.css">
         <link rel="stylesheet" type="text/css" href="/app/librerias/css/go_master.css">
         <link rel="stylesheet" type="text/css" href="/app/librerias/css/go_menus.css">
-
+        <link rel="stylesheet" type="text/css" href="/app/librerias/css/bootstrap/bootstrap.min.css">
+        
         <!-- [ ICONO PRIMARIO DE LA APP ] -->
       	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
        	<link rel="icon" type="image/png" href="/favicon-large.png">
@@ -52,6 +53,7 @@
         <script type="text/javascript" src="/app/librerias/js/jquery.tooltip.min.js"></script>
         <script type="text/javascript" src="/app/librerias/js/go_master.js"></script>
         <script type="text/javascript" src="/app/librerias/js/go_menus.js"></script>
+        <script type="text/javascript" src="/app/librerias/js/bootstrap/bootstrap.min.js"></script>
 
         <!-- [ KIT FONT AWESOME DE ICONOS ] -->
         <script src="https://kit.fontawesome.com/78507b64fe.js" crossorigin="anonymous"></script>

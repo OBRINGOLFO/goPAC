@@ -9,6 +9,7 @@
  * @copyright 2021
  */
 
+    require_once PATH_CONFIGURACIONES."/cookie.configuracion";
     require_once PATH_CONFIGURACIONES."/sesion.configuracion";
 
 //FUNCIONES PARA EL CONTROLADOR FRONTAL

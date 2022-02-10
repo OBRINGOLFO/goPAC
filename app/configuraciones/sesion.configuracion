@@ -19,6 +19,7 @@
     //Configuro las variables de comportamiento
     session_name('goPAC');
     session_save_path(PATH_SESIONES);
+    session_set_cookie_params(['samesite' => 'Strict']);
     session_start();
 
 ?>

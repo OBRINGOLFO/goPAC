@@ -34,13 +34,14 @@
 <script type="text/javascript">
     var MyW = goTasaW(99);
     var MyH = goTasaH(98);
+    var mgn = 10;
     //# **************************************************** #
     $(document).ready(function(){
         document.title = "goPAC® - <?php echo $_SESSION['empresa']["razon"] ?>";
         document.body.style.overflow = "hidden";
         //# ************************************************ #
-        $("#MyEscritorio").width(MyW+"px"); $("#MyEscritorio").height(MyH+"px"); 
-        $('#MyEscritorio').layout('resize', { width: MyW+"px", height: MyH+"px" });
+        $("#MyEscritorio").width((MyW-mgn)+"px"); $("#MyEscritorio").height(MyH+"px"); 
+        $('#MyEscritorio').layout('resize', { width: (MyW-mgn)+"px", height: MyH+"px" });
         $('#MyEscritorio').layout('collapse','east');
         $('#MyEscritorio').layout('collapse','west');
         //# ************************************************ #
@@ -59,9 +60,9 @@
     $(window).resize(function() {
         var MyW = goTasaW(99);
         var MyH = goTasaH(98);
-        $("#MyEscritorio").width(MyW+"px"); $("#MyEscritorio").height(MyH+"px");
+        $("#MyEscritorio").width((MyW-mgn)+"px"); $("#MyEscritorio").height(MyH+"px");
         $("#ctr_progreso").progressbar('resize');
-        $('#MyEscritorio').layout('resize', { width: MyW+"px", height: MyH+"px" });
+        $('#MyEscritorio').layout('resize', { width: (MyW-mgn)+"px", height: MyH+"px" });
     });
     //# **************************************************** #
     //# **************************************************** #

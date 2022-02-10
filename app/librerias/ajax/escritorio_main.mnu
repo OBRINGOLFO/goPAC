@@ -35,10 +35,7 @@
 
 <!-- ## ********************************************* ## -->
 <script type="text/javascript">
-    var MyW = goTasaW(99);
-    var MyH = goTasaH(98);
-	//$("#escritorio_main").width(MyW+"px");
-    //# **************************************************** #
+
     $('.easyui-ribbon').ribbon({
         onClick: function(name, target){
             switch (name) {
@@ -137,15 +134,15 @@
     });
     //# **************************************************** #
     $(window).resize(function() {
+
         var MyW = goTasaW(99);
         var MyH = goTasaH(98);
-        $("#escritorio_main").width(MyW+"px");
-		$(".tabs-header").width(MyW+"px");
-		$(".tabs-panels").width(MyW+"px");
-		$(".panel").width(MyW+"px");
-		$(".panel-htop").width(MyW+"px");
-		$(".panel-body").width(MyW+"px");
-		
+        var mgn = 10;
+
+        $("#escritorio_main").ribbon('resize',{
+            width: (MyW-mgn)
+        });
+        
     });
     //# **************************************************** #
 </script>

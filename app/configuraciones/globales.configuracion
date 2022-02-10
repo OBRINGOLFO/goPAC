@@ -9,23 +9,7 @@
  * @copyright 2021
  */
 
-/*
-    # CONFIGURACION DE RUTAS A DIRECTORIOS DE LA APLICACI�N
-    define('DS', DIRECTORY_SEPARATOR);
-    define('ROOT_DIR', $_SERVER['DOCUMENT_ROOT']);
-    define('PATH_CLASES',           ROOT_DIR . DS . 'app'   . DS . 'clases'          . DS);
-    define('PATH_CONTROLADORES',    ROOT_DIR . DS . 'app'   . DS . 'controladores'   . DS);
-    define('PATH_NUCLEO',           ROOT_DIR . DS . 'app'   . DS . 'nucleos'         . DS);
-    define('PATH_DATOS',            ROOT_DIR . DS . 'app'   . DS . 'datos'           . DS);
-    define('PATH_AYUDANTES',        ROOT_DIR . DS . 'app'   . DS . 'ayudantes'       . DS);
-    define('PATH_MODELOS',          ROOT_DIR . DS . 'app'   . DS . 'modelos'         . DS);
-    define('PATH_VISTAS',           ROOT_DIR . DS . 'app'   . DS . 'vistas'          . DS);
-    define('PATH_CONFIGURACIONES',  ROOT_DIR . DS . 'app'   . DS . 'configuraciones' . DS);
-    define('PATH_LIBRERIAS',        ROOT_DIR . DS . 'app'   . DS . 'librerias'       . DS);
-    define('PATH_CACHE',            ROOT_DIR . DS . 'temp'  . DS . 'cache'           . DS);
-    define('PATH_REGISTROS',        ROOT_DIR . DS . 'temp'  . DS . 'registros'       . DS);
-    define('PATH_SESIONES',         ROOT_DIR . DS . 'temp'  . DS . 'sesiones'        . DS);
-*/
+
     # CONFIGURACION DE RUTAS A DIRECTORIOS DE LA APLICACIÓN
     define('DS', DIRECTORY_SEPARATOR);
     define('ROOT_DIR', $_SERVER['DOCUMENT_ROOT']);
