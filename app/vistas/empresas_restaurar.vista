@@ -12,37 +12,37 @@
 
 ?>
 
-    <div id="ifaceWINDOW_usuarios_nuevo" name="ifaceWINDOW_usuarios_nuevo" class="easyui-layout" style="width:99%; height:99%; margin: 5px 5px 5px 5px;">
+    <div id="ifaceWINDOW_empresas_restaurar" name="ifaceWINDOW_empresas_restaurar" class="easyui-layout" style="width:99%; height:99%; margin: 5px 5px 5px 5px;">
         <div data-options="region: 'center'" style="padding: 6px; background: #eee;">
 
         </div>
         <div data-options="region: 'north', split: true,  minHeight: 82, maxHeight: 82" style="display: flex; align-items: flex-end; height: 82px;">
             <a class="easyui-menubutton" data-options="
-                        name: 'cmd_SAVE_NEW_USUARIO',
+                        name: 'cmd_SAVE_RESTORE_EMPRESA',
                         iconCls: 'icon-floppy-disk',
                         iconAlign: 'top',
                         size: 'small'"
-                        id="cmd_SAVE_NEW_USUARIO";
+                        id="cmd_SAVE_RESTORE_EMPRESA";
                         style="width: 70px; margin: 5px 0px 5px 5px; background: #eee; border-width: 1px;"
-                        onmouseover='statusMSG("Crea y guarda toda la información del usuario.");'
+                        onmouseover='statusMSG("Crea la base de datos y guarda toda la información de la empresa.");'
                         onmouseout='statusMSG_clear();'
             ><b>Guardar</b></a>
             <a class="easyui-menubutton" data-options="
-                        name: 'cmd_HELP_NEW_USUARIO',
+                        name: 'cmd_RESTORE_NEW_EMPRESA',
                         iconCls: 'icon-question',
                         iconAlign: 'top',
                         size: 'small'"
-                        id="cmd_HELP_NEW_USUARIO";
+                        id="cmd_HELP_RESTORE_EMPRESA";
                         style="width: 70px; margin: 5px 0px 5px 5px; background: #eee; border-width: 1px;"
                         onmouseover='statusMSG("Abre el manual de ayuda.");'
                         onmouseout='statusMSG_clear();'
             >Ayuda</a>
             <a class="easyui-menubutton" data-options="
-                        name: 'cmd_CLOSE_NEW_USUARIO',
+                        name: 'cmd_CLOSE_RESTORE_EMPRESA',
                         iconCls: 'icon-arrow-up-right-from-square',
                         iconAlign: 'top',
                         size: 'small'"
-                        id="cmd_CLOSE_NEW_USUARIO";
+                        id="cmd_CLOSE_RESTORE_EMPRESA";
                         style="width: 70px; margin: 5px 5px 5px auto; background: #eee; border-width: 1px;"
                         onmouseover='statusMSG("Cierra ésta ventana.");'
                         onmouseout='statusMSG_clear();'
@@ -57,22 +57,22 @@
     $('.easyui-menubutton').menubutton({
         onClick: function(){
             switch (this.id) {
-                //# **************************************************** #
-                case "cmd_CLOSE_NEW_USUARIO":
-                    $('#win_USUARIOS_NUEVO').window('close');
+                //# **************************************************** # 
+                case "cmd_CLOSE_RESTORE_EMPRESA":
+                    $('#win_EMPRESAS_RESTAURAR').window('close');
                     break;
                 //# **************************************************** #
-                case "cmd_HELP_NEW_USUARIO":
+                case "cmd_HELP_RESTORE_EMPRESA":
                     alert(this.id+" -> onClick()");
                     break;
                 //# **************************************************** #
-                case "cmd_SAVE_NEW_USUARIO":
+                case "cmd_SAVE_RESTORE_EMPRESA":
                     alert(this.id+" -> onClick()");
                     break;
                 //# **************************************************** #
                 //# **************************************************** #
                 //# **************************************************** #
-                //# **************************************************** #                    
+                //# **************************************************** #
             }
         } 
     });

@@ -12,38 +12,69 @@
 
 ?>
 
-    <div id="ifaceWINDOW" name="ifaceWINDOW" class="easyui-layout" style="width:99%; height:99%; margin: 5px 5px 5px 5px;">
-        <div id="ly-centro" name="ly-centro" data-options="region: 'center'" style="padding: 6px; background: #eee;">
+    <div id="ifaceWINDOW_empresas_nuevo" name="ifaceWINDOW_empresas_nuevo" class="easyui-layout" style="width:99%; height:99%; margin: 5px 5px 5px 5px;">
+        <div data-options="region: 'center'" style="padding: 6px; background: #eee;">
 
         </div>
-        <div id="ly-arriba" name="ly-arriba" data-options="region: 'north', split: true" style="display: flex; align-items: flex-end; height: 82px;">
+        <div data-options="region: 'north', split: true,  minHeight: 82, maxHeight: 82" style="display: flex; align-items: flex-end; height: 82px;">
             <a class="easyui-menubutton" data-options="
-                        name: 'cmd_INFORMACION_ACERCA',
-                        iconCls: 'icon-address-card',
+                        name: 'cmd_SAVE_NEW_EMPRESA',
+                        iconCls: 'icon-floppy-disk',
                         iconAlign: 'top',
                         size: 'small'"
-                        style="margin: 5px 0px 5px 5px; background: #eee; border-width: 1px;"
+                        id="cmd_SAVE_NEW_EMPRESA";
+                        style="width: 70px; margin: 5px 0px 5px 5px; background: #eee; border-width: 1px;"
                         onmouseover='statusMSG("Crea la base de datos y guarda toda la información de la empresa.");'
                         onmouseout='statusMSG_clear();'
-            >Guardar</a>
+            ><b>Guardar</b></a>
             <a class="easyui-menubutton" data-options="
-                        name: 'cmd_INFORMACION_ACERCA',
-                        iconCls: 'icon-address-card',
+                        name: 'cmd_HELP_NEW_EMPRESA',
+                        iconCls: 'icon-question',
                         iconAlign: 'top',
                         size: 'small'"
-                        style="margin: 5px 0px 5px 5px; background: #eee; border-width: 1px;"
-                        onmouseover='statusMSG("Crea la base de datos y guarda toda la información de la empresa.");'
+                        id="cmd_HELP_NEW_EMPRESA";
+                        style="width: 70px; margin: 5px 0px 5px 5px; background: #eee; border-width: 1px;"
+                        onmouseover='statusMSG("Abre el manual de ayuda.");'
                         onmouseout='statusMSG_clear();'
             >Ayuda</a>
             <a class="easyui-menubutton" data-options="
-                        name: 'cmd_INFORMACION_ACERCA',
-                        iconCls: 'icon-address-card',
+                        name: 'cmd_CLOSE_NEW_EMPRESA',
+                        iconCls: 'icon-arrow-up-right-from-square',
                         iconAlign: 'top',
                         size: 'small'"
-                        style="margin: 5px 0px 5px 5px; background: #eee; border-width: 1px;"
-                        onmouseover='statusMSG("Crea la base de datos y guarda toda la información de la empresa.");'
+                        id="cmd_CLOSE_NEW_EMPRESA";
+                        style="width: 70px; margin: 5px 5px 5px auto; background: #eee; border-width: 1px;"
+                        onmouseover='statusMSG("Cierra ésta ventana.");'
                         onmouseout='statusMSG_clear();'
-            >Salir</a>
+            >Cerrar</a>
 
         </div>
     </div>
+
+<!-- ## ********************************************* ## -->
+<script type="text/javascript">
+
+    $('.easyui-menubutton').menubutton({
+        onClick: function(){
+            switch (this.id) {
+                //# **************************************************** # 
+                case "cmd_CLOSE_NEW_EMPRESA":
+                    $('#win_EMPRESAS_CREAR').window('close');
+                    break;
+                //# **************************************************** #
+                case "cmd_HELP_NEW_EMPRESA":
+                    alert(this.id+" -> onClick()");
+                    break;
+                //# **************************************************** #
+                case "cmd_SAVE_NEW_EMPRESA":
+                    alert(this.id+" -> onClick()");
+                    break;
+                //# **************************************************** #
+                //# **************************************************** #
+                //# **************************************************** #
+                //# **************************************************** #
+            }
+        } 
+    });
+
+</script>

@@ -25,7 +25,12 @@
 
 <!-- [BEGIN][VENTANAS DINAMICAS] -->
 <div id="win_EMPRESAS_CREAR" style="overflow: hidden;"></div>
-<div id="win_USUARIOS_NUEVO"></div>
+<div id="win_EMPRESAS_RESPALDAR" style="overflow: hidden;"></div>
+<div id="win_EMPRESAS_BORRAR" style="overflow: hidden;"></div>
+<div id="win_EMPRESAS_RESTAURAR" style="overflow: hidden;"></div>
+<div id="win_EMPRESAS_MODIFICAR" style="overflow: hidden;"></div>
+
+<div id="win_USUARIOS_NUEVO" style="overflow: hidden;"></div>
 <!-- [END][VENTANAS DINAMICAS] -->
 
 <!-- ## ********************************************* ## -->
@@ -37,8 +42,18 @@
     $('.easyui-ribbon').ribbon({
         onClick: function(name, target){
             switch (name) {
+                //# *************************** #
                 case "cmd_EMPRESAS_RESPALDAR":
+                    $('#win_EMPRESAS_RESPALDAR').window({
+                        title:          "Respaldar empresa activa.",
+                        collapsible:    false,
+                        width:          goTasaW(35),
+                        height:         goTasaH(35),
+                        modal:          true
+                    });                    
+                    $('#win_EMPRESAS_RESPALDAR').window('refresh', '/index.php?goExec=Empresas&goAcc=iface_respaldar');                    
                     break;
+                //# *************************** #
                 case "cmd_EMPRESAS_CREAR":
                     $('#win_EMPRESAS_CREAR').window({
                         title:          "Creación de nueva empresa.",
@@ -49,10 +64,20 @@
                     });                    
                     $('#win_EMPRESAS_CREAR').window('refresh', '/index.php?goExec=Empresas&goAcc=iface_nuevo');                    
                     break;
+                //# *************************** #
                 case "cmd_EMPRESAS_BORRAR":
                     break;
                 case "cmd_EMPRESAS_RESTAURAR":
+                    $('#win_EMPRESAS_RESTAURAR').window({
+                        title:          "Recuperar respaldo de empresa activa.",
+                        collapsible:    false,
+                        width:          goTasaW(35),
+                        height:         goTasaH(35),
+                        modal:          true
+                    });                    
+                    $('#win_EMPRESAS_RESTAURAR').window('refresh', '/index.php?goExec=Empresas&goAcc=iface_restaurar');                    
                     break;
+                //# *************************** #
                 case "cmd_USUARIOS_NUEVO":
                     $('#win_USUARIOS_NUEVO').window({
                         title:          "Creación de nuevo usuario.",
@@ -63,15 +88,19 @@
                     });
                     $('#win_USUARIOS_NUEVO').window('refresh', '/index.php?goExec=Usuarios&goAcc=iface_nuevo');                    
                     break;
+                //# *************************** #
                 case "cmd_USUARIOS_PERMISOS":
                     break;
+                //# *************************** #
                 case "cmd_USUARIOS_ELIMINAR":
                     break;
+                //# *************************** #
                 case "cmd_USUARIOS_MODIFICAR":
                     break;
+                //# *************************** #
                 case "cmd_USUARIOS_SUSPENDER":
                     break;
-
+                //# *************************** #
 
 
 
@@ -87,6 +116,7 @@
                         }
                     });                    
                     break;
+                //# *************************** #
                 case "cmd_CERRAR_SESION":
                     $.messager.confirm({
                         title: '¿Confirmar intención?',
@@ -98,7 +128,7 @@
                         }
                     });                    
                     break;
-
+                //# *************************** #
                 default:
                     alert(name+' OnClick');
                     break;

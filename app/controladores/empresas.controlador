@@ -175,7 +175,8 @@ class EmpresasControlador extends ControladorBase{
     /**
      * CONTROL DE INTERFACES PARA LA EMPRESA (Carga dinamica en ventanas de usuario)
      *  **/
-    public function iface_nuevo(){
+    /** ****************************************************** **/
+     public function iface_nuevo(){
         try {
 
             chkSesion();
@@ -185,7 +186,29 @@ class EmpresasControlador extends ControladorBase{
             mostrar_error($e);
         }
     }
-
     /** ****************************************************** **/
+    public function iface_respaldar(){
+        try {
+
+            chkSesion();
+            $this->view("empresas_respaldar", array(null));
+
+        } catch (Exception $e) {
+            mostrar_error($e);
+        }
+    }
+    /** ****************************************************** **/
+    public function iface_restaurar(){
+        try {
+
+            chkSesion();
+            $this->view("empresas_restaurar", array(null));
+
+        } catch (Exception $e) {
+            mostrar_error($e);
+        }
+    }
+
+    
 }
 ?>
