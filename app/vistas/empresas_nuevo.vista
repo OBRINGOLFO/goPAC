@@ -13,34 +13,64 @@
 ?>
 
     <div id="ifaceWINDOW_empresas_nuevo" name="ifaceWINDOW_empresas_nuevo" class="easyui-layout" style="width:99%; height:99%; margin: 5px 5px 5px 5px;">
-        <div data-options="region: 'center'" style="padding: 6px; background: #eee;">
-            <div class="container">
+        <div data-options="region: 'center'" style="padding-top: 5px; background: #eee;">
+            <div class="container" style="padding-left: 5px !important;padding-right: 5px !important; overflow: hidden;">
                 <form id="Frm_EMPRESAS_NUEVO" method="post">
-                    <div class="row">
-                        <div id="panel_01" class="easyui-panel" style="width:100%; height:50px; padding:10px; background:#fafafa; overflow: hidden;"
+                    <div class="row no-gutters">
+                        <div id="panel_01" class="easyui-panel" style="width:100%; height:100px; padding:10px; background:#fafafa; overflow: hidden;"
                             data-options="iconCls:'', closable:false, collapsible:false, minimizable:false, maximizable:false">
-                                <input id="txt_EMPRESA_NOMBRE" name="txt_EMPRESA_NOMBRE" class="easyui-textbox" style="width: 100%; height: 30px; padding: 12px;"
-                                    data-options="required: true, validType: 'length[3,25]', prompt: 'Nombre de la nueva empresa', iconCls: 'icon-industry', iconWidth: 16"
+                                <input id="txt_EMPRESA_NOMBRE" name="txt_EMPRESA_NOMBRE" class="easyui-textbox" style="width: 100%; height: 40px;"
+                                    data-options="required: true, validType: 'length[3,100]', prompt: 'Nombre o razón social de la nueva empresa', iconCls: 'icon-industry', iconWidth: 16"
                                 >
+                                <input id="txt_EMPRESA_DENOMINACION" name="txt_EMPRESA_DENOMINACION" class="easyui-textbox" style="width: 100%; height: 40px;"
+                                    data-options="required: false, validType: 'length[3,100]', prompt: 'Denominación comercial o nombre corto', iconCls: 'icon-keyboard', iconWidth: 16"
+                                >
+
                         </div>
                     </div>
                     <div class="row">
 
-                        <div class="col-3">
-                            <div id="panel_02" class="easyui-panel" style="width:50%; height:150px; margin-top: 5px; padding:10px; background:#fafafa; overflow: hidden;"
+                        <div class="col-6">
+                            <div id="panel_02" class="easyui-panel" style="width:100%; height:100%; margin-top: 5px; padding:10px; background:#fafafa; overflow: hidden;"
                             data-options="iconCls:'', closable:false, collapsible:false, minimizable:false, maximizable:false">
-                                <input id="txt_EMPRESA_RFC" name="txt_EMPRESA_RFC" class="easyui-textbox" style="width: 100%; height: 30px; padding: 12px;"
-                                    data-options="required: true, validType: 'length[3,25]', prompt: 'Nombre de la nueva empresa', iconCls: 'icon-industry', iconWidth: 16"
+                                <input id="txt_EMPRESA_RFC" name="txt_EMPRESA_RFC" class="easyui-textbox" style="width: 49%; height: 40px;"
+                                    data-options="required: true, validType: 'length[3,25]', prompt: 'Registro federal (R.F.C.)', iconCls: 'icon-building-columns', iconWidth: 16"
                                 >
+                                <input id="txt_EMPRESA_CURP" name="txt_EMPRESA_CURP" class="easyui-textbox" style="width: 50%; height: 40px;"
+                                    data-options="required: false, validType: 'length[3,25]', prompt: 'C.U.R.P.', iconCls: 'icon-person', iconWidth: 16"
+                                >
+                                <select id="txt_EMPRESA_REGIMEN" class="easyui-combobox" name="txt_EMPRESA_REGIMEN" style="width: 100%; height: 40px;"
+                                    data-options="required: true, iconCls: 'icon-id-card', iconWidth: 16"
+                                >
+                                    <?php
+                                        foreach($RegimenFiscal as $xRegimen) {
+                                            echo '<option value="' . $xRegimen->c_RegimenFiscal . '">[' . $xRegimen->c_RegimenFiscal . '] ' . $xRegimen->Descripcion . '</option>';
+                                        }
+                                    ?>
+                                </select>                                
+                                <input id="txt_EMPRESA_IVA" name="txt_EMPRESA_IVA" class="easyui-numberbox" style="width: 33%; height: 40px;"
+                                    data-options="required: true, min: 0, max: 100, precision: 3, prompt: 'Tasa I.V.A.', iconCls: 'icon-percent-solid', iconWidth: 16"
+                                >
+                                <input id="txt_EMPRESA_IEPS" name="txt_EMPRESA_IEPS" class="easyui-numberbox" style="width: 33%; height: 40px;"
+                                    data-options="required: true, min: 0, max: 100, precision: 3, prompt: 'Tasa I.E.P.S.', iconCls: 'icon-percent-solid', iconWidth: 16"
+                                >
+                                <input id="txt_EMPRESA_OTRO" name="txt_EMPRESA_OTRO" class="easyui-numberbox" style="width: 33%; height: 40px;"
+                                    data-options="required: true, min: 0, max: 100, precision: 3, prompt: 'Otros impuestos', iconCls: 'icon-percent-solid', iconWidth: 16"
+                                >
+
                             </div>
                         </div>
 
-                        <div class="col">
-                            <div id="panel_03" class="easyui-panel" style="width:50%; height:150px; margin-top: 5px; padding:10px; background:#fafafa; overflow: hidden;"
+                        <div class="col-6">
+                            <div id="panel_03" class="easyui-panel" style="width:100%; height:150px; margin-top: 5px; padding:10px; background:#fafafa; overflow: hidden;"
                             data-options="iconCls:'', closable:false, collapsible:false, minimizable:false, maximizable:false">
-                                <input id="txt_EMPRESA_RFC" name="txt_EMPRESA_RFC" class="easyui-textbox" style="width: 100%; height: 30px; padding: 12px;"
-                                    data-options="required: true, validType: 'length[3,25]', prompt: 'Nombre de la nueva empresa', iconCls: 'icon-industry', iconWidth: 16"
+                                <input id="txt_EMPRESA_CPOSTAL" name="txt_EMPRESA_CPOSTAL" class="easyui-numberbox" style="width: 33%; height: 40px;"
+                                    data-options="required: true, min: 0, max: 99999, precision: 0, prompt: 'Código postal', iconCls: 'icon-location-dot', iconWidth: 16"
                                 >
+                                <select id="txt_EMPRESA_COLONIA" class="easyui-combobox" name="txt_EMPRESA_COLONIA" style="width: 66%; height: 40px;"
+                                    data-options="required: true, iconCls: 'icon-location-crosshairs', iconWidth: 16"
+                                ></select>                                
+
                             </div>
                         </div>    
 
@@ -60,7 +90,7 @@
                         style="width: 70px; margin: 5px 0px 5px 5px; background: #eee; border-width: 1px;"
                         onmouseover='statusMSG("Crea la base de datos y guarda toda la información de la empresa.");'
                         onmouseout='statusMSG_clear();'
-            ><b>Guardar</b></a>
+            ><b>Crear</b></a>
             <a class="easyui-menubutton" data-options="
                         name: 'cmd_HELP_NEW_EMPRESA',
                         iconCls: 'icon-question',

@@ -180,7 +180,13 @@ class EmpresasControlador extends ControladorBase{
         try {
 
             chkSesion();
-            $this->view("empresas_nuevo", array(null));
+            //Cargando catálogo de [REGIMEN FISCAL]
+            $xRegimen = new SatRegimenFiscal($this->adapter);
+
+
+            $this->view("empresas_nuevo", array(
+                "RegimenFiscal" => $xRegimen->getAll()
+            ));
 
         } catch (Exception $e) {
             mostrar_error($e);
