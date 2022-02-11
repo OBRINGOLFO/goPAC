@@ -117,6 +117,57 @@
 
 <!-- ## ********************************************* ## -->
 <script type="text/javascript">
+    var arr_POSTAL = [];
+
+    $('#txt_EMPRESA_CPOSTAL').numberbox({
+        onChange: function(){
+            var xCP = $('#txt_EMPRESA_CPOSTAL').numberbox('getValue');
+            if(xCP != ""){
+                $('#txt_EMPRESA_COLONIA').combobox('clear');
+                $('#txt_EMPRESA_COLONIA').combobox('loadData', []);
+                var xData = { cp: xCP };
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo $helper->url("Empresas", "get_postal"); ?>',
+                    data: xData,
+                    success:function(respuesta){
+                        if(respuesta.error == 0){
+                            var arrDATA = [];
+                            var n = 0;
+                            respuesta.data.forEach(function(colonia) {
+                                n++;
+                                if(n == 1){
+                                    arrDATA.push({ "value":n, "text":colonia.asentamiento, "selected":true });
+                                }else{
+                                    arrDATA.push({ "value":n, "text":colonia.asentamiento });
+                                }
+                                arr_POSTAL.push({
+                                    "cp":colonia.cp,
+                                    "asentamiento":colonia.asentamiento,
+                                    "tipo":colonia.tipo,
+                                    "minicipio":colonia.municipio,
+                                    "estado":colonia.estado,
+                                    "ciudad":colonia.ciudad,
+                                    "zona":colonia.zona
+                                });
+                            });
+                            $('#txt_EMPRESA_COLONIA').combobox('loadData', arrDATA);
+                        }
+                    }
+                });            
+            }else{
+                $('#txt_EMPRESA_COLONIA').combobox('clear');
+                $('#txt_EMPRESA_COLONIA').combobox('loadData', []);
+            }            
+        }
+    });
+
+    //Colocar datos de ciudad, municipio, espado y pais al seleccionar la colonia
+    $("#txt_EMPRESA_COLONIA").combobox({
+        onSelect:function(){
+
+        }
+    });
 
     $('.easyui-menubutton').menubutton({
         onClick: function(){

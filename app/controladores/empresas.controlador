@@ -171,6 +171,33 @@ class EmpresasControlador extends ControladorBase{
             mostrar_error($e);
         }
     }
+    /** ****************************************************** **/
+    public function get_postal(){
+        try {
+
+            chkSesion();
+            header('Content-Type: application/json; charset=UTF8');
+            $CP_Code = $_POST['cp'];
+            $xRespuesta = array();
+            if(($CP_Code != "") && ($CP_Code < 99999)){
+                $xCodigoPostal = new CodigoPostal($this->adapter);
+                $MyCODE = $xCodigoPostal->getBy("cp", $CP_Code);
+                if($MyCODE){
+                    $xRespuesta["error"] = 0;
+                    $xRespuesta["data"] = $MyCODE;
+                    //array_push($xRespuesta["data"], $MyCODE);
+                }else{
+                    $xRespuesta["error"] = 300;
+                }
+            }else{
+                $xRespuesta["error"] = 400;
+            }
+            echo json_encode($xRespuesta);
+
+        } catch (Exception $e) {
+            mostrar_error($e);
+        }
+    }
 
     /**
      * CONTROL DE INTERFACES PARA LA EMPRESA (Carga dinamica en ventanas de usuario)

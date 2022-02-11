@@ -1,0 +1,42 @@
+<?php
+/**
+ * @autor Rixio Danilo Iguarán Chourio.
+ * @cédula-profesional 12196442
+ * @correo-eletrónico atencion.clientes@obringolfo.com
+ * @denominacion OBRAS INFORMÁTICAS DEL GOLFO
+ * @empresa OBRINGOLFO S.A.S. DE C.V.
+ * @proyecto  goPAC.
+ * @copyright 2021
+ */
+
+
+class CodigoPostal extends ModeloBase{
+    private $table;
+
+    private $c_RegimenFiscal;
+    private $Descripcion;
+
+    # ********************************************************** #
+    public function __construct($adapter) {
+        try {
+
+            $this->table = "c_postal";
+            parent::__construct($this->table, $adapter);
+
+        } catch (Exception $e) {
+            mostrar_error($e);
+        }
+    }
+    # ********************************************************** #
+    public function get_c_RegimenFiscal(){ return $this->c_RegimenFiscal; }
+    public function set_c_RegimenFiscal($c_RegimenFiscal){ $this->c_RegimenFiscal = $c_RegimenFiscal; }
+    # ********************************************************** #
+    public function getDescripcion(){ return $this->Descripcion; }
+    public function setDescripcion($Descripcion){ $this->Descripcion = $Descripcion; }
+
+    /** ********************************************************
+     * 
+     * ***************************************************** **/
+
+}
+?>

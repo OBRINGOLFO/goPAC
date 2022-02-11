@@ -98,3 +98,19 @@
         });        
     }
     /** ****************************************************** **/
+    $.extend($.fn.combobox.methods, {
+        appendItem: function(jq, item){
+            return jq.each(function(){
+                var state = $.data(this, 'combobox');
+                var opts = state.options;
+                var items = $(this).combobox('getData');
+                items.push(item);
+                $(this).combobox('panel').append(
+                    '<div id="' + state.itemIdPrefix+'_'+(items.length-1) + '"  class="combobox-item">' +
+                    (opts.formatter ? opts.formatter.call(this, item) : item[opts.textField]) +
+                    '</div>'
+                )
+            })
+        }
+    })
+    /** ****************************************************** **/
