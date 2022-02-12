@@ -62,7 +62,7 @@
                         </div>
 
                         <div class="col-6">
-                            <div id="panel_03" class="easyui-panel" style="width:100%; height:150px; margin-top: 5px; padding:10px; background:#fafafa; overflow: hidden;"
+                            <div id="panel_03" class="easyui-panel" style="width:100%; height:250px; margin-top: 5px; padding:10px; background:#fafafa; overflow: hidden;"
                             data-options="iconCls:'', closable:false, collapsible:false, minimizable:false, maximizable:false">
                                 <input id="txt_EMPRESA_CPOSTAL" name="txt_EMPRESA_CPOSTAL" class="easyui-numberbox" style="width: 33%; height: 40px;"
                                     data-options="required: true, min: 0, max: 99999, precision: 0, prompt: 'Código postal', iconCls: 'icon-location-dot', iconWidth: 16"
@@ -70,7 +70,27 @@
                                 <select id="txt_EMPRESA_COLONIA" class="easyui-combobox" name="txt_EMPRESA_COLONIA" style="width: 66%; height: 40px;"
                                     data-options="required: true, iconCls: 'icon-location-crosshairs', iconWidth: 16"
                                 ></select>                                
-
+                                <input id="txt_EMPRESA_CIUDAD" name="txt_EMPRESA_CIUDAD" class="easyui-textbox" style="width: 49%; height: 40px;"
+                                    data-options="required: true, readonly: true, prompt: 'Ciudad', iconCls: 'icon-location-arrow', iconWidth: 16"
+                                >
+                                <input id="txt_EMPRESA_MUNICIPIO" name="txt_EMPRESA_MUNICIPIO" class="easyui-textbox" style="width: 50%; height: 40px;"
+                                    data-options="required: true, readonly: true, prompt: 'Municipio', iconCls: 'icon-location-arrow', iconWidth: 16"
+                                >
+                                <input id="txt_EMPRESA_ESTADO" name="txt_EMPRESA_ESTADO" class="easyui-textbox" style="width: 49%; height: 40px;"
+                                    data-options="required: true, readonly: true, prompt: 'Estado', iconCls: 'icon-location-arrow', iconWidth: 16"
+                                >
+                                <input id="txt_EMPRESA_PAIS" name="txt_EMPRESA_PAIS" class="easyui-textbox" style="width: 50%; height: 40px;"
+                                    data-options="required: true, readonly: true, prompt: 'País', iconCls: 'icon-location-arrow', iconWidth: 16"
+                                >
+                                <input id="txt_EMPRESA_CALLE" name="txt_EMPRESA_CALLE" class="easyui-textbox" style="width: 69%; height: 40px;"
+                                    data-options="required: true, prompt: 'Calle', iconCls: 'icon-road', iconWidth: 16"
+                                >
+                                <input id="txt_EMPRESA_EXTERIOR" name="txt_EMPRESA_EXTERIOR" class="easyui-textbox" style="width: 15%; height: 40px;"
+                                    data-options="required: true, prompt: 'Ext.', iconCls: 'icon-angles-up', iconWidth: 16"
+                                >
+                                <input id="txt_EMPRESA_INTERIOR" name="txt_EMPRESA_INTERIOR" class="easyui-textbox" style="width: 15%; height: 40px;"
+                                    data-options="required: true, prompt: 'Int.', iconCls: 'icon-angles-down', iconWidth: 16"
+                                >
                             </div>
                         </div>    
 
@@ -125,6 +145,10 @@
             if(xCP != ""){
                 $('#txt_EMPRESA_COLONIA').combobox('clear');
                 $('#txt_EMPRESA_COLONIA').combobox('loadData', []);
+                $("#txt_EMPRESA_CIUDAD").textbox('clear');
+                $("#txt_EMPRESA_MUNICIPIO").textbox('clear');
+                $("#txt_EMPRESA_ESTADO").textbox('clear');
+                $("#txt_EMPRESA_PAIS").textbox('clear');
                 var xData = { cp: xCP };
                 $.ajax({
                     type: 'POST',
@@ -133,6 +157,7 @@
                     success:function(respuesta){
                         if(respuesta.error == 0){
                             var arrDATA = [];
+                            arr_POSTAL = [];
                             var n = 0;
                             respuesta.data.forEach(function(colonia) {
                                 n++;
@@ -145,10 +170,11 @@
                                     "cp":colonia.cp,
                                     "asentamiento":colonia.asentamiento,
                                     "tipo":colonia.tipo,
-                                    "minicipio":colonia.municipio,
+                                    "municipio":colonia.municipio,
                                     "estado":colonia.estado,
                                     "ciudad":colonia.ciudad,
-                                    "zona":colonia.zona
+                                    "zona":colonia.zona,
+                                    "pais":"México"
                                 });
                             });
                             $('#txt_EMPRESA_COLONIA').combobox('loadData', arrDATA);
@@ -158,6 +184,10 @@
             }else{
                 $('#txt_EMPRESA_COLONIA').combobox('clear');
                 $('#txt_EMPRESA_COLONIA').combobox('loadData', []);
+                $("#txt_EMPRESA_CIUDAD").textbox('clear');
+                $("#txt_EMPRESA_MUNICIPIO").textbox('clear');
+                $("#txt_EMPRESA_ESTADO").textbox('clear');
+                $("#txt_EMPRESA_PAIS").textbox('clear');
             }            
         }
     });
@@ -165,7 +195,14 @@
     //Colocar datos de ciudad, municipio, espado y pais al seleccionar la colonia
     $("#txt_EMPRESA_COLONIA").combobox({
         onSelect:function(){
-
+            $("#txt_EMPRESA_CIUDAD").textbox('setText', arr_POSTAL[0].ciudad);
+            $("#txt_EMPRESA_CIUDAD").textbox('setValue', arr_POSTAL[0].ciudad);
+            $("#txt_EMPRESA_MUNICIPIO").textbox('setText', arr_POSTAL[0].municipio);
+            $("#txt_EMPRESA_MUNICIPIO").textbox('setValue', arr_POSTAL[0].municipio);
+            $("#txt_EMPRESA_ESTADO").textbox('setText', arr_POSTAL[0].estado);
+            $("#txt_EMPRESA_ESTADO").textbox('setValue', arr_POSTAL[0].estado);
+            $("#txt_EMPRESA_PAIS").textbox('setText', arr_POSTAL[0].pais);
+            $("#txt_EMPRESA_PAIS").textbox('setValue', arr_POSTAL[0].pais);
         }
     });
 
