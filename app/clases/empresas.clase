@@ -76,20 +76,14 @@ class Empresas extends EntidadBase{
     /* ***************************************************************************
     *
     *************************************************************************** */
-    public function guardar(){
+    public function registrar(){
         try {
 
-            $query = "INSERT INTO c_usuarios (uid, uid_persona, usuario, secreto, creacion, acceso, ip, estado, observaciones)
+            $query = "INSERT INTO c_empresas (uid, rfc, razon)
                       VALUES(
                            '".$this->uid."',
-                           '".$this->uid_persona."',
-                           '".$this->usuario."',
-                           '".$this->secreto."',
-                           '".$this->creacion."',
-                           '".$this->acceso."',
-                           '".$this->ip."',
-                           '".$this->estado."',
-                           '".$this->observaciones."'
+                           '".$this->rfc."',
+                           '".$this->razon."'
                       );";
             $save = $this->db()->query($query);
             //$this->db()->error;

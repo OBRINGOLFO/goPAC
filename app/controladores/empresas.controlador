@@ -54,22 +54,58 @@ class EmpresasControlador extends ControladorBase{
 
             chkSesion();
             header('Content-Type: application/json; charset=UTF8');
+            //almacenando el formulario de creación
+            $txt_EMPRESA_UID            = strtoupper(trim(getUUID()));
+            $txt_EMPRESA_NOMBRE         = strtoupper(trim($_POST['txt_EMPRESA_NOMBRE']));
+            $txt_EMPRESA_DENOMINACION   = strtoupper(trim($_POST['txt_EMPRESA_DENOMINACION']));
+            $txt_EMPRESA_RFC            = strtoupper(trim($_POST['txt_EMPRESA_RFC']));
+            $txt_EMPRESA_CURP           = strtoupper(trim($_POST['txt_EMPRESA_CURP']));
+            $txt_EMPRESA_REGIMEN        = strtoupper(trim($_POST['txt_EMPRESA_REGIMEN']));
+            $txt_EMPRESA_IVA            = strtoupper(trim($_POST['txt_EMPRESA_IVA']));
+            $txt_EMPRESA_IEPS           = strtoupper(trim($_POST['txt_EMPRESA_IEPS']));
+            $txt_EMPRESA_OTRO           = strtoupper(trim($_POST['txt_EMPRESA_OTRO']));
+            $txt_EMPRESA_CPOSTAL        = strtoupper(trim($_POST['txt_EMPRESA_CPOSTAL']));
+            $txt_EMPRESA_COLONIA        = strtoupper(trim($_POST['txt_EMPRESA_COLONIA']));
+            $txt_EMPRESA_CIUDAD         = strtoupper(trim($_POST['txt_EMPRESA_CIUDAD']));
+            $txt_EMPRESA_MUNICIPIO      = strtoupper(trim($_POST['txt_EMPRESA_MUNICIPIO']));
+            $txt_EMPRESA_ESTADO         = strtoupper(trim($_POST['txt_EMPRESA_ESTADO']));
+            $txt_EMPRESA_PAIS           = strtoupper(trim($_POST['txt_EMPRESA_PAIS']));
+            $txt_EMPRESA_CALLE          = strtoupper(trim($_POST['txt_EMPRESA_CALLE']));
+            $txt_EMPRESA_EXTERIOR       = strtoupper(trim($_POST['txt_EMPRESA_EXTERIOR']));
+            $txt_EMPRESA_INTERIOR       = strtoupper(trim($_POST['txt_EMPRESA_INTERIOR']));
+            
             $xRespuesta = array();
-            $xRespuesta["estado"] = null;
-            if(isset($_POST["txtRFC"])){ //Validamos campos principales
-                auditar("2");
-                $MyRFC = strtoupper(trim($_POST["txtRFC"]));
+            $xRespuesta["error"] = 1;
+            $xRespuesta["mensaje"] = null;
+            if(isset($txt_EMPRESA_RFC) && $txt_EMPRESA_RFC != ""){ //Validamos campos principales
                 $connection = mysqli_connect(DB_HOST, DB_USUARIO, DB_SECRETO);
-                if (!$connection) {
-                    auditar('Imposible realizar la conexión: ' . mysql_error());
-                }
-                $sql = 'CREATE DATABASE ' . DB_PREFIJO . $MyRFC;
-                if (mysqli_query($connection, $sql)) {
-                    auditar("Base de datos ".DB_PREFIJO.$MyRFC." creada con éxito.");
-                } else {
-                    auditar('Error al crear la base de datos: ' . mysql_error());
+                if (!$connection) { //imposible conectar
+                    auditar('Imposible realizar la conexión: ' . mysqli_error($connection));
+                    $xRespuesta["error"] = 410;
+                    $xRespuesta["mensaje"] = "Imposible realizar la conexión con el servidor de datos.";
+                }else{ //intentamos generar db
+                    $sql = 'CREATE DATABASE ' . DB_PREFIJO . $txt_EMPRESA_RFC;
+                    if (mysqli_query($connection, $sql)) { //db generada con éxito
+                        //Registrando la empresa en el catalogo general
+                        $xEmpresas = new Empresas($this->adapter);
+                        $xEmpresas->setUid($txt_EMPRESA_UID);
+                        $xEmpresas->setRfc($txt_EMPRESA_RFC);
+                        $xEmpresas->setRazon($txt_EMPRESA_NOMBRE);
+                        $xCrear = $xEmpresas->registrar();
+                        //Ejecutando el script de datos para estructira interna
+                        
+                        //Auditando acciones
+                        auditar("Base de datos ".DB_PREFIJO.$txt_EMPRESA_DENOMINACION." creada con éxito.");
+                        $xRespuesta["error"] = 0;
+                    }else{ //imposible generar db
+                        auditar('Error al crear la base de datos: ' . mysqli_error($connection));
+                        $xRespuesta["error"] = 420;
+                        $xRespuesta["mensaje"] = "Error al crear la empresa: " . mysqli_error($connection);
+                    }   
                 }
             }
+
+            echo json_encode($xRespuesta);
 
         } catch (Exception $e) {
             mostrar_error($e);
@@ -83,7 +119,7 @@ class EmpresasControlador extends ControladorBase{
             header('Content-Type: application/json; charset=UTF8');
             $xRespuesta = array();
             $xRespuesta["error"] = 0;
-            return json_encode($xRespuesta);
+            echo json_encode($xRespuesta);
 
         } catch (Exception $e) {
             mostrar_error($e);

@@ -55,8 +55,8 @@
                     $('#win_EMPRESAS_CREAR').window({
                         title:          "Creación de nueva empresa.",
                         collapsible:    false,
-                        width:          goTasaW(75),
-                        height:         goTasaH(75),
+                        width:          900, //goTasaW(75),
+                        height:         440, //goTasaH(75),
                         modal:          true
                     });                    
                     $('#win_EMPRESAS_CREAR').window('refresh', '/index.php?goExec=Empresas&goAcc=iface_nuevo');                    
