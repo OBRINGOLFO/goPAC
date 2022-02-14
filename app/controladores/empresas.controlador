@@ -84,18 +84,49 @@ class EmpresasControlador extends ControladorBase{
                     $xRespuesta["error"] = 410;
                     $xRespuesta["mensaje"] = "Imposible realizar la conexión con el servidor de datos.";
                 }else{ //intentamos generar db
-                    $sql = 'CREATE DATABASE ' . DB_PREFIJO . $txt_EMPRESA_RFC;
+                    $db_NAME = end(explode("-", $txt_EMPRESA_UID));
+                    $sql = 'CREATE DATABASE ' . DB_PREFIJO . $db_NAME;
                     if (mysqli_query($connection, $sql)) { //db generada con éxito
                         //Registrando la empresa en el catalogo general
                         $xEmpresas = new Empresas($this->adapter);
                         $xEmpresas->setUid($txt_EMPRESA_UID);
                         $xEmpresas->setRfc($txt_EMPRESA_RFC);
                         $xEmpresas->setRazon($txt_EMPRESA_NOMBRE);
+                        $xEmpresas->setDb_name($db_NAME);
                         $xCrear = $xEmpresas->registrar();
-                        //Ejecutando el script de datos para estructira interna
-                        
+                        //Ejecutando el script de datos para estructura interna
+                        $sql = 'USE ' . DB_PREFIJO . $db_NAME;
+                        if (mysqli_query($connection, $sql)) { //db en uso
+                            $directorio = PATH_SQL;
+                            $scan_directorio = array_diff(scandir($directorio), array('..', '.'));
+                            foreach ($scan_directorio as $key => $value) {
+                                auditar("Buscando SQL: ".$value);
+                                $sql_ESTRUCTURA = file_get_contents(PATH_SQL . "/" . $value);
+                                auditar("Ejecutando SQL: ".$value);
+                                if(mysqli_query($connection, $sql_ESTRUCTURA)){
+                                    auditar("Éxito en SQL: ".$value);
+                                }else{
+                                    auditar("Error en SQL: ".$value." -> " . mysqli_error($connection));
+                                }
+                            }
+                        }
+                        //Llenando los parametros iniciales de la empresa
+                        $this->adapter_empresa  = $this->conector->conexion_empresa($db_NAME);
+                        $MyEP = new Empresa_Parametros($this->adapter_empresa);
+                        $MyEP->setUid($txt_EMPRESA_UID);
+                        $MyEP->setRfc($txt_EMPRESA_RFC);
+                        $MyEP->setRegimen($txt_EMPRESA_REGIMEN);
+                        $MyEP->setCurp($txt_EMPRESA_CURP);
+                        $MyEP->setRazon($txt_EMPRESA_NOMBRE);
+                        $MyEP->setDenominacion($txt_EMPRESA_DENOMINACION);
+                        $MyEP->setPeriodo("02");
+                        $MyEP->setEjercicio("2022");
+                        $MyEP->setTasa_otros($txt_EMPRESA_OTRO);
+                        $MyEP->setTasa_ieps($txt_EMPRESA_IEPS);
+                        $MyEP->setTasa_iva($txt_EMPRESA_IVA);
+                        $MyEP->registrar();
                         //Auditando acciones
-                        auditar("Base de datos ".DB_PREFIJO.$txt_EMPRESA_DENOMINACION." creada con éxito.");
+                        auditar("Base de datos " . DB_PREFIJO . $db_NAME . " creada con éxito.");
                         $xRespuesta["error"] = 0;
                     }else{ //imposible generar db
                         auditar('Error al crear la base de datos: ' . mysqli_error($connection));
@@ -117,9 +148,19 @@ class EmpresasControlador extends ControladorBase{
 
             chkSesion();
             header('Content-Type: application/json; charset=UTF8');
-            $xRespuesta = array();
-            $xRespuesta["error"] = 0;
-            echo json_encode($xRespuesta);
+            if(isset($_SESSION['empresa']['rfc']) && $_SESSION['empresa']['rfc'] != ""){ //Validamos campos principales
+                $connection = mysqli_connect(DB_HOST, DB_USUARIO, DB_SECRETO);
+                if ($connection) { //imposible conectar
+                    $sql = 'DROP DATABASE ' . DB_PREFIJO . $_SESSION['empresa']['rfc'];
+                    if (mysqli_query($connection, $sql)) { //db generada con éxito
+                        //Registrando la empresa en el catalogo general
+                        auditar("Base de datos " . DB_PREFIJO .  $_SESSION['empresa']['razon'] . " eliminada con éxito.");
+                        $xRespuesta["error"] = 0;
+                    }   
+                }
+                goRedirect("Empresas", "cerrar");
+            }
+
 
         } catch (Exception $e) {
             mostrar_error($e);
@@ -132,14 +173,14 @@ class EmpresasControlador extends ControladorBase{
             chkSesion();
             header('Content-Type: application/json; charset=UTF8');
             $xRespuesta = array();
-            $txtRFC = $_POST["txtRFC"];
-            if(isset($_POST["txtRFC"]) && ($_POST["txtRFC"] != "")){ //tenemos un RFC
+            $db_NAME = $_POST["db_NAME"];
+            if(isset($_POST["db_NAME"]) && ($_POST["db_NAME"] != "")){ //tenemos un RFC
                 //Conectamos con la DB de la empresa
-                $this->adapter_empresa  = $this->conector->conexion_empresa($txtRFC);
+                $this->adapter_empresa  = $this->conector->conexion_empresa($db_NAME);
                 //Cargamos la clase de control para "PARAMETROS"
                 $MyEMPRESA = new Empresa_Parametros($this->adapter_empresa);
                 //Leemos los parametros generales de la empresa
-                $parametros_empresa = $MyEMPRESA->get_parametros($txtRFC);
+                $parametros_empresa = $MyEMPRESA->get_parametros($db_NAME);
                 /** REGISTRANDO LA VARIABLE DE SESIÓN DE LA EMPRESA **/
                 $_SESSION['empresa'] = array(
                     'uid'           => $parametros_empresa->uid,

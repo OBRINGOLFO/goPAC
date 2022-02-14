@@ -339,6 +339,26 @@ function load_Menu($mnu_load){
     return $mnuCONTENT;
 }
 /** *************************************************************************** **/
+function import_sql($xFILE){
+    $conn = new mysqli(DB_HOST, DB_USUARIO, DB_SECRETO);
+    $query = '';
+    $sqlScript = file($xFILE);
+    foreach ($sqlScript as $line)   {
+            
+            $startWith = substr(trim($line), 0 ,2);
+            $endWith = substr(trim($line), -1 ,1);
+            
+            if (empty($line) || $startWith == '--' || $startWith == '/*' || $startWith == '//') {
+                    continue;
+            }
+                    
+            $query = $query . $line;
+            if ($endWith == ';') {
+                    mysqli_query($conn,$query) or auditar('Problem in executing the SQL query ' . $query);
+                    $query= '';             
+            }
+    }    
+}
 /** *************************************************************************** **/
 /** *************************************************************************** **/
 /** *************************************************************************** **/

@@ -34,10 +34,10 @@
                             <div id="panel_02" class="easyui-panel" style="width:100%; height:185px; margin-top: 5px; padding:10px; background:#fafafa; overflow: hidden;"
                             data-options="iconCls:'', closable:false, collapsible:false, minimizable:false, maximizable:false">
                                 <input id="txt_EMPRESA_RFC" name="txt_EMPRESA_RFC" class="easyui-textbox" style="width: 49%; height: 40px;"
-                                    data-options="required: true, validType: 'length[3,25]', prompt: 'Registro federal (R.F.C.)', iconCls: 'icon-building-columns', iconWidth: 16"
+                                    data-options="required: true, validType: 'satRFC[true]', prompt: 'Registro federal (R.F.C.)', iconCls: 'icon-building-columns', iconWidth: 16"
                                 >
                                 <input id="txt_EMPRESA_CURP" name="txt_EMPRESA_CURP" class="easyui-textbox" style="width: 50%; height: 40px;"
-                                    data-options="required: false, validType: 'length[3,25]', prompt: 'C.U.R.P.', iconCls: 'icon-person', iconWidth: 16"
+                                    data-options="required: false, validType: 'renapoCURP', prompt: 'C.U.R.P.', iconCls: 'icon-person', iconWidth: 16"
                                 >
                                 <select id="txt_EMPRESA_REGIMEN" class="easyui-combobox" name="txt_EMPRESA_REGIMEN" style="width: 100%; height: 40px;"
                                     data-options="required: true, iconCls: 'icon-id-card', iconWidth: 16"
@@ -251,4 +251,23 @@
         } 
     });
 
+    function validarInput(input) {
+        var rfc         = input.value.trim().toUpperCase(),
+            resultado   = document.getElementById("resultado"),
+            valido;
+            
+        var rfcCorrecto = rfcValido(rfc);   // ⬅️ Acá se comprueba
+    
+        if (rfcCorrecto) {
+            valido = "Válido";
+        resultado.classList.add("ok");
+        } else {
+            valido = "No válido"
+            resultado.classList.remove("ok");
+        }
+            
+        resultado.innerText = "RFC: " + rfc 
+                            + "\nResultado: " + rfcCorrecto
+                            + "\nFormato: " + valido;
+    }
 </script>

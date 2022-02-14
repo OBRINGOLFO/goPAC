@@ -14,6 +14,7 @@ class Empresas extends EntidadBase{
     private $uid;
     private $rfc;
     private $razon;
+    private $db_name;
 
     # ********************************************************** #
     public function __construct($adapter) {
@@ -35,6 +36,10 @@ class Empresas extends EntidadBase{
     # ********************************************************** #
     public function getRazon(){ return $this->razon; }
     public function setRazon($razon){ $this->razon = $razon; }
+    # ********************************************************** #
+    public function getDb_name(){ return $this->db_name; }
+    public function setDb_name($db_name){ $this->db_name = $db_name; }
+
     /* ***************************************************************************
     *
     *************************************************************************** */
@@ -79,11 +84,12 @@ class Empresas extends EntidadBase{
     public function registrar(){
         try {
 
-            $query = "INSERT INTO c_empresas (uid, rfc, razon)
+            $query = "INSERT INTO c_empresas (uid, rfc, razon, db_name)
                       VALUES(
                            '".$this->uid."',
                            '".$this->rfc."',
-                           '".$this->razon."'
+                           '".$this->razon."',
+                           '".$this->db_name."'
                       );";
             $save = $this->db()->query($query);
             //$this->db()->error;

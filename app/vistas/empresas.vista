@@ -24,7 +24,7 @@
 
                 <?php
                     foreach($empresas_usuario as $xEmpresa) {
-                        echo '<li value="' . $xEmpresa["rfc"] . '">' . $xEmpresa["razon"] . '</li>';
+                        echo '<li value="' . $xEmpresa["db_name"] . '">' . $xEmpresa["razon"] . '</li>';
                     }
                 ?>
 
@@ -66,13 +66,13 @@ $(document).ready(function(){
         var field = $('#listaEMPRESAS').datalist('getSelected');
         
         if (field){
-            var xData = { txtRFC: field.value };
+            var xData = { db_NAME: field.value };
             $.ajax({
                 type: 'POST',
                 url: '<?php echo $helper->url("Empresas", "abrir"); ?>',
                 data: xData,
                 success:function(data){
-                    console.log("La empresa se "+field.value+" abrió con éxito...");
+                    console.log("La empresa "+field.value+" abrió con éxito...");
                     winEMPRESAS.window('close');
                     goRedirect("Escritorio", "index");
                 }

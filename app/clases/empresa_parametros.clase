@@ -11,20 +11,25 @@
 
 
 class Empresa_Parametros extends EntidadBase{
+    private $this_table;
     private $uid;
     private $rfc;
+    private $regimen;
     private $curp;
     private $razon;
     private $denominacion;
     private $periodo;
     private $ejercicio;
+    private $tasa_otros;
+    private $tasa_ieps;
+    private $tasa_iva;
 
     # ********************************************************** #
     public function __construct($adapter_empresa) {
         try {
 
-            $table = "empParametros";
-            parent::__construct($table, $adapter_empresa);
+            $this->this_table = "empParametros";
+            parent::__construct($this->this_table, $adapter_empresa);
 
         } catch (Exception $e) {
             mostrar_error($e);
@@ -37,6 +42,9 @@ class Empresa_Parametros extends EntidadBase{
     public function getRfc(){ return $this->rfc; }
     public function setRfc($rfc){ $this->rfc = $rfc; }
     # ********************************************************** #
+    public function getRegimen(){ return $this->regimen; }
+    public function setRegimen($regimen){ $this->regimen = $regimen; }
+    # ********************************************************** #
     public function getCurp(){ return $this->curp; }
     public function setCurp($curp){ $this->curp = $curp; }
     # ********************************************************** #
@@ -46,20 +54,30 @@ class Empresa_Parametros extends EntidadBase{
     public function getDenominacion(){ return $this->denominacion; }
     public function setDenominacion($denominacion){ $this->denominacion = $denominacion; }
     # ********************************************************** #
-    public function getPeriodo(){ return $this->periodo; }
-    public function setPeriodo($periodo){ $this->periodo = $periodo; }
+    public function getPeriodo(){ return intval($this->periodo); }
+    public function setPeriodo($periodo){ $this->periodo = intval($periodo); }
     # ********************************************************** #
-    public function getEjercicio(){ return $this->ejercicio; }
-    public function setEjercicio($ejercicio){ $this->ejercicio = $ejercicio; }
+    public function getEjercicio(){ return intval($this->ejercicio); }
+    public function setEjercicio($ejercicio){ $this->ejercicio = intval($ejercicio); }
+    # ********************************************************** #
+    public function getTasa_otros(){ return floatval($this->tasa_otros); }
+    public function setTasa_otros($tasa_otros){ $this->tasa_otros = floatval($tasa_otros); }
+    # ********************************************************** #
+    public function getTasa_ieps(){ return floatval($this->tasa_ieps); }
+    public function setTasa_ieps($tasa_ieps){ $this->tasa_ieps = floatval($tasa_ieps); }
+    # ********************************************************** #
+    public function getTasa_iva(){ return floatval($this->tasa_iva); }
+    public function setTasa_iva($tasa_iva){ $this->tasa_iva = floatval($tasa_iva); }
 
     /** ********************************************************
      *  BUSCA LOS PARAMETROS GENERALES DE LA EMPRESA SEGUN SU RFC
      * ***************************************************** **/
-    public function get_parametros($RFC_Empresa){
+    public function get_parametros($db_NAME){
         try {
 
-            auditar("empresas_parametros.clase -> get_parametros(".$RFC_Empresa.")");
-            $xQuery = "SELECT * FROM empParametros WHERE rfc='".$RFC_Empresa."'";
+            auditar("empresas_parametros.clase -> get_parametros(".$db_NAME.")");
+            //$xQuery = "SELECT * FROM empParametros WHERE rfc='".$RFC_Empresa."'";
+            $xQuery = 'SELECT * FROM empParametros WHERE SUBSTRING_INDEX(uid, "-", -1) = "'.$db_NAME.'"';
             $xRespuesta = $this->db()->query($xQuery);
             if($xRespuesta){
                 return $xRespuesta->fetch_object();
@@ -92,21 +110,24 @@ class Empresa_Parametros extends EntidadBase{
     /** ********************************************************
      * 
      * ***************************************************** **/
-    public function guardar(){
+    public function registrar(){
         try {
 
-            $query = "INSERT INTO c_usuarios (uid, uid_persona, usuario, secreto, creacion, acceso, ip, estado, observaciones)
+            $query = "INSERT INTO ".$this->this_table." (uid, razon, denominacion, rfc, curp, regimen, tasa_iva, tasa_ieps, tasa_otros, ejercicio, periodo)
                       VALUES(
                            '".$this->uid."',
-                           '".$this->uid_persona."',
-                           '".$this->usuario."',
-                           '".$this->secreto."',
-                           '".$this->creacion."',
-                           '".$this->acceso."',
-                           '".$this->ip."',
-                           '".$this->estado."',
-                           '".$this->observaciones."'
+                           '".$this->razon."',
+                           '".$this->denominacion."',
+                           '".$this->rfc."',
+                           '".$this->curp."',
+                           '".$this->regimen."',
+                           '".$this->tasa_iva."',
+                           '".$this->tasa_ieps."',
+                           '".$this->tasa_otros."',
+                           '".$this->ejercicio."',
+                           '".$this->periodo."'
                       );";
+            auditar($query);
             $save = $this->db()->query($query);
             //$this->db()->error;
             return $save;

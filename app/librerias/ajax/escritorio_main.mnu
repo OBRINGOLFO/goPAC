@@ -63,6 +63,27 @@
                     break;
                 //# *************************** #
                 case "cmd_EMPRESAS_BORRAR":
+                    $.messager.confirm({
+                        title: 'Eliminación de empresa.',
+                        ok: 'Sí',
+                        cancel: 'No',
+                        msg: '¡ ALTO !, ¿Está seguro de <b>eliminar todos</b> los  datos de la empresa?',
+                        fn: function(xContifma1){
+                            if(xContifma1){
+                                $.messager.confirm({
+                                    title: 'Eliminación de todos los datos.',
+                                    ok: 'Borrar',
+                                    cancel: 'Cancelar',
+                                    msg: 'Tómate tu tiempo; ¿estás plenamente <b>seguro</b>?, ésto es <b>irreversible</b>.',
+                                    fn: function(xContifma2){
+                                        if (xContifma2){
+                                            goRedirect("Empresas", "borrar");
+                                        }
+                                    }
+                                });                                
+                            }
+                        }
+                    });                                                                
                     break;
                 case "cmd_EMPRESAS_RESTAURAR":
                     $('#win_EMPRESAS_RESTAURAR').window({
