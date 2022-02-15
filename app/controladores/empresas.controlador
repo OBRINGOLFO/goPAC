@@ -101,13 +101,9 @@ class EmpresasControlador extends ControladorBase{
                             $scan_directorio = array_diff(scandir($directorio), array('..', '.'));
                             foreach ($scan_directorio as $key => $value) {
                                 auditar("Buscando SQL: ".$value);
-                                $sql_ESTRUCTURA = file_get_contents(PATH_SQL . "/" . $value);
-                                auditar("Ejecutando SQL: ".$value);
-                                if(mysqli_query($connection, $sql_ESTRUCTURA)){
-                                    auditar("Éxito en SQL: ".$value);
-                                }else{
-                                    auditar("Error en SQL: ".$value." -> " . mysqli_error($connection));
-                                }
+                                $sql_FILE = PATH_SQL . "/" . $value;
+                                auditar("Ejecutando SQL: " . $sql_FILE);
+                                import_sql($sql_FILE, DB_PREFIJO . $db_NAME);
                             }
                         }
                         //Llenando los parametros iniciales de la empresa
@@ -224,7 +220,7 @@ class EmpresasControlador extends ControladorBase{
             if(isset($_SESSION['empresa'])){
                 unset($_SESSION['empresa']);
             }
-            
+
             goRedirect("Empresas", "index");
 
         } catch (Exception $e) {

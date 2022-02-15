@@ -339,24 +339,25 @@ function load_Menu($mnu_load){
     return $mnuCONTENT;
 }
 /** *************************************************************************** **/
-function import_sql($xFILE){
+function import_sql($xFILE, $db_NAME){
+    //Asigno la conexión MASTER
     $conn = new mysqli(DB_HOST, DB_USUARIO, DB_SECRETO);
+    //Selecciono la DB
+    mysqli_select_db($conn, $db_NAME);
     $query = '';
     $sqlScript = file($xFILE);
     foreach ($sqlScript as $line)   {
-            
-            $startWith = substr(trim($line), 0 ,2);
-            $endWith = substr(trim($line), -1 ,1);
-            
-            if (empty($line) || $startWith == '--' || $startWith == '/*' || $startWith == '//') {
-                    continue;
-            }
-                    
-            $query = $query . $line;
-            if ($endWith == ';') {
-                    mysqli_query($conn,$query) or auditar('Problem in executing the SQL query ' . $query);
-                    $query= '';             
-            }
+        $startWith = substr(trim($line), 0 ,2);
+        $endWith = substr(trim($line), -1 ,1);
+        if (empty($line) || $startWith == '--' || $startWith == '/*' || $startWith == '//') {
+            continue;
+        }
+        $query = $query . $line;
+        if ($endWith == ';') {
+            //auditar("Ejecutando: ".$query);
+            mysqli_query($conn, $query) or auditar('Problema importando SQL: ' . $query. ' --> '.mysqli_error($conn));
+            $query= '';             
+        }
     }    
 }
 /** *************************************************************************** **/

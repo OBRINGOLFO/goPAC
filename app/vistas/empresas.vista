@@ -11,33 +11,51 @@
 
 ?>
 
-    <div id="winEMPRESAS" style="display: none; padding:0px 20px;">
-        <form name="FrmEMPRESAS" id="FrmEMPRESAS" method="post" autocomplete="off" style="margin-top: 16px;">
-            <!-- ## ************************* ## -->
-            <input id="txtBUSCAR" name="txtBUSCAR" style="width: 100%;"></input>
-            <!-- ## ************************* ## -->
-            <ul id="listaEMPRESAS" name="listaEMPRESAS"
-                class="easyui-datalist"
-                data-options="lines: false"
-                title="Empresas a las que tiene acceso:"
-                style="width:100%;">
+    <div id="winEMPRESAS" style="display: none;">
+        <div class="container">
+            <form name="FrmEMPRESAS" id="FrmEMPRESAS" method="post" autocomplete="off">
+                <div class="row" style="margin: 9px 0px 0px 0px;">
+                    <!-- ## ************************* ## -->
+                    <input id="txtBUSCAR" name="txtBUSCAR"></input>
+                    <!-- ## ************************* ## -->
+                </div>
+                <div class="row" style="margin-top: 5px;">
+                    <ul id="listaEMPRESAS" name="listaEMPRESAS"
+                        class="easyui-datalist"
+                        data-options="lines: false"
+                        title="Empresas a las que tiene acceso:"
+                        >
+                        <?php
+                            foreach($empresas_usuario as $xEmpresa) {
+                                echo '<li value="' . $xEmpresa["db_name"] . '">' . $xEmpresa["razon"] . '</li>';
+                            }
+                        ?>
+                    </ul>
+                </div>
+            </form>
+            <div class="row" style="margin-top: 5px;">
+                <div class="col-sm">
+                    <a id="cmdEMPRESA_NUEVO" name="cmdEMPRESA_NUEVO"
+                        class="easyui-linkbutton"
+                        data-options="iconCls: 'icon-clipboard-check'"
+                        style="padding: 5px 0px; width: inherit;">
+                        <span style="font-size: 14px;">Nueva</span>
+                    </a>                
+                </div>
+                <div class="col-sm"></div>
+                <div class="col-sm">
+                    <a id="cmdEMPRESA_OPEN" name="cmdEMPRESA_OPEN"
+                        class="easyui-linkbutton"
+                        data-options="iconCls: 'icon-right-to-bracket'"
+                        style="padding: 5px 0px; width: inherit;">
+                        <span style="font-size: 14px;">Abrir</span>
+                    </a>
+                </div>
+            </div>
 
-                <?php
-                    foreach($empresas_usuario as $xEmpresa) {
-                        echo '<li value="' . $xEmpresa["db_name"] . '">' . $xEmpresa["razon"] . '</li>';
-                    }
-                ?>
-
-            </ul>
-        </form>
-        <div style="display: block ruby; text-align: right;">
-            <a id="cmdEMPRESA" name="cmdEMPRESA"
-                class="easyui-linkbutton"
-                data-options="iconCls: 'icon-right-to-bracket'"
-                style="padding: 5px 0px; width: 40%; margin-top: 10px;">
-                <span style="font-size: 14px;">Abrir empresa</span>
-            </a>
         </div>
+
+
     </div>
 
 
@@ -62,7 +80,7 @@ $(document).ready(function(){
         height: goTasaH(70)
     });
     //# *********************************************** #
-    $("#cmdEMPRESA").click(function() {
+    $("#cmdEMPRESA_OPEN").click(function() {
         var field = $('#listaEMPRESAS').datalist('getSelected');
         
         if (field){
@@ -79,9 +97,24 @@ $(document).ready(function(){
             });
         }
     });
+    //# *********************************************** #
+    
+    $("#cmdEMPRESA_NUEVO").click(function() {
+        if(!$("#win_EMPRESAS_CREAR").length) {
+            $("#winEMPRESAS").before('<div id="win_EMPRESAS_CREAR" style="overflow: hidden;"></div>');
+        }
+        $('#win_EMPRESAS_CREAR').window({
+            title:          "Creación de nueva empresa.",
+            collapsible:    false,
+            width:          900, //goTasaW(75),
+            height:         440, //goTasaH(75),
+            modal:          true
+        });                    
+        $('#win_EMPRESAS_CREAR').window('refresh', '/index.php?goExec=Empresas&goAcc=iface_nuevo');                    
+    });
     //# ************************************************ #
     $('#listaEMPRESAS').datalist({
-        height: goTasaH(70) - 160,
+        height: goTasaH(70) - 140,
         onDblClickRow: function(index, field){
             console.log(field.value);
         }
