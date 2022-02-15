@@ -99,6 +99,21 @@ class Empresas extends EntidadBase{
             mostrar_error($e);
         }
     }
+    /* ***************************************************************************
+    *
+    *************************************************************************** */
+    public function eliminar(){
+        try {
+
+            $query = "DELETE FROM c_empresas WHERE db_name='" . $this->db_name . "'";
+            $save = $this->db()->query($query);
+            //$this->db()->error;
+            return $save;
+
+        } catch (Exception $e) {
+            mostrar_error($e);
+        }
+    }
     # ********************************************************** #
     public function actualizar($varUID){
         try {

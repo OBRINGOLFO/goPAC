@@ -127,7 +127,6 @@ class Empresa_Parametros extends EntidadBase{
                            '".$this->ejercicio."',
                            '".$this->periodo."'
                       );";
-            auditar($query);
             $save = $this->db()->query($query);
             //$this->db()->error;
             return $save;

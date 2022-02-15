@@ -148,13 +148,17 @@ class EmpresasControlador extends ControladorBase{
 
             chkSesion();
             header('Content-Type: application/json; charset=UTF8');
-            if(isset($_SESSION['empresa']['rfc']) && $_SESSION['empresa']['rfc'] != ""){ //Validamos campos principales
+            auditar("Intentando eliminar la empresa: " . $_SESSION['empresa']['razon']);
+            if(isset($_SESSION['empresa']['db_name']) && $_SESSION['empresa']['db_name'] != ""){ //Validamos db
                 $connection = mysqli_connect(DB_HOST, DB_USUARIO, DB_SECRETO);
                 if ($connection) { //imposible conectar
-                    $sql = 'DROP DATABASE ' . DB_PREFIJO . $_SESSION['empresa']['rfc'];
+                    $sql = 'DROP DATABASE ' . DB_PREFIJO . $_SESSION['empresa']['db_name'];
                     if (mysqli_query($connection, $sql)) { //db generada con éxito
                         //Registrando la empresa en el catalogo general
-                        auditar("Base de datos " . DB_PREFIJO .  $_SESSION['empresa']['razon'] . " eliminada con éxito.");
+                        $xEmpresas = new Empresas($this->adapter);
+                        $xEmpresas->setDb_name($_SESSION['empresa']['db_name']);
+                        $xCrear = $xEmpresas->eliminar();
+                        auditar("Base de datos " . DB_PREFIJO .  $_SESSION['empresa']['db_name'] . " eliminada con éxito.");
                         $xRespuesta["error"] = 0;
                     }   
                 }
@@ -181,18 +185,27 @@ class EmpresasControlador extends ControladorBase{
                 $MyEMPRESA = new Empresa_Parametros($this->adapter_empresa);
                 //Leemos los parametros generales de la empresa
                 $parametros_empresa = $MyEMPRESA->get_parametros($db_NAME);
-                /** REGISTRANDO LA VARIABLE DE SESIÓN DE LA EMPRESA **/
-                $_SESSION['empresa'] = array(
-                    'uid'           => $parametros_empresa->uid,
-                    'rfc'           => $parametros_empresa->rfc,
-                    'curp'          => $parametros_empresa->curp,
-                    'razon'         => $parametros_empresa->razon,
-                    'denominacion'  => $parametros_empresa->denominacion,
-                    'periodo'       => $parametros_empresa->periodo,
-                    'ejercicio'     => $parametros_empresa->ejercicio,
-                );
-                /** ****************************************************** **/  
-                $xRespuesta["error"] = 0;
+                if($parametros_empresa){
+                    /** REGISTRANDO LA VARIABLE DE SESIÓN DE LA EMPRESA **/
+                    $_SESSION['empresa'] = (array) $parametros_empresa;
+                    $_SESSION['empresa']['db_name'] = strtoupper($_POST["db_NAME"]);
+/*
+                    $_SESSION['empresa'] = array(
+                        'uid'           => $parametros_empresa->uid,
+                        'rfc'           => $parametros_empresa->rfc,
+                        'curp'          => $parametros_empresa->curp,
+                        'razon'         => $parametros_empresa->razon,
+                        'denominacion'  => $parametros_empresa->denominacion,
+                        'periodo'       => $parametros_empresa->periodo,
+                        'ejercicio'     => $parametros_empresa->ejercicio,
+                    );
+*/
+                    $xRespuesta["error"] = 0;
+                }else{
+                    /** ****************************************************** **/  
+                    $xRespuesta["error"] = 410;
+
+                }
             }else{
                 $xRespuesta["error"] = 400; //No hay empresa cargada
             }
@@ -210,11 +223,9 @@ class EmpresasControlador extends ControladorBase{
             header('Content-Type: application/json; charset=UTF8');
             if(isset($_SESSION['empresa'])){
                 unset($_SESSION['empresa']);
-                $xRespuesta = array();
-                $xRespuesta["error"] = 0;
-                goRedirect("Empresas", "index");
             }
-            echo json_encode($xRespuesta);
+            
+            goRedirect("Empresas", "index");
 
         } catch (Exception $e) {
             mostrar_error($e);
