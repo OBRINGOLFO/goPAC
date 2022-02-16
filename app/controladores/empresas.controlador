@@ -233,13 +233,15 @@ class EmpresasControlador extends ControladorBase{
 
             chkSesion();
             header('Content-Type: application/json; charset=UTF8');
+            $xRespuesta = array();
             $backup = new DB_Backup(DB_HOST, DB_USUARIO, DB_SECRETO, $_SESSION['empresa']['db_name'], 'utf8');
             $result = $backup->backupTables();
+            if($result){
+                $xRespuesta["error"] = 0;
+            }else{
+                $xRespuesta["error"] = 400;
+            }
             
-            
-            
-            $xRespuesta = array();
-            $xRespuesta["error"] = 0;
             echo json_encode($xRespuesta);
 
         } catch (Exception $e) {

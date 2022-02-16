@@ -13,6 +13,7 @@
     # CONFIGURACION DE RUTAS A DIRECTORIOS DE LA APLICACIÓN
     define('DS', DIRECTORY_SEPARATOR);
     define('ROOT_DIR', $_SERVER['DOCUMENT_ROOT']);
+    define('PATH_ADD',              ROOT_DIR.'/app/add');
     define('PATH_CLASES',           ROOT_DIR.'/app/clases');
     define('PATH_CONTROLADORES',    ROOT_DIR.'/app/controladores');
     define('PATH_NUCLEO',           ROOT_DIR.'/app/nucleos');
