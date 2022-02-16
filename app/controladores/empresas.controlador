@@ -122,7 +122,7 @@ class EmpresasControlador extends ControladorBase{
                         $MyEP->setTasa_iva($txt_EMPRESA_IVA);
                         $MyEP->registrar();
                         //Creando carpeta de documentos digitales de la empresa (ADD)
-                        $ADD_EMPRESA = PATH_ADD . "/" . $txt_EMPRESA_UID;
+                        $ADD_EMPRESA = PATH_ADD . "/" . strtoupper($txt_EMPRESA_UID);
                         if(!is_dir($ADD_EMPRESA)){
                             mkdir($ADD_EMPRESA); //Creando carpeta principal
                         }
@@ -169,7 +169,7 @@ class EmpresasControlador extends ControladorBase{
                         $xEmpresas->setDb_name($_SESSION['empresa']['db_name']);
                         $xCrear = $xEmpresas->eliminar();
                         //Borrando carpeta de documentos digitales de la empresa (ADD)
-                        $ADD_EMPRESA = PATH_ADD . "/" . $_SESSION['empresa']['uid'];
+                        $ADD_EMPRESA = PATH_ADD . "/" . strtoupper($_SESSION['empresa']['uid']);
                         if(is_dir($ADD_EMPRESA)){
                             rmDir_rf($ADD_EMPRESA); //Borrando carpeta principal de forma recursiva
                         }
