@@ -171,7 +171,7 @@ class EmpresasControlador extends ControladorBase{
                         //Borrando carpeta de documentos digitales de la empresa (ADD)
                         $ADD_EMPRESA = PATH_ADD . "/" . strtoupper($_SESSION['empresa']['uid']);
                         if(is_dir($ADD_EMPRESA)){
-                            rmDir_rf($ADD_EMPRESA); //Borrando carpeta principal de forma recursiva
+                            //rmDir_rf($ADD_EMPRESA); //Borrando carpeta principal de forma recursiva
                         }
 
                         auditar("Base de datos " . DB_PREFIJO .  $_SESSION['empresa']['db_name'] . " eliminada con éxito.");
