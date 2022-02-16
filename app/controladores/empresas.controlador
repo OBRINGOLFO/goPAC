@@ -121,6 +121,20 @@ class EmpresasControlador extends ControladorBase{
                         $MyEP->setTasa_ieps($txt_EMPRESA_IEPS);
                         $MyEP->setTasa_iva($txt_EMPRESA_IVA);
                         $MyEP->registrar();
+                        //Creando carpeta de documentos digitales de la empresa (ADD)
+                        $ADD_EMPRESA = PATH_ADD . "/" . $txt_EMPRESA_UID;
+                        if(!is_dir($ADD_EMPRESA)){
+                            mkdir($ADD_EMPRESA); //Creando carpeta principal
+                        }
+                        if(!is_dir($ADD_EMPRESA . "/facturas")){
+                            mkdir($ADD_EMPRESA . "/facturas");      //Creando carpeta de comprobantes fiscales
+                        }
+                        if(!is_dir($ADD_EMPRESA . "/documentos")){
+                            mkdir($ADD_EMPRESA . "/documentos");    //Creando carpeta de documentos generales
+                        }
+                        if(!is_dir($ADD_EMPRESA . "/imagenes")){
+                            mkdir($ADD_EMPRESA . "/imagenes");      //Creando carpeta imagen empresarial
+                        }
                         //Auditando acciones
                         auditar("Base de datos " . DB_PREFIJO . $db_NAME . " creada con éxito.");
                         $xRespuesta["error"] = 0;
@@ -154,6 +168,12 @@ class EmpresasControlador extends ControladorBase{
                         $xEmpresas = new Empresas($this->adapter);
                         $xEmpresas->setDb_name($_SESSION['empresa']['db_name']);
                         $xCrear = $xEmpresas->eliminar();
+                        //Borrando carpeta de documentos digitales de la empresa (ADD)
+                        $ADD_EMPRESA = PATH_ADD . "/" . $_SESSION['empresa']['uid'];
+                        if(is_dir($ADD_EMPRESA)){
+                            rmDir_rf($ADD_EMPRESA); //Borrando carpeta principal de forma recursiva
+                        }
+
                         auditar("Base de datos " . DB_PREFIJO .  $_SESSION['empresa']['db_name'] . " eliminada con éxito.");
                         $xRespuesta["error"] = 0;
                     }   

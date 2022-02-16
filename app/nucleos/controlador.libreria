@@ -361,6 +361,17 @@ function import_sql($xFILE, $db_NAME){
     }    
 }
 /** *************************************************************************** **/
+function rmDir_rf($carpeta){
+    $folderCont = scandir($carpeta);
+    foreach ($folderCont as $clave => $valor) {
+        if(is_dir($folderCont[$clave] . '/'. $valor) && $valor != '.' && $valor != '..'){
+            rmDir_rf($carpeta . '/' . $folderCont[$clave]);
+        }else{
+            unlink($carpeta . '/' . $folderCont[$clave]);
+        }
+    }
+    rmdir($carpeta);
+}
 /** *************************************************************************** **/
 /** *************************************************************************** **/
 /** *************************************************************************** **/
