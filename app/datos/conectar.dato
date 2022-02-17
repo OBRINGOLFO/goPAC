@@ -49,9 +49,9 @@ class Conectar{
         try {
 
             if(isset($rfc_empresa) && ($rfc_empresa != "")){
-                //auditar("conectar.dato -> conexion_empresa(".$rfc_empresa.")");
+                //$this->auditar("conectar.dato -> conexion_empresa(".$rfc_empresa.")");
                 $this->database = $this->prefix . $rfc_empresa;
-                //auditar("intentando conexion con: ".$this->database);
+                //$this->auditar("intentando conexion con: ".$this->database);
                 if($this->driver == "mysql" || $this->driver == null){
                     $con = new mysqli($this->host, $this->user, $this->pass, $this->database);
                     $con->query("SET NAMES '".$this->charset."'");

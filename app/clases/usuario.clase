@@ -95,8 +95,8 @@ class Usuario extends EntidadBase{
                ($this->ip               == null) &&
                ($this->estado           == null) &&
                ($this->observaciones    == null)){
-                auditar("[Excepci�n][403] Actualizaci�n ejecutada sin datos.");
-                throw new Exception('[403] Actualizaci�n ejecutada sin datos.');
+                $this->auditar("[Excepción][403] Actualización ejecutada sin datos.");
+                throw new Exception('[403] Actualización ejecutada sin datos.');
             }
 
             /** [FORMANDO LA EXPRESI�N DE ACTUALIZACI�N] **/
@@ -136,7 +136,7 @@ class Usuario extends EntidadBase{
 
             /** [ENVIANDO INSTRUCCIONES DE ACTUALIZACI�N] **/
             $save = $this->db()->query($query);
-            //auditar("Query: ".$query);
+            //$this->auditar("Query: ".$query);
             //$this->db()->error;
             return $save;
 

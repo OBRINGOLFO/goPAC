@@ -9,11 +9,14 @@
  * @copyright 2021
  */
 
-
+    # CONFIGURACIÓN DEL FORMATO DE FECHA Y HORA DEL SISTEMA
+    define('APP_TIMEZONE', 'America/Mexico_City');
+    
     # CONFIGURACION DE RUTAS A DIRECTORIOS DE LA APLICACIÓN
     define('DS', DIRECTORY_SEPARATOR);
     define('ROOT_DIR', $_SERVER['DOCUMENT_ROOT']);
-    define('PATH_ADD',              ROOT_DIR.'/app/add');
+    define('PATH_ADD',              ROOT_DIR.'/add');
+    define('PATH_RESPALDOS',        ROOT_DIR.'/respaldos');
     define('PATH_CLASES',           ROOT_DIR.'/app/clases');
     define('PATH_CONTROLADORES',    ROOT_DIR.'/app/controladores');
     define('PATH_NUCLEO',           ROOT_DIR.'/app/nucleos');
@@ -40,6 +43,7 @@
     define('DB_PREFIJO',    "goadmin_");
     define('DB_NOMBRE',     "master");
     define('DB_CHARSET',    "utf8");
+    define("DISABLE_FOREIGN_KEY_CHECKS", true);
 
     # CONTROLADOR QUE SE CARGA DE FORMA AUTOMATICA AL INICIAR
     define("CONTROLADOR_DEFECTO", "Index");
@@ -49,6 +53,7 @@
     # TIEMPO EN MINUTOS DE INACTIVIDAD EN EL SISTEMA
     define('SESSION_INACTIVIDAD',    10);
 
+    define("CHARSET", 'utf8');
 
     //Más constantes de configuración
 ?>

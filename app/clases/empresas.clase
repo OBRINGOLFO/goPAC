@@ -126,7 +126,7 @@ class Empresas extends EntidadBase{
                ($this->ip               == null) &&
                ($this->estado           == null) &&
                ($this->observaciones    == null)){
-                auditar("[Excepción][403] Actualización ejecutada sin datos.");
+                $this->auditar("[Excepción][403] Actualización ejecutada sin datos.");
                 throw new Exception('[403] Actualización ejecutada sin datos.');
             }
 
@@ -167,7 +167,7 @@ class Empresas extends EntidadBase{
 
             /** [ENVIANDO INSTRUCCIONES DE ACTUALIZACIÓN] **/
             $save = $this->db()->query($query);
-            //auditar("Query: ".$query);
+            //$this->auditar("Query: ".$query);
             //$this->db()->error;
             return $save;
 

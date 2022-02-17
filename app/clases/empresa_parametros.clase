@@ -75,7 +75,7 @@ class Empresa_Parametros extends EntidadBase{
     public function get_parametros($db_NAME){
         try {
 
-            auditar("empresas_parametros.clase -> get_parametros(".$db_NAME.")");
+            $this->auditar("empresas_parametros.clase -> get_parametros(".$db_NAME.")");
             //$xQuery = "SELECT * FROM empParametros WHERE rfc='".$RFC_Empresa."'";
             $xQuery = 'SELECT * FROM empParametros WHERE SUBSTRING_INDEX(uid, "-", -1) = "'.$db_NAME.'"';
             $xRespuesta = $this->db()->query($xQuery);
@@ -147,7 +147,7 @@ class Empresa_Parametros extends EntidadBase{
                ($this->ip               == null) &&
                ($this->estado           == null) &&
                ($this->observaciones    == null)){
-                auditar("[Excepción][403] Actualización ejecutada sin datos.");
+                $this->auditar("[Excepción][403] Actualización ejecutada sin datos.");
                 throw new Exception('[403] Actualización ejecutada sin datos.');
             }
 
@@ -188,7 +188,7 @@ class Empresa_Parametros extends EntidadBase{
 
             /** [ENVIANDO INSTRUCCIONES DE ACTUALIZACIÓN] **/
             $save = $this->db()->query($query);
-            //auditar("Query: ".$query);
+            //$this->auditar("Query: ".$query);
             //$this->db()->error;
             return $save;
 

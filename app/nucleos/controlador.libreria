@@ -79,7 +79,7 @@ function goRedirect($MyObjControlador, $MyAction){
             mostrar_error($e);
         }
     }
-/** *************************************************************************** **/
+/** *************************************************************************** **/ 
     function auditar($texto){
         try {
 
@@ -96,7 +96,9 @@ function goRedirect($MyObjControlador, $MyAction){
             if($dataFile){
                 $strLOG =   str_pad($tiempo, 19, " ", STR_PAD_BOTH)." | ".
                             str_pad(get_cliente_ip(), 15, " ", STR_PAD_BOTH)." | ".
-                            str_pad(basename($_SERVER['PHP_SELF'], ".php"), 17, " ", STR_PAD_RIGHT)." | ".
+                            str_pad(basename($_SERVER['PHP_SELF'], ".php"), 10, " ", STR_PAD_RIGHT)." | ".
+                            str_pad(__FUNCTION__, 17, " ", STR_PAD_RIGHT)." | ".
+                            str_pad(get_class($this), 17, " ", STR_PAD_RIGHT)." | ".
                             utf8_decode($texto);
 
                 fwrite($dataFile, $strLOG);

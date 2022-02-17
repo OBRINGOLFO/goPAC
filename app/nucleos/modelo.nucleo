@@ -48,6 +48,37 @@ class ModeloBase extends EntidadBase{
     }
      
     //Aqui podemos montarnos métodos para los modelos de consulta
-     
+
+    public function auditar($texto){
+        try {
+
+            $strLOG = '';
+            $filename = "auditoria [".date('d.m.Y')."].log";
+            $dataFile = fopen(PATH_REGISTROS."/".$filename, "a+");
+            $dia = date("d");
+            $mes = date("m");
+            $anno = date("Y");
+            $hora = date("H");
+            $minuto = date("i");
+            $segundo = date("s");
+            $tiempo = "\n".$dia."/".$mes."/".$anno." ".$hora.":".$minuto.":".$segundo;
+            if($dataFile){
+                $strLOG =   str_pad($tiempo, 19, " ", STR_PAD_BOTH)." | ".
+                            str_pad(get_cliente_ip(), 15, " ", STR_PAD_BOTH)." | ".
+                            str_pad(basename($_SERVER['PHP_SELF'], ".php"), 10, " ", STR_PAD_RIGHT)." | ".
+                            str_pad(__FUNCTION__, 15, " ", STR_PAD_RIGHT)." | ".
+                            str_pad(get_class($this), 15, " ", STR_PAD_RIGHT)." | ".
+                            utf8_decode($texto);
+
+                fwrite($dataFile, $strLOG);
+                fclose($dataFile);
+            }
+
+        } catch (Exception $e) {
+            mostrar_error($e);
+        }
+    }
+    
+
 }
 ?>

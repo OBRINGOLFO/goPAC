@@ -80,7 +80,7 @@ class EmpresasControlador extends ControladorBase{
             if(isset($txt_EMPRESA_RFC) && $txt_EMPRESA_RFC != ""){ //Validamos campos principales
                 $connection = mysqli_connect(DB_HOST, DB_USUARIO, DB_SECRETO);
                 if (!$connection) { //imposible conectar
-                    auditar('Imposible realizar la conexión: ' . mysqli_error($connection));
+                    $this->auditar('Imposible realizar la conexión: ' . mysqli_error($connection));
                     $xRespuesta["error"] = 410;
                     $xRespuesta["mensaje"] = "Imposible realizar la conexión con el servidor de datos.";
                 }else{ //intentamos generar db
@@ -100,9 +100,9 @@ class EmpresasControlador extends ControladorBase{
                             $directorio = PATH_SQL;
                             $scan_directorio = array_diff(scandir($directorio), array('..', '.'));
                             foreach ($scan_directorio as $key => $value) {
-                                auditar("Buscando SQL: ".$value);
+                                $this->auditar("Buscando SQL: ".$value);
                                 $sql_FILE = PATH_SQL . "/" . $value;
-                                auditar("Ejecutando SQL: " . $sql_FILE);
+                                $this->auditar("Ejecutando SQL: " . $sql_FILE);
                                 import_sql($sql_FILE, DB_PREFIJO . $db_NAME);
                             }
                         }
@@ -135,11 +135,17 @@ class EmpresasControlador extends ControladorBase{
                         if(!is_dir($ADD_EMPRESA . "/imagenes")){
                             mkdir($ADD_EMPRESA . "/imagenes");      //Creando carpeta imagen empresarial
                         }
+                        //Creando carpeta de respaldos de la empresa
+                        $RESPALDOS_EMPRESA = PATH_RESPALDOS . "/" . strtoupper($txt_EMPRESA_UID);
+                        if(!is_dir($RESPALDOS_EMPRESA)){
+                            mkdir($RESPALDOS_EMPRESA); //Creando carpeta principal
+                        }
+
                         //Auditando acciones
-                        auditar("Base de datos " . DB_PREFIJO . $db_NAME . " creada con éxito.");
+                        $this->auditar("Base de datos " . DB_PREFIJO . $db_NAME . " creada con éxito.");
                         $xRespuesta["error"] = 0;
                     }else{ //imposible generar db
-                        auditar('Error al crear la base de datos: ' . mysqli_error($connection));
+                        $this->auditar('Error al crear la base de datos: ' . mysqli_error($connection));
                         $xRespuesta["error"] = 420;
                         $xRespuesta["mensaje"] = "Error al crear la empresa: " . mysqli_error($connection);
                     }   
@@ -158,7 +164,7 @@ class EmpresasControlador extends ControladorBase{
 
             chkSesion();
             header('Content-Type: application/json; charset=UTF8');
-            auditar("Intentando eliminar la empresa: " . $_SESSION['empresa']['razon']);
+            $this->auditar("Intentando eliminar la empresa: " . $_SESSION['empresa']['razon']);
             if(isset($_SESSION['empresa']['db_name']) && $_SESSION['empresa']['db_name'] != ""){ //Validamos db
                 $connection = mysqli_connect(DB_HOST, DB_USUARIO, DB_SECRETO);
                 if ($connection) { //imposible conectar
@@ -174,7 +180,7 @@ class EmpresasControlador extends ControladorBase{
                             //rmDir_rf($ADD_EMPRESA); //Borrando carpeta principal de forma recursiva
                         }
 
-                        auditar("Base de datos " . DB_PREFIJO .  $_SESSION['empresa']['db_name'] . " eliminada con éxito.");
+                        $this->auditar("Base de datos " . DB_PREFIJO .  $_SESSION['empresa']['db_name'] . " eliminada con éxito.");
                         $xRespuesta["error"] = 0;
                     }   
                 }
