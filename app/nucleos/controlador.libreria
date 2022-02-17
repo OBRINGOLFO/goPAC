@@ -79,7 +79,7 @@ function goRedirect($MyObjControlador, $MyAction){
             mostrar_error($e);
         }
     }
-/** *************************************************************************** **/ 
+/** *************************************************************************** **/ /* 
     function auditar($texto){
         if(AUDITAR_LOG){
             try {
@@ -111,7 +111,7 @@ function goRedirect($MyObjControlador, $MyAction){
             }
         }
     }
-/** *************************************************************************** **/
+*/ /** *************************************************************************** **/
    function get_cliente_ip() {
         try {
 
@@ -366,20 +366,22 @@ function import_sql($xFILE, $db_NAME){
 }
 /** *************************************************************************** **/
 function rmDir_rf($carpeta){
+    $xClass = new ControladorBase();
     $folderCont = scandir($carpeta);
     foreach ($folderCont as $clave => $valor) {
-        auditar("rmDir: ".$clave." => ".$valor);
-        $del_OBJETO = $carpeta . '/' . $folderCont[$clave]; 
-        if(is_dir($folderCont[$clave] . '/'. $valor) && $valor != '.' && $valor != '..'){
-            rmDir_rf($del_OBJETO);
-            auditar("rmDir-SubF: ".$del_OBJETO);
-        }else{
-            unlink($del_OBJETO);
-            auditar("rmDir-File: ".$del_OBJETO);
-        }
+        $del_OBJETO = $carpeta . '/' . $folderCont[$clave];
+        if($valor != '.' && $valor != '..'){ //omitimos directorios especiales
+            if(is_dir($del_OBJETO)){ //es un directorio
+                $xClass->auditar("Eliminando carpeta: ".$del_OBJETO);
+                rmDir_rf($del_OBJETO); //recursivo dentro de
+            }else{
+                $xClass->auditar("Eliminando archivo: ".$del_OBJETO);
+                unlink($del_OBJETO); //archivo
+            }    
+        } 
     }
-    rmdir($carpeta);
-    auditar("rm-Root: ".$carpeta);
+    $xClass->auditar("Eliminando carpeta: ".$carpeta);
+    rmdir($carpeta); //carpeta principal
 }
 /** *************************************************************************** **/
 /** *************************************************************************** **/

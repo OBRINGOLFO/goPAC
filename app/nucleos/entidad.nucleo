@@ -143,7 +143,6 @@ class EntidadBase{
     public function auditar($texto){
         if(AUDITAR_LOG){
             try {
-
                 $strLOG = '';
                 $filename = "auditoria [".date('d.m.Y')."].log";
                 $dataFile = fopen(PATH_REGISTROS."/".$filename, "a+");
@@ -155,15 +154,20 @@ class EntidadBase{
                 $segundo = date("s");
                 $tiempo = "\n".$dia."/".$mes."/".$anno." ".$hora.":".$minuto.":".$segundo;
                 if($dataFile){
+                    $ex = new Exception();
+                    $trace = $ex->getTrace();
+                    $f_name = $trace[1]["function"];
+
                     $strLOG =   str_pad($tiempo, 19, " ", STR_PAD_BOTH)." | ".
                                 str_pad(get_cliente_ip(), 15, " ", STR_PAD_BOTH)." | ".
-                                str_pad(basename($_SERVER['PHP_SELF'], ".php"), 10, " ", STR_PAD_BOTH)." | ".
-                                str_pad(__FUNCTION__, 15, " ", STR_PAD_BOTH)." | ".
-                                str_pad(get_class($this), 15, " ", STR_PAD_BOTH)." | ".
+                                str_pad($_SESSION["usuario"]["usuario"], 20, " ", STR_PAD_BOTH)." | ".
+                                str_pad($f_name, 20, " ", STR_PAD_BOTH)." | ".
+                                str_pad(get_class($this), 20, " ", STR_PAD_RIGHT)." | ".
                                 utf8_decode($texto);
 
                     fwrite($dataFile, $strLOG);
                     fclose($dataFile);
+                    $f_name = null; $trace = null; $ex = null;                    
                 }
 
             } catch (Exception $e) {

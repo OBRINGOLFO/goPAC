@@ -84,7 +84,8 @@ class EmpresasControlador extends ControladorBase{
                     $xRespuesta["error"] = 410;
                     $xRespuesta["mensaje"] = "Imposible realizar la conexión con el servidor de datos.";
                 }else{ //intentamos generar db
-                    $db_NAME = end(explode("-", $txt_EMPRESA_UID));
+                    $db_NAME = explode("-", $txt_EMPRESA_UID);
+                    $db_NAME = (string) end($db_NAME);
                     $sql = 'CREATE DATABASE ' . DB_PREFIJO . $db_NAME;
                     if (mysqli_query($connection, $sql)) { //db generada con éxito
                         //Registrando la empresa en el catalogo general
@@ -177,7 +178,12 @@ class EmpresasControlador extends ControladorBase{
                         //Borrando carpeta de documentos digitales de la empresa (ADD)
                         $ADD_EMPRESA = PATH_ADD . "/" . strtoupper($_SESSION['empresa']['uid']);
                         if(is_dir($ADD_EMPRESA)){
-                            //rmDir_rf($ADD_EMPRESA); //Borrando carpeta principal de forma recursiva
+                            rmDir_rf($ADD_EMPRESA); //Borrando carpeta principal de forma recursiva
+                        }
+                        //Borrando carpeta de respaldos de la empresa
+                        $RESPALDOS_EMPRESA = PATH_RESPALDOS . "/" . strtoupper($_SESSION['empresa']['uid']);
+                        if(is_dir($RESPALDOS_EMPRESA)){
+                            rmDir_rf($RESPALDOS_EMPRESA); //Borrando carpeta principal de forma recursiva
                         }
 
                         $this->auditar("Base de datos " . DB_PREFIJO .  $_SESSION['empresa']['db_name'] . " eliminada con éxito.");
