@@ -9,6 +9,8 @@
  * @copyright 2021
  */
 
+    define('AUDITAR_LOG', true);
+
     # CONFIGURACIÓN DEL FORMATO DE FECHA Y HORA DEL SISTEMA
     define('APP_TIMEZONE', 'America/Mexico_City');
     
