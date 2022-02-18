@@ -53,7 +53,7 @@
     define("ACCION_DEFECTO", "index");
 
     # TIEMPO EN MINUTOS DE INACTIVIDAD EN EL SISTEMA
-    define('SESSION_INACTIVIDAD',    10);
+    define('SESSION_INACTIVIDAD',    1.3);
 
     define("CHARSET", 'utf8');
 

@@ -237,7 +237,7 @@
                     break;
                 //# **************************************************** #
                 case "cmd_HELP_NEW_EMPRESA":
-                    console.log($('#txt_EMPRESA_COLONIA').combobox('getValue'));
+                    //console.log($('#txt_EMPRESA_COLONIA').combobox('getValue'));
                     break;
                 //# **************************************************** #
                 case "cmd_SAVE_NEW_EMPRESA":

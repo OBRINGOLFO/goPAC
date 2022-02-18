@@ -8,8 +8,71 @@
  * @proyecto  goPAC.
  * @copyright 2021
  */
-
+    $_SESSION['LAST_ACTIVITY'] = time();
 
 ?>
+        <script type="text/javascript">
+        var Tiempo_Expira = 0;
+        var Tiempo_Actual = 0;
+        var Tiempo_Ultimo = 0;
+        var Tiempo_Restan = 0;
+        /** ****************************************************** **/
+            function TimerSession(){
+                Tiempo_Expira = <?php echo (SESSION_INACTIVIDAD * 60); ?>;
+                Tiempo_Actual = Math.floor(new Date().getTime() / 1000);
+                window.Tiempo_Ultimo = <?php echo $_SESSION['LAST_ACTIVITY']; ?>;
+                Tiempo_Restan = (Tiempo_Expira - (Tiempo_Actual - window.Tiempo_Ultimo));
+                console.log('Restan: '+Tiempo_Restan);
+
+                        if(Tiempo_Restan == 60){ //Ultimo minuto
+                            var xHTML = '<div id="dlg_SESSION_EXPIRE" class="easyui-dialog" title="Tiempo de inactividad detectado" style="width: 350px; height: 150px;"';
+                                xHTML += 'data-options="iconCls: \'fas fa-shield-alt\', buttons: \'#cmds_SESSION_EXPIRE\', resizable: false, modal: true, closed: false, cache: false, closable: false">';
+                                xHTML += '<center>Detectamos que no usas el sistema por casi 10 minutos, en <b>menos de un minuto</b> se cerrará por seguridad.</center>';
+                                xHTML += '</div>';
+                                xHTML += '<div id="cmds_SESSION_EXPIRE">';
+                                xHTML += '<a id="cmd_MASTIEMPO" href="#">Más tiempo</a>';
+                                xHTML += '<a id="cmd_CERRARSESION" href="#">Cerrar sesión (00)</a>';
+                                xHTML += '</div>';
+                            document.body.insertAdjacentHTML('afterbegin', xHTML);
+                            $('#dlg_SESSION_EXPIRE').dialog();
+                            $('#cmd_MASTIEMPO').linkbutton({
+                                iconCls: 'icon-retweet',
+                                width: '49%',
+                                height: 32
+                            });
+                            $('#cmd_CERRARSESION').linkbutton({
+                                iconCls: 'icon-right-from-bracket',
+                                width: '49%',
+                                height: 32
+                            });
+                        }else if((Tiempo_Restan > 1) && (Tiempo_Restan < 60)){ //Menos de 1 minuto para cerrar
+                            $('#cmd_CERRARSESION').linkbutton({text:'Cerrar sesión ('+Tiempo_Restan+')'});
+                        }else if(Tiempo_Restan < 1){ //Tiempo agotado
+                            window.Tiempo_Ultimo = 0;
+                            clearInterval(window.TimerSESSION);
+                            goRedirect("Usuarios", "logedout");
+                        }
+
+                        $('#cmd_MASTIEMPO').bind('click', function(){
+                            $.ajax({
+                                type: 'POST',
+                                url: '/index.php?goExec=Index&goAcc=set_sesionTIME',
+                                success:function(data){
+                                    window.Tiempo_Ultimo = Math.floor(new Date().getTime() / 1000);
+                                    $('#dlg_SESSION_EXPIRE').dialog('close');
+                                    $('#dlg_SESSION_EXPIRE').remove();
+                                    $('#cmd_MASTIEMPO').remove();
+                                    $('#cmd_CERRARSESION').remove();
+                                }
+                            });
+                        });
+                        $('#cmd_CERRARSESION').bind('click', function(){
+                            window.Tiempo_Ultimo = 0;
+                            clearInterval(window.TimerSESSION);
+                            goRedirect("Usuarios", "logedout");
+                        });
+
+            }
+        </script>
     </body>
 </html>
