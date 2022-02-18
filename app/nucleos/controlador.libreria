@@ -344,6 +344,7 @@ function load_Menu($mnu_load){
 }
 /** *************************************************************************** **/
 function import_sql($xFILE, $db_NAME){
+    $xClass = new ControladorBase();
     //Asigno la conexión MASTER
     $conn = new mysqli(DB_HOST, DB_USUARIO, DB_SECRETO);
     //Selecciono la DB
@@ -359,7 +360,7 @@ function import_sql($xFILE, $db_NAME){
         $query = $query . $line;
         if ($endWith == ';') {
             //auditar("Ejecutando: ".$query);
-            mysqli_query($conn, $query) or auditar('Problema importando SQL: ' . $query. ' --> '.mysqli_error($conn));
+            mysqli_query($conn, $query) or $xClass->auditar('Problema importando SQL: ' . $query. ' --> '.mysqli_error($conn));
             $query= '';             
         }
     }    

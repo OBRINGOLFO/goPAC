@@ -101,9 +101,9 @@ class EmpresasControlador extends ControladorBase{
                             $directorio = PATH_SQL;
                             $scan_directorio = array_diff(scandir($directorio), array('..', '.'));
                             foreach ($scan_directorio as $key => $value) {
-                                $this->auditar("Buscando SQL: ".$value);
+                                $this->auditar("Buscando estructura SQL: ".$value);
                                 $sql_FILE = PATH_SQL . "/" . $value;
-                                $this->auditar("Ejecutando SQL: " . $sql_FILE);
+                                $this->auditar("Procesando SQL: " . $sql_FILE);
                                 import_sql($sql_FILE, DB_PREFIJO . $db_NAME);
                             }
                         }

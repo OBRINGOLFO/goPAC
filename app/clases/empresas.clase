@@ -46,7 +46,7 @@ class Empresas extends EntidadBase{
     public function get_todas(){
         try {
 
-            $xQuery = "SELECT * FROM c_empresas";
+            $xQuery = "SELECT * FROM c_empresas ORDER BY razon ASC";
             $xRespuesta = $this->db()->query($xQuery);
             if($xRespuesta){
                 return $xRespuesta;
