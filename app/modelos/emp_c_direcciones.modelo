@@ -59,23 +59,23 @@ class Empresa_Direcciones extends ModeloBase{
     public function getCodigo_postal(){ return intval($this->codigo_postal); }
     public function setCodigo_postal($codigo_postal){ $this->codigo_postal = intval($codigo_postal); }
     # ********************************************************** #
-    public function getColonia(){ return intval($this->colonia); }
-    public function setColonia($colonia){ $this->colonia = intval($colonia); }
+    public function getColonia(){ return $this->colonia; }
+    public function setColonia($colonia){ $this->colonia = $colonia; }
     # ********************************************************** #
-    public function getLocalidad(){ return floatval($this->localidad); }
-    public function setLocalidad($localidad){ $this->localidad = floatval($localidad); }
+    public function getLocalidad(){ return $this->localidad; }
+    public function setLocalidad($localidad){ $this->localidad = $localidad; }
     # ********************************************************** #
-    public function getMunicipio(){ return floatval($this->municipio); }
-    public function setMunicipio($municipio){ $this->municipio = floatval($municipio); }
+    public function getMunicipio(){ return $this->municipio; }
+    public function setMunicipio($municipio){ $this->municipio = $municipio; }
     # ********************************************************** #
-    public function getEntidad(){ return floatval($this->entidad); }
-    public function setEntidad($entidad){ $this->entidad = floatval($entidad); }
+    public function getEntidad(){ return $this->entidad; }
+    public function setEntidad($entidad){ $this->entidad = $entidad; }
     # ********************************************************** #
-    public function getPais(){ return floatval($this->pais); }
-    public function setPais($pais){ $this->pais = floatval($pais); }
+    public function getPais(){ return $this->pais; }
+    public function setPais($pais){ $this->pais = $pais; }
     # ********************************************************** #
-    public function getReferencias(){ return floatval($this->referencias); }
-    public function setReferencias($referencias){ $this->referencias = floatval($referencias); }
+    public function getReferencias(){ return $this->referencias; }
+    public function setReferencias($referencias){ $this->referencias = $referencias; }
 
     /** ******************************************************** **/
     public function registrar(){
@@ -97,6 +97,7 @@ class Empresa_Direcciones extends ModeloBase{
                            '".$this->pais."',
                            '".$this->referencias."'
                       );";
+            $this->auditar($query);
             $save = $this->db()->query($query);
             //$this->db()->error;
             return $save;

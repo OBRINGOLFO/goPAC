@@ -33,6 +33,7 @@ CREATE TABLE `c_direcciones` (
   `localidad` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `municipio` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `entidad` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pais` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `referencias` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

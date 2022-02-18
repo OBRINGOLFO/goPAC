@@ -24,6 +24,10 @@ class Empresa_Parametros extends EntidadBase{
     private $tasa_otros;
     private $tasa_ieps;
     private $tasa_iva;
+    private $representante_nombre;
+    private $representante_rfc;
+    private $representante_curp;
+
 
     # ********************************************************** #
     public function __construct($adapter_empresa) {
@@ -72,6 +76,16 @@ class Empresa_Parametros extends EntidadBase{
     # ********************************************************** #
     public function getTasa_iva(){ return floatval($this->tasa_iva); }
     public function setTasa_iva($tasa_iva){ $this->tasa_iva = floatval($tasa_iva); }
+    # ********************************************************** #
+    public function getRepresentante_nombre(){ return $this->representante_nombre; }
+    public function setRepresentante_nombre($representante_nombre){ $this->representante_nombre = $representante_nombre; }
+    # ********************************************************** #
+    public function getRepresentante_rfc(){ return $this->representante_rfc; }
+    public function setRepresentante_rfc($representante_rfc){ $this->representante_rfc = $representante_rfc; }
+    # ********************************************************** #
+    public function getRepresentante_curp(){ return $this->representante_curp; }
+    public function setRepresentante_curp($representante_curp){ $this->representante_curp = $representante_curp; }
+
 
     /** ********************************************************
      *  BUSCA LOS PARAMETROS GENERALES DE LA EMPRESA SEGUN SU RFC
@@ -117,7 +131,7 @@ class Empresa_Parametros extends EntidadBase{
     public function registrar(){
         try {
             $this->auditar("Registrando los parametros de la empresa");
-            $query = "INSERT INTO ".$this->this_table." (uid, razon, denominacion, rfc, curp, regimen, uid_direccion, tasa_iva, tasa_ieps, tasa_otros, ejercicio, periodo)
+            $query = "INSERT INTO ".$this->this_table." (uid, razon, denominacion, rfc, curp, regimen, uid_direccion, tasa_iva, tasa_ieps, tasa_otros, ejercicio, periodo, representante_nombre, representante_rfc, representante_curp)
                       VALUES(
                            '".$this->uid."',
                            '".$this->razon."',
@@ -130,7 +144,10 @@ class Empresa_Parametros extends EntidadBase{
                            '".$this->tasa_ieps."',
                            '".$this->tasa_otros."',
                            '".$this->ejercicio."',
-                           '".$this->periodo."'
+                           '".$this->periodo."',
+                           '".$this->representante_nombre."',
+                           '".$this->representante_rfc."',
+                           '".$this->representante_curp."'
                       );";
             $save = $this->db()->query($query);
             //$this->db()->error;

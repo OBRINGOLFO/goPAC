@@ -60,22 +60,24 @@ class EmpresasControlador extends ControladorBase{
             $txt_EMPRESA_DENOMINACION   = strtoupper(trim($_POST['txt_EMPRESA_DENOMINACION']));
             $txt_EMPRESA_RFC            = strtoupper(trim($_POST['txt_EMPRESA_RFC']));
             $txt_EMPRESA_CURP           = strtoupper(trim($_POST['txt_EMPRESA_CURP']));
-            $txt_EMPRESA_REGIMEN        = strtoupper(trim($_POST['txt_EMPRESA_REGIMEN']));
-            $txt_EMPRESA_IVA            = strtoupper(trim($_POST['txt_EMPRESA_IVA']));
-            $txt_EMPRESA_IEPS           = strtoupper(trim($_POST['txt_EMPRESA_IEPS']));
-            $txt_EMPRESA_OTRO           = strtoupper(trim($_POST['txt_EMPRESA_OTRO']));
-
+            $txt_EMPRESA_REGIMEN        = trim($_POST['txt_EMPRESA_REGIMEN']);
+            $txt_EMPRESA_IVA            = trim($_POST['txt_EMPRESA_IVA']);
+            $txt_EMPRESA_IEPS           = trim($_POST['txt_EMPRESA_IEPS']);
+            $txt_EMPRESA_OTRO           = trim($_POST['txt_EMPRESA_OTRO']);
+            $txt_REPRESENTANTE_NOMBRE   = trim($_POST['txt_REPRESENTANTE_NOMBRE']);
+            $txt_REPRESENTANTE_RFC      = strtoupper(trim($_POST['txt_REPRESENTANTE_RFC']));
+            $txt_REPRESENTANTE_CURP     = strtoupper(trim($_POST['txt_REPRESENTANTE_CURP']));
             $txt_DIRECCION_UID          = strtoupper(trim(getUUID()));
-            $txt_DIRECCION_CPOSTAL      = strtoupper(trim($_POST['txt_EMPRESA_CPOSTAL']));
-            $txt_DIRECCION_COLONIA      = strtoupper(trim($_POST['txt_EMPRESA_COLONIA']));
-            $txt_DIRECCION_CIUDAD       = strtoupper(trim($_POST['txt_EMPRESA_CIUDAD']));
-            $txt_DIRECCION_MUNICIPIO    = strtoupper(trim($_POST['txt_EMPRESA_MUNICIPIO']));
-            $txt_DIRECCION_ESTADO       = strtoupper(trim($_POST['txt_EMPRESA_ESTADO']));
-            $txt_DIRECCION_PAIS         = strtoupper(trim($_POST['txt_EMPRESA_PAIS']));
-            $txt_DIRECCION_VIALIDAD     = strtoupper(trim($_POST['txt_EMPRESA_VIALIDAD']));
-            $txt_DIRECCION_CALLE        = strtoupper(trim($_POST['txt_EMPRESA_CALLE']));
-            $txt_DIRECCION_EXTERIOR     = strtoupper(trim($_POST['txt_EMPRESA_EXTERIOR']));
-            $txt_DIRECCION_INTERIOR     = strtoupper(trim($_POST['txt_EMPRESA_INTERIOR']));
+            $txt_DIRECCION_CPOSTAL      = trim($_POST['txt_EMPRESA_CPOSTAL']);
+            $txt_DIRECCION_COLONIA      = trim($_POST['txt_EMPRESA_COLONIA']);
+            $txt_DIRECCION_CIUDAD       = trim($_POST['txt_EMPRESA_CIUDAD']);
+            $txt_DIRECCION_MUNICIPIO    = trim($_POST['txt_EMPRESA_MUNICIPIO']);
+            $txt_DIRECCION_ESTADO       = trim($_POST['txt_EMPRESA_ESTADO']);
+            $txt_DIRECCION_PAIS         = trim($_POST['txt_EMPRESA_PAIS']);
+            $txt_DIRECCION_VIALIDAD     = trim($_POST['txt_EMPRESA_VIALIDAD']);
+            $txt_DIRECCION_CALLE        = trim($_POST['txt_EMPRESA_CALLE']);
+            $txt_DIRECCION_EXTERIOR     = trim($_POST['txt_EMPRESA_EXTERIOR']);
+            $txt_DIRECCION_INTERIOR     = trim($_POST['txt_EMPRESA_INTERIOR']);
 
             $xRespuesta = array();
             $xRespuesta["error"] = 1;
@@ -125,6 +127,9 @@ class EmpresasControlador extends ControladorBase{
                         $MyEP->setTasa_otros($txt_EMPRESA_OTRO);
                         $MyEP->setTasa_ieps($txt_EMPRESA_IEPS);
                         $MyEP->setTasa_iva($txt_EMPRESA_IVA);
+                        $MyEP->setRepresentante_nombre($txt_REPRESENTANTE_NOMBRE);
+                        $MyEP->setRepresentante_rfc($txt_REPRESENTANTE_RFC);
+                        $MyEP->setRepresentante_curp($txt_REPRESENTANTE_CURP);
                         $MyEP->registrar();
                         //Llenando los datos de dirección de la empresa
                         $MyED = new Empresa_Direcciones($this->adapter_empresa);

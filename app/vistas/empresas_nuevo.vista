@@ -105,7 +105,7 @@
                                     ?>
                                 </select>                                
                                 <input id="txt_EMPRESA_CALLE" name="txt_EMPRESA_CALLE" class="easyui-textbox" style="width: 54%; height: 40px;"
-                                    data-options="required: true, prompt: 'Calle', iconCls: 'icon-road', iconWidth: 16"
+                                    data-options="required: true, prompt: 'Nombre de la vialidad', iconCls: 'icon-road', iconWidth: 16"
                                 >
                                 <input id="txt_EMPRESA_EXTERIOR" name="txt_EMPRESA_EXTERIOR" class="easyui-textbox" style="width: 25%; height: 40px;"
                                     data-options="required: true, prompt: 'Ext.', iconCls: 'icon-angles-up', iconWidth: 16"
@@ -184,9 +184,9 @@
                             respuesta.data.forEach(function(colonia) {
                                 n++;
                                 if(n == 1){
-                                    arrDATA.push({ "value":n, "text":colonia.asentamiento, "selected":true });
+                                    arrDATA.push({ "value":colonia.asentamiento, "text":colonia.asentamiento, "selected":true });
                                 }else{
-                                    arrDATA.push({ "value":n, "text":colonia.asentamiento });
+                                    arrDATA.push({ "value":colonia.asentamiento, "text":colonia.asentamiento });
                                 }
                                 arr_POSTAL.push({
                                     "cp":colonia.cp,
@@ -237,7 +237,7 @@
                     break;
                 //# **************************************************** #
                 case "cmd_HELP_NEW_EMPRESA":
-                    alert(this.id+" -> onClick()");
+                    console.log($('#txt_EMPRESA_COLONIA').combobox('getValue'));
                     break;
                 //# **************************************************** #
                 case "cmd_SAVE_NEW_EMPRESA":

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 18, 2022 at 03:47 PM
+-- Generation Time: Feb 18, 2022 at 07:33 PM
 -- Server version: 10.2.43-MariaDB
 -- PHP Version: 7.2.30
 
@@ -33,7 +33,10 @@ CREATE TABLE `empParametros` (
   `tasa_ieps` float(10,6) DEFAULT NULL,
   `tasa_otros` float(10,6) DEFAULT NULL,
   `ejercicio` int(11) DEFAULT NULL,
-  `periodo` int(11) DEFAULT NULL
+  `periodo` int(11) DEFAULT NULL,
+  `representante_nombre` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `representante_rfc` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `representante_curp` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
