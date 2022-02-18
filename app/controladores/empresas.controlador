@@ -64,16 +64,19 @@ class EmpresasControlador extends ControladorBase{
             $txt_EMPRESA_IVA            = strtoupper(trim($_POST['txt_EMPRESA_IVA']));
             $txt_EMPRESA_IEPS           = strtoupper(trim($_POST['txt_EMPRESA_IEPS']));
             $txt_EMPRESA_OTRO           = strtoupper(trim($_POST['txt_EMPRESA_OTRO']));
-            $txt_EMPRESA_CPOSTAL        = strtoupper(trim($_POST['txt_EMPRESA_CPOSTAL']));
-            $txt_EMPRESA_COLONIA        = strtoupper(trim($_POST['txt_EMPRESA_COLONIA']));
-            $txt_EMPRESA_CIUDAD         = strtoupper(trim($_POST['txt_EMPRESA_CIUDAD']));
-            $txt_EMPRESA_MUNICIPIO      = strtoupper(trim($_POST['txt_EMPRESA_MUNICIPIO']));
-            $txt_EMPRESA_ESTADO         = strtoupper(trim($_POST['txt_EMPRESA_ESTADO']));
-            $txt_EMPRESA_PAIS           = strtoupper(trim($_POST['txt_EMPRESA_PAIS']));
-            $txt_EMPRESA_CALLE          = strtoupper(trim($_POST['txt_EMPRESA_CALLE']));
-            $txt_EMPRESA_EXTERIOR       = strtoupper(trim($_POST['txt_EMPRESA_EXTERIOR']));
-            $txt_EMPRESA_INTERIOR       = strtoupper(trim($_POST['txt_EMPRESA_INTERIOR']));
-            
+
+            $txt_DIRECCION_UID          = strtoupper(trim(getUUID()));
+            $txt_DIRECCION_CPOSTAL      = strtoupper(trim($_POST['txt_EMPRESA_CPOSTAL']));
+            $txt_DIRECCION_COLONIA      = strtoupper(trim($_POST['txt_EMPRESA_COLONIA']));
+            $txt_DIRECCION_CIUDAD       = strtoupper(trim($_POST['txt_EMPRESA_CIUDAD']));
+            $txt_DIRECCION_MUNICIPIO    = strtoupper(trim($_POST['txt_EMPRESA_MUNICIPIO']));
+            $txt_DIRECCION_ESTADO       = strtoupper(trim($_POST['txt_EMPRESA_ESTADO']));
+            $txt_DIRECCION_PAIS         = strtoupper(trim($_POST['txt_EMPRESA_PAIS']));
+            $txt_DIRECCION_VIALIDAD     = strtoupper(trim($_POST['txt_EMPRESA_VIALIDAD']));
+            $txt_DIRECCION_CALLE        = strtoupper(trim($_POST['txt_EMPRESA_CALLE']));
+            $txt_DIRECCION_EXTERIOR     = strtoupper(trim($_POST['txt_EMPRESA_EXTERIOR']));
+            $txt_DIRECCION_INTERIOR     = strtoupper(trim($_POST['txt_EMPRESA_INTERIOR']));
+
             $xRespuesta = array();
             $xRespuesta["error"] = 1;
             $xRespuesta["mensaje"] = null;
@@ -113,6 +116,7 @@ class EmpresasControlador extends ControladorBase{
                         $MyEP->setUid($txt_EMPRESA_UID);
                         $MyEP->setRfc($txt_EMPRESA_RFC);
                         $MyEP->setRegimen($txt_EMPRESA_REGIMEN);
+                        $MyEP->setUid_direccion($txt_DIRECCION_UID);                        
                         $MyEP->setCurp($txt_EMPRESA_CURP);
                         $MyEP->setRazon($txt_EMPRESA_NOMBRE);
                         $MyEP->setDenominacion($txt_EMPRESA_DENOMINACION);
@@ -122,6 +126,22 @@ class EmpresasControlador extends ControladorBase{
                         $MyEP->setTasa_ieps($txt_EMPRESA_IEPS);
                         $MyEP->setTasa_iva($txt_EMPRESA_IVA);
                         $MyEP->registrar();
+                        //Llenando los datos de dirección de la empresa
+                        $MyED = new Empresa_Direcciones($this->adapter_empresa);
+                        $MyED->setUid($txt_DIRECCION_UID);
+                        $MyED->setTipo('P');
+                        $MyED->setVialidad_tipo($txt_DIRECCION_VIALIDAD);
+                        $MyED->setVialidad_nombre($txt_DIRECCION_CALLE);
+                        $MyED->setExterior($txt_DIRECCION_EXTERIOR);
+                        $MyED->setInterior($txt_DIRECCION_INTERIOR);
+                        $MyED->setCodigo_postal($txt_DIRECCION_CPOSTAL);
+                        $MyED->setColonia($txt_DIRECCION_COLONIA);
+                        $MyED->setLocalidad($txt_DIRECCION_CIUDAD);
+                        $MyED->setMunicipio($txt_DIRECCION_MUNICIPIO);
+                        $MyED->setEntidad($txt_DIRECCION_ESTADO);
+                        $MyED->setPais($txt_DIRECCION_PAIS);
+                        $MyED->setReferencias('');
+                        $MyED->registrar();
                         //Creando carpeta de documentos digitales de la empresa (ADD)
                         $ADD_EMPRESA = PATH_ADD . "/" . strtoupper($txt_EMPRESA_UID);
                         if(!is_dir($ADD_EMPRESA)){
@@ -321,10 +341,14 @@ class EmpresasControlador extends ControladorBase{
             chkSesion();
             //Cargando catálogo de [REGIMEN FISCAL]
             $xRegimen = new SatRegimenFiscal($this->adapter);
+            //Cargando catálogo de [TIPOS DE VIALIDAD]
+            $xTipo_Vialidad = new Tipo_Vialidad($this->adapter);
+
 
 
             $this->view("empresas_nuevo", array(
-                "RegimenFiscal" => $xRegimen->getAll()
+                "RegimenFiscal" => $xRegimen->getAll(),
+                "TipoVialidad"  => $xTipo_Vialidad->getAll()
             ));
 
         } catch (Exception $e) {

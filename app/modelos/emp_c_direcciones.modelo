@@ -10,26 +10,27 @@
  */
 
 
-class Empresa_Parametros extends EntidadBase{
+class Empresa_Direcciones extends ModeloBase{
     private $this_table;
     private $uid;
-    private $rfc;
-    private $regimen;
-    private $uid_direccion;
-    private $curp;
-    private $razon;
-    private $denominacion;
-    private $periodo;
-    private $ejercicio;
-    private $tasa_otros;
-    private $tasa_ieps;
-    private $tasa_iva;
-
+    private $tipo;
+    private $vialidad_tipo;
+    private $vialidad_nombre;
+    private $exterior;
+    private $interior;
+    private $codigo_postal;
+    private $colonia;
+    private $localidad;
+    private $municipio;
+    private $entidad;
+    private $pais;
+    private $referencias;
+    
     # ********************************************************** #
     public function __construct($adapter_empresa) {
         try {
 
-            $this->this_table = "empParametros";
+            $this->this_table = "c_direcciones";
             parent::__construct($this->this_table, $adapter_empresa);
 
         } catch (Exception $e) {
@@ -40,97 +41,61 @@ class Empresa_Parametros extends EntidadBase{
     public function getUid(){ return $this->uid; }
     public function setUid($uid){ $this->uid = $uid; }
     # ********************************************************** #
-    public function getRfc(){ return $this->rfc; }
-    public function setRfc($rfc){ $this->rfc = $rfc; }
+    public function getTipo(){ return $this->tipo; }
+    public function setTipo($tipo){ $this->tipo = $tipo; }
     # ********************************************************** #
-    public function getRegimen(){ return $this->regimen; }
-    public function setRegimen($regimen){ $this->regimen = $regimen; }
+    public function getVialidad_tipo(){ return $this->vialidad_tipo; }
+    public function setVialidad_tipo($vialidad_tipo){ $this->vialidad_tipo = $vialidad_tipo; }
     # ********************************************************** #
-    public function getUid_direccion(){ return $this->uid_direccion; }
-    public function setUid_direccion($uid_direccion){ $this->uid_direccion = $uid_direccion; }
+    public function getVialidad_nombre(){ return $this->vialidad_nombre; }
+    public function setVialidad_nombre($vialidad_nombre){ $this->vialidad_nombre = $vialidad_nombre; }
     # ********************************************************** #
-    public function getCurp(){ return $this->curp; }
-    public function setCurp($curp){ $this->curp = $curp; }
+    public function getExterior(){ return $this->exterior; }
+    public function setExterior($exterior){ $this->exterior = $exterior; }
     # ********************************************************** #
-    public function getRazon(){ return $this->razon; }
-    public function setRazon($razon){ $this->razon = $razon; }
+    public function getInterior(){ return $this->interior; }
+    public function setInterior($interior){ $this->interior = $interior; }
     # ********************************************************** #
-    public function getDenominacion(){ return $this->denominacion; }
-    public function setDenominacion($denominacion){ $this->denominacion = $denominacion; }
+    public function getCodigo_postal(){ return intval($this->codigo_postal); }
+    public function setCodigo_postal($codigo_postal){ $this->codigo_postal = intval($codigo_postal); }
     # ********************************************************** #
-    public function getPeriodo(){ return intval($this->periodo); }
-    public function setPeriodo($periodo){ $this->periodo = intval($periodo); }
+    public function getColonia(){ return intval($this->colonia); }
+    public function setColonia($colonia){ $this->colonia = intval($colonia); }
     # ********************************************************** #
-    public function getEjercicio(){ return intval($this->ejercicio); }
-    public function setEjercicio($ejercicio){ $this->ejercicio = intval($ejercicio); }
+    public function getLocalidad(){ return floatval($this->localidad); }
+    public function setLocalidad($localidad){ $this->localidad = floatval($localidad); }
     # ********************************************************** #
-    public function getTasa_otros(){ return floatval($this->tasa_otros); }
-    public function setTasa_otros($tasa_otros){ $this->tasa_otros = floatval($tasa_otros); }
+    public function getMunicipio(){ return floatval($this->municipio); }
+    public function setMunicipio($municipio){ $this->municipio = floatval($municipio); }
     # ********************************************************** #
-    public function getTasa_ieps(){ return floatval($this->tasa_ieps); }
-    public function setTasa_ieps($tasa_ieps){ $this->tasa_ieps = floatval($tasa_ieps); }
+    public function getEntidad(){ return floatval($this->entidad); }
+    public function setEntidad($entidad){ $this->entidad = floatval($entidad); }
     # ********************************************************** #
-    public function getTasa_iva(){ return floatval($this->tasa_iva); }
-    public function setTasa_iva($tasa_iva){ $this->tasa_iva = floatval($tasa_iva); }
+    public function getPais(){ return floatval($this->pais); }
+    public function setPais($pais){ $this->pais = floatval($pais); }
+    # ********************************************************** #
+    public function getReferencias(){ return floatval($this->referencias); }
+    public function setReferencias($referencias){ $this->referencias = floatval($referencias); }
 
-    /** ********************************************************
-     *  BUSCA LOS PARAMETROS GENERALES DE LA EMPRESA SEGUN SU RFC
-     * ***************************************************** **/
-    public function get_parametros($db_NAME){
-        try {
-
-            $this->auditar("empresas_parametros.clase -> get_parametros(".$db_NAME.")");
-            //$xQuery = "SELECT * FROM empParametros WHERE rfc='".$RFC_Empresa."'";
-            $xQuery = 'SELECT * FROM empParametros WHERE SUBSTRING_INDEX(uid, "-", -1) = "'.$db_NAME.'"';
-            $xRespuesta = $this->db()->query($xQuery);
-            if($xRespuesta){
-                return $xRespuesta->fetch_object();
-            }else{
-                return null;
-            }
-
-        } catch (Exception $e) {
-            mostrar_error($e);
-        }
-    }
-    /** ********************************************************
-     * 
-     * ***************************************************** **/
-    public function get_todas(){
-        try {
-
-            $xQuery = "SELECT * FROM c_empresas";
-            $xRespuesta = $this->db()->query($xQuery);
-            if($xRespuesta){
-                return $xRespuesta;
-            }else{
-                return null;
-            }
-
-        } catch (Exception $e) {
-            mostrar_error($e);
-        }
-    }
-    /** ********************************************************
-     * 
-     * ***************************************************** **/
+    /** ******************************************************** **/
     public function registrar(){
         try {
-            $this->auditar("Registrando los parametros de la empresa");
-            $query = "INSERT INTO ".$this->this_table." (uid, razon, denominacion, rfc, curp, regimen, uid_direccion, tasa_iva, tasa_ieps, tasa_otros, ejercicio, periodo)
+            $this->auditar("Registrando nueva dirección en el catálogo.");
+            $query = "INSERT INTO ".$this->this_table." 
                       VALUES(
                            '".$this->uid."',
-                           '".$this->razon."',
-                           '".$this->denominacion."',
-                           '".$this->rfc."',
-                           '".$this->curp."',
-                           '".$this->regimen."',
-                           '".$this->uid_direccion."',
-                           '".$this->tasa_iva."',
-                           '".$this->tasa_ieps."',
-                           '".$this->tasa_otros."',
-                           '".$this->ejercicio."',
-                           '".$this->periodo."'
+                           '".$this->tipo."',
+                           '".$this->vialidad_tipo."',
+                           '".$this->vialidad_nombre."',
+                           '".$this->exterior."',
+                           '".$this->interior."',
+                           '".$this->codigo_postal."',
+                           '".$this->colonia."',
+                           '".$this->localidad."',
+                           '".$this->municipio."',
+                           '".$this->entidad."',
+                           '".$this->pais."',
+                           '".$this->referencias."'
                       );";
             $save = $this->db()->query($query);
             //$this->db()->error;

@@ -1,0 +1,39 @@
+<?php
+/**
+ * @autor Rixio Danilo Iguarán Chourio.
+ * @cédula-profesional 12196442
+ * @correo-eletrónico atencion.clientes@obringolfo.com
+ * @denominacion OBRAS INFORMÁTICAS DEL GOLFO
+ * @empresa OBRINGOLFO S.A.S. DE C.V.
+ * @proyecto  goPAC.
+ * @copyright 2021
+ */
+
+
+class Tipo_Vialidad extends ModeloBase{
+    private $table;
+
+    private $uid;
+    private $tipo;
+
+    # ********************************************************** #
+    public function __construct($adapter) {
+        try {
+
+            $this->table = "c_tipo_vialidad";
+            parent::__construct($this->table, $adapter);
+
+        } catch (Exception $e) {
+            mostrar_error($e);
+        }
+    }
+    # ********************************************************** #
+    public function getUid(){ return $this->uid; }
+    public function setUid($uid){ $this->uid = $uid; }
+    # ********************************************************** #
+    public function getTipo(){ return $this->tipo; }
+    public function setTipo($tipo){ $this->tipo = $tipo; }
+
+
+}
+?>
