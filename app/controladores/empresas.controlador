@@ -217,17 +217,6 @@ class EmpresasControlador extends ControladorBase{
                     /** REGISTRANDO LA VARIABLE DE SESIÓN DE LA EMPRESA **/
                     $_SESSION['empresa'] = (array) $parametros_empresa;
                     $_SESSION['empresa']['db_name'] = strtoupper($_POST["db_NAME"]);
-/*
-                    $_SESSION['empresa'] = array(
-                        'uid'           => $parametros_empresa->uid,
-                        'rfc'           => $parametros_empresa->rfc,
-                        'curp'          => $parametros_empresa->curp,
-                        'razon'         => $parametros_empresa->razon,
-                        'denominacion'  => $parametros_empresa->denominacion,
-                        'periodo'       => $parametros_empresa->periodo,
-                        'ejercicio'     => $parametros_empresa->ejercicio,
-                    );
-*/
                     $xRespuesta["error"] = 0;
                 }else{
                     /** ****************************************************** **/  

@@ -18,12 +18,6 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `goadmin_158002F72BF5`
---
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `c_direcciones`
 --
 

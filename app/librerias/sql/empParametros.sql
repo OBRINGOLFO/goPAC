@@ -1,6 +1,9 @@
+-- phpMyAdmin SQL Dump
+-- version 5.1.1
+-- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 15, 2022 at 03:46 PM
+-- Generation Time: Feb 18, 2022 at 03:47 PM
 -- Server version: 10.2.43-MariaDB
 -- PHP Version: 7.2.30
 
@@ -14,8 +17,6 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
--- --------------------------------------------------------
-
 --
 -- Table structure for table `empParametros`
 --
@@ -27,13 +28,13 @@ CREATE TABLE `empParametros` (
   `rfc` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `curp` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `regimen` int(11) NOT NULL,
+  `uid_direccion` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tasa_iva` float(10,6) DEFAULT NULL,
   `tasa_ieps` float(10,6) DEFAULT NULL,
   `tasa_otros` float(10,6) DEFAULT NULL,
   `ejercicio` int(11) DEFAULT NULL,
   `periodo` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 
 --
 -- Indexes for dumped tables
