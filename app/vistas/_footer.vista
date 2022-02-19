@@ -20,9 +20,11 @@
             function TimerSession(){
                 Tiempo_Expira = <?php echo (SESSION_INACTIVIDAD * 60); ?>;
                 Tiempo_Actual = Math.floor(new Date().getTime() / 1000);
-                window.Tiempo_Ultimo = <?php echo $_SESSION['LAST_ACTIVITY']; ?>;
+                if(Tiempo_Ultimo < 1){
+                    Tiempo_Ultimo = <?php echo $_SESSION['LAST_ACTIVITY']; ?>;
+                }
                 Tiempo_Restan = (Tiempo_Expira - (Tiempo_Actual - window.Tiempo_Ultimo));
-                console.log('Restan: '+Tiempo_Restan);
+                //console.log('Expira: '+Tiempo_Expira+', Actual: '+Tiempo_Actual+', Ultimo: '+Tiempo_Ultimo+' Restan: '+Tiempo_Restan);
 
                         if(Tiempo_Restan == 60){ //Ultimo minuto
                             var xHTML = '<div id="dlg_SESSION_EXPIRE" class="easyui-dialog" title="Tiempo de inactividad detectado" style="width: 350px; height: 150px;"';
@@ -48,7 +50,7 @@
                         }else if((Tiempo_Restan > 1) && (Tiempo_Restan < 60)){ //Menos de 1 minuto para cerrar
                             $('#cmd_CERRARSESION').linkbutton({text:'Cerrar sesión ('+Tiempo_Restan+')'});
                         }else if(Tiempo_Restan < 1){ //Tiempo agotado
-                            window.Tiempo_Ultimo = 0;
+                            Tiempo_Ultimo = 0;
                             clearInterval(window.TimerSESSION);
                             goRedirect("Usuarios", "logedout");
                         }
@@ -58,7 +60,8 @@
                                 type: 'POST',
                                 url: '/index.php?goExec=Index&goAcc=set_sesionTIME',
                                 success:function(data){
-                                    window.Tiempo_Ultimo = Math.floor(new Date().getTime() / 1000);
+                                    Tiempo_Ultimo = Math.floor(new Date().getTime() / 1000);
+                                    console.log('update: '+Tiempo_Ultimo);
                                     $('#dlg_SESSION_EXPIRE').dialog('close');
                                     $('#dlg_SESSION_EXPIRE').remove();
                                     $('#cmd_MASTIEMPO').remove();
@@ -66,12 +69,12 @@
                                 }
                             });
                         });
+
                         $('#cmd_CERRARSESION').bind('click', function(){
-                            window.Tiempo_Ultimo = 0;
+                            Tiempo_Ultimo = 0;
                             clearInterval(window.TimerSESSION);
                             goRedirect("Usuarios", "logedout");
                         });
-
             }
         </script>
     </body>
