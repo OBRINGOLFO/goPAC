@@ -44,8 +44,8 @@
                     $('#win_EMPRESAS_RESPALDAR').window({
                         title:          "Respaldar empresa activa.",
                         collapsible:    false,
-                        width:          goTasaW(35),
-                        height:         goTasaH(35),
+                        width:          400, //goTasaW(35),
+                        height:         450, //goTasaH(35),
                         modal:          true
                     });                    
                     $('#win_EMPRESAS_RESPALDAR').window('refresh', '/index.php?goExec=Empresas&goAcc=iface_respaldar');                    
@@ -89,8 +89,8 @@
                     $('#win_EMPRESAS_RESTAURAR').window({
                         title:          "Recuperar respaldo de empresa activa.",
                         collapsible:    false,
-                        width:          goTasaW(35),
-                        height:         goTasaH(35),
+                        width:          400, //goTasaW(35),
+                        height:         450, //goTasaH(35),
                         modal:          true
                     });                    
                     $('#win_EMPRESAS_RESTAURAR').window('refresh', '/index.php?goExec=Empresas&goAcc=iface_restaurar');                    
