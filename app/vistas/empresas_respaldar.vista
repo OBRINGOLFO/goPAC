@@ -32,8 +32,9 @@
                                 title="Respaldos existentes en la empresa:"
                                 >
                                 <?php
-                                    foreach($empresas_usuario as $xEmpresa) {
-                                        echo '<li value="' . $xEmpresa["db_name"] . '">' . $xEmpresa["razon"] . '</li>';
+                                    $scan_directorio = array_diff(scandir(PATH_RESPALDOS . '/' . $_SESSION['empresa']['uid']), array('..', '.'));
+                                    foreach($scan_directorio as $key => $value) {
+                                        echo '<li value="' . $value . '">' .$value . '</li>';
                                     }
                                 ?>
                             </ul>
@@ -81,7 +82,7 @@
 <script type="text/javascript">
     var xDate = new Date();
     var str_NAME = 'Bkp_<?php echo $_SESSION['empresa']['db_name']; ?>_'+xDate.toISOString()+'.sql';
-    str_NAME = str_NAME.replace(':', '.');
+    str_NAME = str_NAME.replaceAll(':', '.');
     //alert(str_NAME);
     $("#txt_FILEBACKUP").textbox({
         //iconCls:'icon-file-invoice',
@@ -98,11 +99,11 @@
                 //# **************************************************** # 
                 case "cmd_CLOSE_BACKUP_EMPRESA":
                     $('#win_EMPRESAS_RESPALDAR').window('close');
-                    break;
+                break;
                 //# **************************************************** #
                 case "cmd_HELP_BACKUP_EMPRESA":
                     alert(this.id+" -> onClick()");
-                    break;
+                break;
                 //# **************************************************** #
                 case "cmd_SAVE_BACKUP_EMPRESA":
                     $.messager.progress();
@@ -116,20 +117,22 @@
                             return isValid;
                         },
                         success: function(datos){
+                            console.log(datos);
                             var resp = JSON.parse(datos);
                             $.messager.progress('close');
                             if(resp.error == 0){
-                                $('#win_EMPRESAS_RESTAURAR').window('close');
-                                $.messager.alert('Copia de seguridad.','El respaldo de la empresa se a creado con éxito.');
-                                goRedirect("Empresas", "cerrar");
+                                $('#win_EMPRESAS_RESPALDAR').window('close');
+                                $.messager.alert('Copia de seguridad.','El respaldo de la empresa se a creado con éxito.', function(r){
+                                    if (r){
+                                        goRedirect("Escritorio", "index");
+                                    }
+                                });
                             }else{
-                                $.messager.alert('Generación de empresas.','['+resp.error+'] '+resp.mensaje);
+                                $.messager.alert('Generación de empresas.','[<b>'+resp.error+'</b>]<br>'+resp.mensaje);
                             }
                         }
                     });
-
-                    //alert(this.id+" -> onClick()");
-                    break;
+                break;
                 //# **************************************************** #
                 //# **************************************************** #
                 //# **************************************************** #

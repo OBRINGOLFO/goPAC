@@ -280,12 +280,18 @@ class EmpresasControlador extends ControladorBase{
             chkSesion();
             header('Content-Type: application/json; charset=UTF8');
             $xRespuesta = array();
-            $backup = new DB_Backup(DB_HOST, DB_USUARIO, DB_SECRETO, $_SESSION['empresa']['db_name'], 'utf8');
-            $result = $backup->backupTables();
-            if($result){
-                $xRespuesta["error"] = 0;
+            if(isset($_POST['txt_FILEBACKUP']) && $_POST['txt_FILEBACKUP'] != ''){
+                $backup = new DB_Backup(DB_HOST, DB_USUARIO, DB_SECRETO, $_SESSION['empresa']['uid'], $_POST['txt_FILEBACKUP'], 'utf8');
+                $result = $backup->backupTables();
+                if($result){
+                    $xRespuesta["error"] = 0;
+                }else{
+                    $xRespuesta["error"] = 400;
+                    $xRespuesta["mensaje"] = "Error al generar el archivo de respaldo.";
+                }    
             }else{
-                $xRespuesta["error"] = 400;
+                $xRespuesta["error"] = 410;
+                $xRespuesta["mensaje"] = "Error en la solicitud del respaldo.";
             }
             
             echo json_encode($xRespuesta);

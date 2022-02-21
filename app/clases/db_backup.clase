@@ -32,7 +32,7 @@ define("BATCH_SIZE", 1000); // Batch size when selecting rows from database in o
 /**
  * The Backup_Database class
  */
-class DB_Backup {
+class DB_Backup  extends EntidadBase{
     /**
      * Host where the database is located
      */
@@ -96,15 +96,17 @@ class DB_Backup {
     /**
      * Constructor initializes database
      */
-    public function __construct($host, $username, $passwd, $dbName, $charset = 'utf8') {
+    public function __construct($host, $username, $passwd, $uid_empresa, $fileName, $charset = 'utf8') {
+        $db_NAME = explode("-", $uid_empresa);
+        $db_NAME = (string) end($db_NAME);
         $this->host                    = $host;
         $this->username                = $username;
         $this->passwd                  = $passwd;
-        $this->dbName                  = $dbName;
+        $this->dbName                  = DB_PREFIJO . $db_NAME;
         $this->charset                 = $charset;
         $this->conn                    = $this->initializeDatabase();
-        $this->backupDir               = BACKUP_DIR ? BACKUP_DIR : '.';
-        $this->backupFile              = 'myphp-backup-'.$this->dbName.'-'.date("Ymd_His", time()).'.sql';
+        $this->backupDir               = PATH_RESPALDOS . '/' . $uid_empresa;
+        $this->backupFile              = $fileName; //'myphp-backup-'.$this->dbName.'-'.date("Ymd_His", time()).'.sql';
         $this->gzipBackupFile          = defined('GZIP_BACKUP_FILE') ? GZIP_BACKUP_FILE : true;
         $this->disableForeignKeyChecks = defined('DISABLE_FOREIGN_KEY_CHECKS') ? DISABLE_FOREIGN_KEY_CHECKS : true;
         $this->batchSize               = defined('BATCH_SIZE') ? BATCH_SIZE : 1000; // default 1000 rows
@@ -165,7 +167,7 @@ class DB_Backup {
             foreach($tables as $table) {
                 if( in_array($table, IGNORE_TABLES) )
                     continue;
-                $this->obfPrint("Backing up `".$table."` table...".str_repeat('.', 50-strlen($table)), 0, 0);
+                $this->auditar("Backing up `".$table."` table...".str_repeat('.', 50-strlen($table)), 0, 0);
 
                 /**
                  * CREATE TABLE
@@ -265,7 +267,7 @@ class DB_Backup {
  
                 $sql.="\n\n";
 
-                $this->obfPrint('OK');
+                $this->auditar('OK');
             }
 
             /**
@@ -280,7 +282,7 @@ class DB_Backup {
             if ($this->gzipBackupFile) {
                 $this->gzipBackupFile();
             } else {
-                $this->obfPrint('Backup file succesfully saved to ' . $this->backupDir.'/'.$this->backupFile, 1, 1);
+                $this->auditar('Backup file succesfully saved to ' . $this->backupDir.'/'.$this->backupFile, 1, 1);
             }
         } catch (Exception $e) {
             print_r($e->getMessage());
@@ -327,7 +329,7 @@ class DB_Backup {
         $source = $this->backupDir . '/' . $this->backupFile;
         $dest =  $source . '.gz';
 
-        $this->obfPrint('Gzipping backup file to ' . $dest . '... ', 1, 0);
+        $this->auditar('Gzipping backup file to ' . $dest . '... ', 1, 0);
 
         $mode = 'wb' . $level;
         if ($fpOut = gzopen($dest, $mode)) {
@@ -347,7 +349,7 @@ class DB_Backup {
             return false;
         }
         
-        $this->obfPrint('OK');
+        $this->auditar('OK');
         return $dest;
     }
 
