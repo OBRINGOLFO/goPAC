@@ -50,10 +50,10 @@
                         iconAlign: 'top',
                         size: 'small'"
                         id="cmd_SAVE_BACKUP_EMPRESA";
-                        style="width: 70px; margin: 5px 0px 5px 5px; background: #eee; border-width: 1px;"
+                        style="width: 120px; margin: 5px 0px 5px 5px; background: #eee; border-width: 1px;"
                         onmouseover='statusMSG("Guarda toda la información de la empresa en un archivo descargable.");'
                         onmouseout='statusMSG_clear();'
-            ><b>Hacer</b></a>
+            ><b>Respaldar</b></a>
             <a class="easyui-menubutton" data-options="
                         name: 'cmd_HELP_BACKUP_EMPRESA',
                         iconCls: 'icon-question',

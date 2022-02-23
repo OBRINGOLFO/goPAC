@@ -17,7 +17,7 @@
     ini_set("session.gc_maxlifetime", "3600"); //1 horas maximo
 
     //Constante de máxima duración de sesión activa
-    define('MAX_SESSION_TIEMPO', 3600); //1 Hora
+    define('MAX_SESSION_TIEMPO', SESSION_INACTIVIDAD * 60); 
 
     //Configuro las variables de comportamiento
     session_name('goPAC');
