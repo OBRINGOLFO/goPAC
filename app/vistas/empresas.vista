@@ -90,7 +90,7 @@ $(document).ready(function(){
                 url: '<?php echo $helper->url("Empresas", "abrir"); ?>',
                 data: xData,
                 success:function(data){
-                    console.log("La empresa "+field.value+" abrió con éxito...");
+                    //console.log("La empresa "+field.value+" abrió con éxito...");
                     winEMPRESAS.window('close');
                     goRedirect("Escritorio", "index");
                 }

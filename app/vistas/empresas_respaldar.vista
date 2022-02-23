@@ -83,7 +83,6 @@
     var xDate = new Date();
     var str_NAME = 'Bkp_<?php echo $_SESSION['empresa']['db_name']; ?>_'+xDate.toISOString();
     str_NAME = str_NAME.replaceAll(':', '.');
-    //alert(str_NAME);
     $("#txt_FILEBACKUP").textbox({
         //iconCls:'icon-file-invoice',
         iconAlign:'right',
@@ -117,7 +116,6 @@
                             return isValid;
                         },
                         success: function(datos){
-                            console.log(datos);
                             var resp = JSON.parse(datos);
                             $.messager.progress('close');
                             if(resp.error == 0){
