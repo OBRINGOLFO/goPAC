@@ -54,6 +54,7 @@
         <script type="text/javascript" src="/app/librerias/js/go_master.js"></script>
         <script type="text/javascript" src="/app/librerias/js/go_menus.js"></script>
         <script type="text/javascript" src="/app/librerias/js/bootstrap/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/app/librerias/js/jquery.fileDownload.js"></script>
 
         <!-- [ KIT FONT AWESOME DE ICONOS ] -->
         <script src="https://kit.fontawesome.com/78507b64fe.js" crossorigin="anonymous"></script>
