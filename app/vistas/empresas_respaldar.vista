@@ -143,10 +143,14 @@
 
     $('#listaRESPALDOS').datalist({
         onClickCell: function(index, field, value){
-            $.fileDownload('<?php echo PATH_RESPALDOS.'/'.strtoupper($_SESSION['empresa']['uid']) ?>/'+value)
-                .done(function () { alert('File download a success!'); })
-                .fail(function () { alert('File download failed!'); });
-            alert(value);
+            //$.messager.progress();
+            $.fileDownload('<?php echo '/respaldos/'.strtoupper($_SESSION['empresa']['uid']) ?>/'+value)
+                .done(function () {
+                    //$.messager.progress('close');
+                })
+                .fail(function () {
+                    //$.messager.progress('close');
+                });
         }
     });
 
