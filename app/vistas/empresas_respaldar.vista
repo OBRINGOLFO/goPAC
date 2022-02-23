@@ -81,7 +81,7 @@
 <!-- ## ********************************************* ## -->
 <script type="text/javascript">
     var xDate = new Date();
-    var str_NAME = 'Bkp_<?php echo $_SESSION['empresa']['db_name']; ?>_'+xDate.toISOString()+'.sql';
+    var str_NAME = 'Bkp_<?php echo $_SESSION['empresa']['db_name']; ?>_'+xDate.toISOString();
     str_NAME = str_NAME.replaceAll(':', '.');
     //alert(str_NAME);
     $("#txt_FILEBACKUP").textbox({
