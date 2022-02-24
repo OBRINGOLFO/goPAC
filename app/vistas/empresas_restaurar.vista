@@ -158,10 +158,36 @@
                 },{
                     text:'Sí restaurar',
                     handler: function(){
+                        $('#dlg_RESTAURAR').dialog('close');
+                        $.messager.progress();
                         $("#txt_FROM").val('listaRESPALDOS');
                         $("#txt_FNAME").val(value);
                         //ENVIAR FORMULARIO
-                        
+                        $('#Frm_EMPRESAS_RESTAURAR').form('submit', {
+                            url: '<?php echo $helper->url("Empresas", "restaurar"); ?>',
+                            onSubmit: function(){
+                                var isValid = $(this).form('validate');
+                                if (!isValid){
+                                    $.messager.progress('close');
+                                }
+                                return isValid;
+                            },
+                            success: function(datos){
+                                var resp = JSON.parse(datos);
+                                $.messager.progress('close');
+                                if(resp.error == 0){
+                                    $('#win_EMPRESAS_RESTAURAR').window('close');
+                                    $.messager.alert('Copia de seguridad.','La empresa se ha restablecido con éxito.', function(r){
+                                        if (r){
+                                            goRedirect("Empresas", "cerrar");
+                                        }
+                                    });
+                                }else{
+                                    $.messager.alert('Generación de empresas.','[<b>'+resp.error+'</b>]<br>'+resp.mensaje);
+                                }
+                            }
+                        });
+
                     }
                 }]
             });

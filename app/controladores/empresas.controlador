@@ -307,7 +307,16 @@ class EmpresasControlador extends ControladorBase{
             chkSesion();
             header('Content-Type: application/json; charset=UTF8');
             $xRespuesta = array();
-            $xRespuesta["error"] = 0;
+            $this->auditar(json_encode($_POST));
+            if($_POST['txt_FROM'] == "listaRESPALDOS"){ //el usuario seleccionó un respaldo de la lista
+                $xRespuesta["error"] = 0;
+                if($_POST['txt_FNAME'] != ""){ //tenemos un nombre de archivo
+                    $txt_FNAME = PATH_RESPALDOS . "/" . strtoupper($_SESSION['empresa']['uid']) . "/" . $_POST['txt_FNAME'];
+                }
+            }else{ //el usuario cargó un archivo de respaldo
+                $xRespuesta["error"] = 0;
+            }
+
             echo json_encode($xRespuesta);
 
         } catch (Exception $e) {
