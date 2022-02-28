@@ -15,7 +15,7 @@
 //define("DB_NAME", 'your_db_name');
 //define("DB_HOST", 'localhost');
 //define("BACKUP_DIR", 'myphp-backup-files'); // Comment this line to use same script's directory ('.')
-define("BACKUP_FILE", 'myphp-backup-your_db_name-20181022_164459.sql.gz'); // Script will autodetect if backup file is gzipped based on .gz extension
+//define("BACKUP_FILE", 'myphp-backup-your_db_name-20181022_164459.sql.gz'); // Script will autodetect if backup file is gzipped based on .gz extension
 
 //define("DISABLE_FOREIGN_KEY_CHECKS", true); // Set to true if you are having foreign key constraint fails
 
@@ -23,54 +23,35 @@ define("BACKUP_FILE", 'myphp-backup-your_db_name-20181022_164459.sql.gz'); // Sc
  * The Restore_Database class
  */
 class DB_Restore {
-    /**
-     * Host where the database is located
-     */
     var $host;
-
-    /**
-     * Username used to connect to database
-     */
     var $username;
-
-    /**
-     * Password used to connect to database
-     */
     var $passwd;
-
-    /**
-     * Database to backup
-     */
     var $dbName;
-
-    /**
-     * Database charset
-     */
     var $charset;
-
-    /**
-     * Database connection
-     */
     var $conn;
-
-    /**
-     * Disable foreign key checks
-     */
     var $disableForeignKeyChecks;
-
+    var $uid_empresa;
+    var $backupFile; //*.sql
+    var $backupDir;
+    var $gzipBackupFile; //*.tar.gz
+    
     /**
      * Constructor initializes database
      */
-    function __construct($host, $username, $passwd, $dbName, $charset = 'utf8') {
+    function __construct($host, $username, $passwd, $uid_empresa, $fileName, $charset = 'utf8') {
+        $db_NAME = explode("-", $uid_empresa);
+        $db_NAME = (string) end($db_NAME);
+        $this->uid_empresa             = $uid_empresa;
         $this->host                    = $host;
         $this->username                = $username;
         $this->passwd                  = $passwd;
-        $this->dbName                  = $dbName;
+        $this->dbName                  = DB_PREFIJO . $db_NAME;
         $this->charset                 = $charset;
         $this->disableForeignKeyChecks = defined('DISABLE_FOREIGN_KEY_CHECKS') ? DISABLE_FOREIGN_KEY_CHECKS : true;
         $this->conn                    = $this->initializeDatabase();
-        $this->backupDir               = defined('BACKUP_DIR') ? BACKUP_DIR : '.';
-        $this->backupFile              = defined('BACKUP_FILE') ? BACKUP_FILE : null;
+        $this->backupDir               = PATH_RESPALDOS . "/" . $uid_empresa;
+        $this->gzipBackupFile          = $fileName; //defined('BACKUP_FILE') ? BACKUP_FILE : null;
+        $this->backupFile              = null;
     }
 
     /**
@@ -190,6 +171,22 @@ class DB_Restore {
      * @return string New filename (without .gz appended and without backup directory) if success, or false if operation fails
      */
     protected function gunzipBackupFile() {
+        if (!$this->gzipBackupFile){
+            return true;
+        }
+
+        $source = $this->gzipBackupFile;
+        $add_folder = PATH_ADD.'/'.$this->uid_empresa;
+        if(!file_exists($add_folder)){
+            mkdir($add_folder);
+        }
+
+        $xComprimido = new PharData($source);
+        $xComprimido->extractTo($add_folder, null, true);
+
+
+
+
         // Raising this value may increase performance
         $bufferSize = 4096; // read 4kb at a time
         $error = false;
