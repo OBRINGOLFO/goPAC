@@ -85,23 +85,10 @@
 <!-- ## ********************************************* ## -->
 <script type="text/javascript">
 
-    $('#Frm_EMPRESAS_RESTAURAR').ajaxForm({
-            beforeSend: function () {
-                //status.empty();
-                //var percentVal = '0%';
-                //bar.width(percentVal);
-                //percent.html(percentVal);
-                $('#ctr_progreso').progressbar('setValue', 0);
-            },
-            uploadProgress: function (event, position, total, percentComplete) {
-                //var percentVal = percentComplete + '%';
-                //bar.width(percentVal);
-                //percent.html(percentVal);
+    $('#Frm_EMPRESAS_RESTAURAR').form({
+        iframe: false,
+            onProgress: function (percentComplete) {
                 $('#ctr_progreso').progressbar('setValue', percentComplete);
-            },
-            complete: function (xhr) {
-                //status.html(xhr.responseText);
-                $('#ctr_progreso').progressbar('setValue', 100);
             }
     });
 
@@ -179,7 +166,7 @@
                     text:'Sí restaurar',
                     handler: function(){
                         $('#dlg_RESTAURAR').dialog('close');
-                        $.messager.progress();
+                        show_XProgreso();
                         $("#txt_FROM").val('fileRESPALDOS');
                         //ENVIAR FORMULARIO
                         $('#Frm_EMPRESAS_RESTAURAR').form('submit', {
@@ -196,6 +183,7 @@
                                 $.messager.progress('close');
                                 if(resp.error == 0){
                                     $('#win_EMPRESAS_RESTAURAR').window('close');
+                                    $('#ctr_progreso').progressbar('setValue', 0);
                                     $.messager.alert('Copia de seguridad.','La empresa se ha restablecido con éxito.', function(r){
                                         if (r){
                                             goRedirect("Empresas", "cerrar");
@@ -232,7 +220,7 @@
                     text:'Sí restaurar',
                     handler: function(){
                         $('#dlg_RESTAURAR').dialog('close');
-                        $.messager.progress();
+                        show_XProgreso();
                         $("#txt_FROM").val('listaRESPALDOS');
                         $("#txt_FNAME").val(value);
                         //ENVIAR FORMULARIO
@@ -250,6 +238,7 @@
                                 $.messager.progress('close');
                                 if(resp.error == 0){
                                     $('#win_EMPRESAS_RESTAURAR').window('close');
+                                    $('#ctr_progreso').progressbar('setValue', 0);
                                     $.messager.alert('Copia de seguridad.','La empresa se ha restablecido con éxito.', function(r){
                                         if (r){
                                             goRedirect("Empresas", "cerrar");

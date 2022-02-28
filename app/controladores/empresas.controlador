@@ -307,18 +307,24 @@ class EmpresasControlador extends ControladorBase{
             chkSesion();
             header('Content-Type: application/json; charset=UTF8');
             $xRespuesta = array();
-            $this->auditar(json_encode($_FILES));
             if($_POST['txt_FROM'] == "listaRESPALDOS"){ //el usuario seleccionó un respaldo de la lista
-                $xRespuesta["error"] = 0;
+                $this->auditar('Recuperación desde la lista de respaldos');
                 if($_POST['txt_FNAME'] != ""){ //tenemos un nombre de archivo
                     $txt_FNAME = PATH_RESPALDOS . "/" . strtoupper($_SESSION['empresa']['uid']) . "/" . $_POST['txt_FNAME'];
+                    $this->auditar($txt_FNAME);
+                    $xRespuesta["error"] = 0;
                 }
             }else{ //el usuario cargó un archivo de respaldo
+                $this->auditar('Recuperación desde archivo cargado por usuario ');
+                if(!file_exists(PATH_RESPALDOS . "/" . strtoupper($_SESSION['empresa']['uid']))){
+                    mkdir(PATH_RESPALDOS . "/" . strtoupper($_SESSION['empresa']['uid']));
+                }
+                $txt_FNAME = PATH_RESPALDOS . "/" . strtoupper($_SESSION['empresa']['uid']) . "/" . $_FILES['txt_FILE']['name'];
+                $this->auditar("moviendo: ".$txt_FNAME);
+                move_uploaded_file( $_FILES['txt_FILE']['tmp_name'], $txt_FNAME);
                 $xRespuesta["error"] = 0;
-
-                $txt_FNAME = PATH_RESPALDOS . "/" . strtoupper($_SESSION['empresa']['uid']) . "/" . $_POST['txt_FNAME'];
             }
-
+            
             echo json_encode($xRespuesta);
 
         } catch (Exception $e) {

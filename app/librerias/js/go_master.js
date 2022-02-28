@@ -32,6 +32,15 @@
         $("#mensaje_escritorio").html('');
     }
     /** ****************************************************** **/
+    function show_XProgreso(){
+        var dlg = $.messager.progress({
+            border: 'thin',
+            msg: '<center>Procesando, espere...</center><br><img src="/app/librerias/img/loading1.gif" class="mx-auto d-block" style="height:48px">'
+        });
+        $.messager.progress('bar').hide();
+        dlg.dialog('resize');
+    }   
+    /** ****************************************************** **/
     function status_getFecha() {
         const d = new Date();
         var options = { weekday: "long", year: "numeric", month: "long", day: "numeric", hour: "numeric",  minute: "numeric", hour12: "false" };
