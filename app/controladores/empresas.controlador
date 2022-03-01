@@ -96,8 +96,8 @@ class EmpresasControlador extends ControladorBase{
                         //Registrando la empresa en el catalogo general
                         $xEmpresas = new Empresas($this->adapter);
                         $xEmpresas->setUid($txt_EMPRESA_UID);
-                        $xEmpresas->setRfc($txt_EMPRESA_RFC);
-                        $xEmpresas->setRazon($txt_EMPRESA_NOMBRE);
+                        //$xEmpresas->setRfc($txt_EMPRESA_RFC);
+                        //$xEmpresas->setRazon($txt_EMPRESA_NOMBRE);
                         $xEmpresas->setDb_name($db_NAME);
                         $xCrear = $xEmpresas->registrar();
                         //Ejecutando el script de datos para estructura interna
@@ -312,7 +312,7 @@ class EmpresasControlador extends ControladorBase{
                 if($_POST['txt_FNAME'] != ""){ //tenemos un nombre de archivo
                     $txt_FNAME = PATH_RESPALDOS . "/" . strtoupper($_SESSION['empresa']['uid']) . "/" . $_POST['txt_FNAME'];
                     $this->auditar($txt_FNAME);
-                    $xRespuesta["error"] = 0;
+                    //$xRespuesta["error"] = 0;
                 }
             }else{ //el usuario cargó un archivo de respaldo
                 $this->auditar('Recuperación desde archivo cargado por usuario ');
@@ -322,9 +322,24 @@ class EmpresasControlador extends ControladorBase{
                 $txt_FNAME = PATH_RESPALDOS . "/" . strtoupper($_SESSION['empresa']['uid']) . "/" . $_FILES['txt_FILE']['name'];
                 $this->auditar("moviendo: ".$txt_FNAME);
                 move_uploaded_file( $_FILES['txt_FILE']['tmp_name'], $txt_FNAME);
-                $xRespuesta["error"] = 0;
+                //$xRespuesta["error"] = 0;
             }
             $restore = new DB_Restore(DB_HOST, DB_USUARIO, DB_SECRETO, $_SESSION['empresa']['uid'], $txt_FNAME, 'utf8');
+            $result = $restore->restoreDb();
+            if($result){
+                $xRespuesta["error"] = 0;
+                //Conectamos con la DB de la empresa
+                $this->adapter_empresa  = $this->conector->conexion_empresa($_SESSION['empresa']['db_name']);
+                //Cargamos la clase de control para "PARAMETROS"
+                $MyEMPRESA = new Empresa_Parametros($this->adapter_empresa);
+                //Leemos los parametros generales de la empresa
+                $MyEMPRESA->restaura_uid($_SESSION['empresa']['uid']);
+                $this->auditar("El resultado de la restauración es exitoso");
+            }else{
+                $xRespuesta["error"] = 400;
+                $xRespuesta["mensaje"] = "Error al restaurar el respaldo de la empresa.";
+                $this->auditar("El resultado de la restauración es erroneo");
+            }    
 
             echo json_encode($xRespuesta);
 

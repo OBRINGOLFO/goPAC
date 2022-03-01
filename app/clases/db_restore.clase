@@ -22,7 +22,7 @@
 /**
  * The Restore_Database class
  */
-class DB_Restore {
+class DB_Restore extends EntidadBase{
     var $host;
     var $username;
     var $passwd;
@@ -49,7 +49,7 @@ class DB_Restore {
         $this->charset                 = $charset;
         $this->disableForeignKeyChecks = defined('DISABLE_FOREIGN_KEY_CHECKS') ? DISABLE_FOREIGN_KEY_CHECKS : true;
         $this->conn                    = $this->initializeDatabase();
-        $this->backupDir               = PATH_RESPALDOS . "/" . $uid_empresa;
+        $this->backupDir               = PATH_ADD . "/" . $uid_empresa . "/database";
         $this->gzipBackupFile          = $fileName; //defined('BACKUP_FILE') ? BACKUP_FILE : null;
         $this->backupFile              = null;
     }
@@ -68,6 +68,7 @@ class DB_Restore {
 
     protected function initializeDatabase() {
         try {
+            $this->auditar("Conectando con: ".$this->dbName);
             $conn = mysqli_connect($this->host, $this->username, $this->passwd, $this->dbName);
             if (mysqli_connect_errno()) {
                 throw new Exception('ERROR connecting database: ' . mysqli_connect_error());
@@ -108,7 +109,7 @@ class DB_Restore {
             /**
              * Gunzip file if gzipped
              */
-            $backupFileIsGzipped = substr($backupFile, -3, 3) == '.gz' ? true : false;
+            $backupFileIsGzipped = substr($this->gzipBackupFile, -3, 3) == '.gz' ? true : false;
             if ($backupFileIsGzipped) {
                 if (!$backupFile = $this->gunzipBackupFile()) {
                     throw new Exception("ERROR: couldn't gunzip backup file " . $backupDir . '/' . $backupFile);
@@ -118,6 +119,7 @@ class DB_Restore {
             /**
             * Read backup file line by line
             */
+            $this->auditar("handle = ". $backupDir . '/' . $backupFile);
             $handle = fopen($backupDir . '/' . $backupFile, "r");
             if ($handle) {
                 while (($line = fgets($handle)) !== false) {
@@ -131,13 +133,17 @@ class DB_Restore {
                         if ($multiLineComment or preg_match('/^\/\//', $line)) {
                             $lineIsComment = true;
                         }
+                        //Inhabilitando USE y CREATE DATABASE para compatibilidad con DB actual
+                        if((strtoupper(substr($line, 0, 3)) == 'USE') or (strtoupper(substr($line, 0, 15)) == "CREATE DATABASE")){
+                            $lineIsComment = true;
+                        }
                         if (!$lineIsComment) {
                             $sql .= $line;
                             if (preg_match('/;$/', $line)) {
                                 // execute query
                                 if(mysqli_query($this->conn, $sql)) {
                                     if (preg_match('/^CREATE TABLE `([^`]+)`/i', $sql, $tableName)) {
-                                        $this->obfPrint("Table succesfully created: `" . $tableName[1] . "`");
+                                        $this->auditar("Table succesfully created: `" . $tableName[1] . "`");
                                     }
                                     $sql = '';
                                 } else {
@@ -150,16 +156,19 @@ class DB_Restore {
                     }
                 }
                 fclose($handle);
+                //Eliminamos el archivo de respaldo y su carpeta
+                unlink($backupDir . '/' . $backupFile);
+                rmdir($backupDir);
             } else {
                 throw new Exception("ERROR: couldn't open backup file " . $backupDir . '/' . $backupFile);
             } 
         } catch (Exception $e) {
-            print_r($e->getMessage());
+            $this->auditar(print_r($e->getMessage()));
             return false;
         }
 
         if ($backupFileIsGzipped) {
-            unlink($backupDir . '/' . $backupFile);
+            //unlink($backupDir . '/' . $backupFile);
         }
 
         return true;
@@ -186,7 +195,7 @@ class DB_Restore {
 
 
 
-
+/*
         // Raising this value may increase performance
         $bufferSize = 4096; // read 4kb at a time
         $error = false;
@@ -221,9 +230,20 @@ class DB_Restore {
 
         fclose($dstFile);
         gzclose($srcFile);
-
+*/
         // Return backup filename excluding backup directory
-        return str_replace($this->backupDir . '/', '', $dest);
+
+        $sql_folder = $add_folder."/database";
+        if(file_exists($sql_folder)){
+            $archivos = array_diff(scandir($sql_folder), array('.', '..')); 
+            foreach($archivos as $indice => $nombre){
+                $extension = pathinfo($nombre, PATHINFO_EXTENSION);
+                if($extension == 'sql'){
+                    $dest = $nombre;
+                }
+            }
+        }        
+        return $dest;
     }
 
     /**

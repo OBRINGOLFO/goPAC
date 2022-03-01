@@ -12,8 +12,6 @@
 
 class Empresas extends EntidadBase{
     private $uid;
-    private $rfc;
-    private $razon;
     private $db_name;
 
     # ********************************************************** #
@@ -31,12 +29,6 @@ class Empresas extends EntidadBase{
     public function getUid(){ return $this->uid; }
     public function setUid($uid){ $this->uid = $uid; }
     # ********************************************************** #
-    public function getRfc(){ return $this->rfc; }
-    public function setRfc($rfc){ $this->rfc = $rfc; }
-    # ********************************************************** #
-    public function getRazon(){ return $this->razon; }
-    public function setRazon($razon){ $this->razon = $razon; }
-    # ********************************************************** #
     public function getDb_name(){ return $this->db_name; }
     public function setDb_name($db_name){ $this->db_name = $db_name; }
 
@@ -46,10 +38,34 @@ class Empresas extends EntidadBase{
     public function get_todas(){
         try {
 
-            $xQuery = "SELECT * FROM c_empresas ORDER BY razon ASC";
+            $_EMPRESAS = array();
+            $xQuery = "SELECT * FROM c_empresas";
             $xRespuesta = $this->db()->query($xQuery);
+            //$this->auditar(json_encode($xRespuesta->fetch_object()));
+            while ($xEmpresa = $xRespuesta -> fetch_object()) {
+                //$this->auditar($xEmpresa->uid . " <-> " . DB_PREFIJO . $xEmpresa->db_name);
+                $conn = mysqli_connect(DB_HOST, DB_USUARIO, DB_SECRETO, DB_PREFIJO . $xEmpresa->db_name);
+                if ($conn){
+                    if (!mysqli_set_charset($conn, DB_CHARSET)) {
+                        mysqli_query($conn, 'SET NAMES '.DB_CHARSET);
+                    }
+                    $xQuery = 'SELECT * FROM empParametros WHERE SUBSTRING_INDEX(uid, "-", -1) = "'.$xEmpresa->db_name.'"';
+                    //$this->auditar("xQuery: ".$xQuery);
+                    $resultado = mysqli_query($conn, $xQuery);
+                    $parametros_empresa = $resultado->fetch_array(MYSQLI_ASSOC);
+                    $parametros_empresa = array_merge($parametros_empresa, array("db_name" => $xEmpresa->db_name));
+                    //$this->auditar("parametros_empresa: ".json_encode($parametros_empresa));
+                    array_push($_EMPRESAS, $parametros_empresa);
+                }else{
+                    $this->auditar("Problemas al procesar las empresas en el sistema.");
+                    $this->auditar(mysqli_connect_errno());
+                    return null;
+                }
+
+            }
+            //$this->auditar("_EMP: ".json_encode($_EMPRESAS));
             if($xRespuesta){
-                return $xRespuesta;
+                return $_EMPRESAS; //$xRespuesta;
             }else{
                 return null;
             }
@@ -65,9 +81,32 @@ class Empresas extends EntidadBase{
         try {
 
             //$xQuery = "SELECT * FROM c_empresas_usuarios WHERE uid_usuario='".$xUID."'";
-            
+            $_EMPRESAS = array();            
             $xQuery = "SELECT * FROM c_empresas WHERE c_empresas.uid IN (SELECT c_empresas_usuarios.uid_empresa FROM c_empresas_usuarios WHERE c_empresas_usuarios.uid_usuario = '". $xUID ."')";
             $xRespuesta = $this->db()->query($xQuery);
+            //$this->auditar(json_encode($xRespuesta->fetch_object()));
+            while ($xEmpresa = $xRespuesta -> fetch_object()) {
+                //$this->auditar($xEmpresa->uid . " <-> " . DB_PREFIJO . $xEmpresa->db_name);
+                $conn = mysqli_connect(DB_HOST, DB_USUARIO, DB_SECRETO, DB_PREFIJO . $xEmpresa->db_name);
+                if ($conn){
+                    if (!mysqli_set_charset($conn, DB_CHARSET)) {
+                        mysqli_query($conn, 'SET NAMES '.DB_CHARSET);
+                    }
+                    $xQuery = 'SELECT * FROM empParametros WHERE SUBSTRING_INDEX(uid, "-", -1) = "'.$xEmpresa->db_name.'"';
+                    //$this->auditar("xQuery: ".$xQuery);
+                    $resultado = mysqli_query($conn, $xQuery);
+                    $parametros_empresa = $resultado->fetch_array(MYSQLI_ASSOC);
+                    $parametros_empresa = array_merge($parametros_empresa, array("db_name" => $xEmpresa->db_name));
+                    //$this->auditar("parametros_empresa: ".json_encode($parametros_empresa));
+                    array_push($_EMPRESAS, $parametros_empresa);
+                }else{
+                    $this->auditar("Problemas al procesar las empresas en el sistema.");
+                    $this->auditar(mysqli_connect_errno());
+                    return null;
+                }
+
+            }
+            //$this->auditar("_EMP: ".json_encode($_EMPRESAS));
             if($xRespuesta){
                 return $xRespuesta;
             }else{
@@ -84,11 +123,9 @@ class Empresas extends EntidadBase{
     public function registrar(){
         try {
 
-            $query = "INSERT INTO c_empresas (uid, rfc, razon, db_name)
+            $query = "INSERT INTO c_empresas (uid, db_name)
                       VALUES(
                            '".$this->uid."',
-                           '".$this->rfc."',
-                           '".$this->razon."',
                            '".$this->db_name."'
                       );";
             $save = $this->db()->query($query);
@@ -118,43 +155,19 @@ class Empresas extends EntidadBase{
     public function actualizar($varUID){
         try {
             /** [VALIDANDO DATOS EN ALGUNO DE LOS CAMPOS] **/
-            if(($this->uid_persona      == null) &&
-               ($this->usuario          == null) &&
-               ($this->secreto          == null) &&
-               ($this->creacion         == null) &&
-               ($this->acceso           == null) &&
-               ($this->ip               == null) &&
-               ($this->estado           == null) &&
-               ($this->observaciones    == null)){
+            if(($this->uid      == null) &&
+               ($this->db_name  == null)){
                 $this->auditar("[Excepción][403] Actualización ejecutada sin datos.");
                 throw new Exception('[403] Actualización ejecutada sin datos.');
             }
 
             /** [FORMANDO LA EXPRESIÓN DE ACTUALIZACIÓN] **/
             $Campos = Array();
-            if($this->uid_persona != null){ //Tiene datos para actualizar
-                $Campos['uid_persona'] = $this->uid_persona;
+            if($this->uid != null){ //Tiene datos para actualizar
+                $Campos['uid'] = $this->uid;
             }
-            if($this->usuario != null){ //Tiene datos para actualizar
-                $Campos['usuario'] = $this->usuario;
-            }
-            if($this->secreto != null){ //Tiene datos para actualizar
-                $Campos['secreto'] = $this->secreto;
-            }
-            if($this->creacion != null){ //Tiene datos para actualizar
-                $Campos['creacion'] = $this->creacion;
-            }
-            if($this->acceso != null){ //Tiene datos para actualizar
-                $Campos['acceso'] = $this->acceso;
-            }
-            if($this->ip != null){ //Tiene datos para actualizar
-                $Campos['ip'] = $this->ip;
-            }
-            if($this->estado != null){ //Tiene datos para actualizar
-                $Campos['estado'] = $this->estado;
-            }
-            if($this->observaciones != null){ //Tiene datos para actualizar
-                $Campos['observaciones'] = $this->observaciones;
+            if($this->db_name != null){ //Tiene datos para actualizar
+                $Campos['db_name'] = $this->db_name;
             }
 
             $qCampos = ""; //acumulador de query
@@ -163,7 +176,7 @@ class Empresas extends EntidadBase{
             }
             $qCampos = substr($qCampos, 0, strlen($qCampos)-2); //le quito la coma y el espacio al final
             //Armo la instrucción SQL
-            $query = "UPDATE c_usuarios SET ".$qCampos." WHERE uid='".$varUID."';";
+            $query = "UPDATE c_empresas SET ".$qCampos." WHERE uid='".$varUID."';";
 
             /** [ENVIANDO INSTRUCCIONES DE ACTUALIZACIÓN] **/
             $save = $this->db()->query($query);

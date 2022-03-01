@@ -93,7 +93,7 @@ class Empresa_Parametros extends EntidadBase{
     public function get_parametros($db_NAME){
         try {
 
-            $this->auditar("empresas_parametros.clase -> get_parametros(".$db_NAME.")");
+            //$this->auditar("empresas_parametros.clase -> get_parametros(".$db_NAME.")");
             //$xQuery = "SELECT * FROM empParametros WHERE rfc='".$RFC_Empresa."'";
             $xQuery = 'SELECT * FROM empParametros WHERE SUBSTRING_INDEX(uid, "-", -1) = "'.$db_NAME.'"';
             $xRespuesta = $this->db()->query($xQuery);
@@ -158,6 +158,18 @@ class Empresa_Parametros extends EntidadBase{
         }
     }
     # ********************************************************** #
+    public function restaura_uid($UUID){
+        try {
+
+            $query = "UPDATE ".$this->this_table." SET uid='" . $UUID . "' WHERE 1";
+            $save = $this->db()->query($query);
+            return $save;
+
+        } catch (Exception $e) {
+            mostrar_error($e);
+        }
+    }
+    # ********************************************************** #
     public function actualizar($varUID){
         try {
             /** [VALIDANDO DATOS EN ALGUNO DE LOS CAMPOS] **/
@@ -206,7 +218,7 @@ class Empresa_Parametros extends EntidadBase{
             }
             $qCampos = substr($qCampos, 0, strlen($qCampos)-2); //le quito la coma y el espacio al final
             //Armo la instrucción SQL
-            $query = "UPDATE c_usuarios SET ".$qCampos." WHERE uid='".$varUID."';";
+            $query = "UPDATE ".$this->this_table." SET ".$qCampos." WHERE uid='".$varUID."';";
 
             /** [ENVIANDO INSTRUCCIONES DE ACTUALIZACIÓN] **/
             $save = $this->db()->query($query);

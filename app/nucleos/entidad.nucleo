@@ -16,7 +16,7 @@ class EntidadBase{
  
     public function __construct($table, $adapter) {
         try {
-
+            
             $this->table = (string) $table;
 
             //$this->conectar=new Conectar();
@@ -158,9 +158,15 @@ class EntidadBase{
                     $trace = $ex->getTrace();
                     $f_name = $trace[1]["function"];
 
+                    if(isset($_SESSION["usuario"]["usuario"]) && $_SESSION["usuario"]["usuario"] != ""){
+                        $xUSUARIO = $_SESSION["usuario"]["usuario"];
+                    }else{
+                        $xUSUARIO = "Usuario anonimo";
+                    }
+
                     $strLOG =   str_pad($tiempo, 19, " ", STR_PAD_BOTH)." | ".
                                 str_pad(get_cliente_ip(), 15, " ", STR_PAD_BOTH)." | ".
-                                str_pad($_SESSION["usuario"]["usuario"], 20, " ", STR_PAD_BOTH)." | ".
+                                str_pad($xUSUARIO, 20, " ", STR_PAD_BOTH)." | ".
                                 str_pad($f_name, 20, " ", STR_PAD_BOTH)." | ".
                                 str_pad(get_class($this), 20, " ", STR_PAD_RIGHT)." | ".
                                 utf8_decode($texto);

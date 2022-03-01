@@ -112,6 +112,7 @@ $(document).ready(function(){
                 return isValid;
             },
             success: function(datos){
+                //console.log(datos);
                 var resp = JSON.parse(datos);
                 $.messager.progress('close');
                 if(resp.estado == 0){

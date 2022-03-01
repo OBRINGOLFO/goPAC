@@ -97,7 +97,7 @@ class Empresa_Direcciones extends ModeloBase{
                            '".$this->pais."',
                            '".$this->referencias."'
                       );";
-            $this->auditar($query);
+            //$this->auditar($query);
             $save = $this->db()->query($query);
             //$this->db()->error;
             return $save;
