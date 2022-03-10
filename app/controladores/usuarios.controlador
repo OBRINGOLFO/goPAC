@@ -180,6 +180,29 @@ class UsuariosControlador extends ControladorBase{
         $this->redirect();
     }
     /** ****************************************************** **/
+    function check_privilegio(){
+        try {
+
+            if(isset($_POST['modulo']) && isset($_POST['funcion'])){
+                if(($_POST['modulo'] != '') && ($_POST['funcion'] != '')){
+                    $xModelo = new Usuarios_Privilegios($this->adapter);
+                    $xPrivilegio = $xModelo->get_permiso($_POST['modulo'], $_POST['funcion']);
+                    echo $xPrivilegio;
+                }else{
+                    echo 'false';
+                }
+            }else{
+                echo 'false';
+            }
+
+        } catch (Exception $e) {
+            mostrar_error($e);
+        }
+    }
+    /** ****************************************************** **/
+    /** ****************************************************** **/
+    /** ****************************************************** **/
+    /** ****************************************************** **/                
     public function hola(){
         $usuarios=new UsuariosModel($this->adapter);
         $usu=$usuarios->getUnUsuario();

@@ -8,11 +8,13 @@
  * @proyecto  WINDOWS PAQUETE ADMINISTRATIVO CONTABLE (WinPAC).
  * @copyright 2022
  */
-    
+
+    //$usrPrivilegios = new Usuarios_Privilegios();
+
 ?>
 <!-- [BEGIN][CINTA DE OPCIONES DINAMICA] -->
-<div id="escritorio_main" name="escritorio_main" class="easyui-ribbon">
-	<?php echo load_Menu("ribbon_generales"); ?>
+<div id="escritorio_main" name="escritorio_main" class="easyui-ribbon">	
+    <?php echo load_Menu("ribbon_generales"); ?>
 	<?php echo load_Menu("ribbon_administracion"); ?>
 	<?php echo load_Menu("ribbon_contabilidad"); ?>
 	<?php echo load_Menu("ribbon_bancos"); ?>
@@ -41,82 +43,158 @@
             switch (name) {
                 //# *************************** #
                 case "cmd_EMPRESAS_RESPALDAR":
-                    $('#win_EMPRESAS_RESPALDAR').window({
-                        title:          "Respaldar empresa activa.",
-                        collapsible:    false,
-                        width:          400, //goTasaW(35),
-                        height:         450, //goTasaH(35),
-                        modal:          true
+                    $.when(check_privilegios(1001, 101)).done(function(result){
+                        if(result === 'true'){
+
+                            $('#win_EMPRESAS_RESPALDAR').window({
+                                title:          "Respaldar empresa activa.",
+                                collapsible:    false,
+                                width:          400, //goTasaW(35),
+                                height:         450, //goTasaH(35),
+                                modal:          true
+                            });                    
+                            $('#win_EMPRESAS_RESPALDAR').window('refresh', '/index.php?goExec=Empresas&goAcc=iface_respaldar');                                           
+
+                        }else{
+                            $.messager.alert('Acceso denegado','No tiene permiso para utilizar éste proceso','error');
+                        }
                     });                    
-                    $('#win_EMPRESAS_RESPALDAR').window('refresh', '/index.php?goExec=Empresas&goAcc=iface_respaldar');                    
                     break;
                 //# *************************** #
                 case "cmd_EMPRESAS_CREAR":
-                    $('#win_EMPRESAS_CREAR').window({
-                        title:          "Creación de nueva empresa.",
-                        collapsible:    false,
-                        width:          900, //goTasaW(75),
-                        height:         500, //goTasaH(75),
-                        modal:          true
+                    $.when(check_privilegios(1001, 104)).done(function(result){
+                        if(result === 'true'){
+
+                            $('#win_EMPRESAS_CREAR').window({
+                                title:          "Creación de nueva empresa.",
+                                collapsible:    false,
+                                width:          900, //goTasaW(75),
+                                height:         500, //goTasaH(75),
+                                modal:          true
+                            });                    
+                            $('#win_EMPRESAS_CREAR').window('refresh', '/index.php?goExec=Empresas&goAcc=iface_nuevo');                    
+
+                        }else{
+                            $.messager.alert('Acceso denegado','No tiene permiso para utilizar éste proceso','error');
+                        }
                     });                    
-                    $('#win_EMPRESAS_CREAR').window('refresh', '/index.php?goExec=Empresas&goAcc=iface_nuevo');                    
                     break;
                 //# *************************** #
                 case "cmd_EMPRESAS_BORRAR":
-                    $.messager.confirm({
-                        title: 'Eliminación de empresa.',
-                        ok: 'Sí',
-                        cancel: 'No',
-                        msg: '¡ ALTO !, ¿Está seguro de <b>eliminar todos</b> los  datos de la empresa?',
-                        fn: function(xContifma1){
-                            if(xContifma1){
-                                $.messager.confirm({
-                                    title: 'Eliminación de todos los datos.',
-                                    ok: 'Borrar',
-                                    cancel: 'Cancelar',
-                                    msg: 'Tómate tu tiempo; ¿estás plenamente <b>seguro</b>?, ésto es <b>irreversible</b>.',
-                                    fn: function(xContifma2){
-                                        if (xContifma2){
-                                            goRedirect("Empresas", "borrar");
-                                        }
+                    $.when(check_privilegios(1001, 103)).done(function(result){
+                        if(result === 'true'){
+
+                            $.messager.confirm({
+                                title: 'Eliminación de empresa.',
+                                ok: 'Sí',
+                                cancel: 'No',
+                                msg: '¡ ALTO !, ¿Está seguro de <b>eliminar todos</b> los  datos de la empresa?',
+                                fn: function(xContifma1){
+                                    if(xContifma1){
+                                        $.messager.confirm({
+                                            title: 'Eliminación de todos los datos.',
+                                            ok: 'Borrar',
+                                            cancel: 'Cancelar',
+                                            msg: 'Tómate tu tiempo; ¿estás plenamente <b>seguro</b>?, ésto es <b>irreversible</b>.',
+                                            fn: function(xContifma2){
+                                                if (xContifma2){
+                                                    goRedirect("Empresas", "borrar");
+                                                }
+                                            }
+                                        });                                
                                     }
-                                });                                
-                            }
+                                }
+                            });                                                                
+
+                        }else{
+                            $.messager.alert('Acceso denegado','No tiene permiso para utilizar éste proceso','error');
                         }
-                    });                                                                
+                    });                    
                     break;
                 case "cmd_EMPRESAS_RESTAURAR":
-                    $('#win_EMPRESAS_RESTAURAR').window({
-                        title:          "Recuperar respaldo de empresa activa.",
-                        collapsible:    false,
-                        width:          400, //goTasaW(35),
-                        height:         450, //goTasaH(35),
-                        modal:          true
+                    $.when(check_privilegios(1001, 102)).done(function(result){
+                        if(result === 'true'){
+
+                            $('#win_EMPRESAS_RESTAURAR').window({
+                                title:          "Recuperar respaldo de empresa activa.",
+                                collapsible:    false,
+                                width:          400, //goTasaW(35),
+                                height:         450, //goTasaH(35),
+                                modal:          true
+                            });                    
+                            $('#win_EMPRESAS_RESTAURAR').window('refresh', '/index.php?goExec=Empresas&goAcc=iface_restaurar');                    
+
+                        }else{
+                            $.messager.alert('Acceso denegado','No tiene permiso para utilizar éste proceso','error');
+                        }
                     });                    
-                    $('#win_EMPRESAS_RESTAURAR').window('refresh', '/index.php?goExec=Empresas&goAcc=iface_restaurar');                    
                     break;
                 //# *************************** #
                 case "cmd_USUARIOS_NUEVO":
-                    $('#win_USUARIOS_NUEVO').window({
-                        title:          "Creación de nuevo usuario.",
-                        collapsible:    false,
-                        width:          goTasaW(50),
-                        height:         goTasaH(50),
-                        modal:          true
-                    });
-                    $('#win_USUARIOS_NUEVO').window('refresh', '/index.php?goExec=Usuarios&goAcc=iface_nuevo');                    
+                    $.when(check_privilegios(1001, 102)).done(function(result){
+                        if(result === 'true'){
+
+                            $('#win_USUARIOS_NUEVO').window({
+                                title:          "Creación de nuevo usuario.",
+                                collapsible:    false,
+                                width:          goTasaW(50),
+                                height:         goTasaH(50),
+                                modal:          true
+                            });
+                            $('#win_USUARIOS_NUEVO').window('refresh', '/index.php?goExec=Usuarios&goAcc=iface_nuevo');                    
+
+                        }else{
+                            $.messager.alert('Acceso denegado','No tiene permiso para utilizar éste proceso','error');
+                        }
+                    });                    
                     break;
                 //# *************************** #
                 case "cmd_USUARIOS_PERMISOS":
+                    $.when(check_privilegios(1002, 114)).done(function(result){
+                        if(result === 'true'){
+
+
+
+                        }else{
+                            $.messager.alert('Acceso denegado','No tiene permiso para utilizar éste proceso','error');
+                        }
+                    });                    
                     break;
                 //# *************************** #
                 case "cmd_USUARIOS_ELIMINAR":
+                    $.when(check_privilegios(1002, 111)).done(function(result){
+                        if(result === 'true'){
+
+
+
+                        }else{
+                            $.messager.alert('Acceso denegado','No tiene permiso para utilizar éste proceso','error');
+                        }
+                    });                    
                     break;
                 //# *************************** #
                 case "cmd_USUARIOS_MODIFICAR":
+                    $.when(check_privilegios(1002, 112)).done(function(result){
+                        if(result === 'true'){
+
+
+
+                        }else{
+                            $.messager.alert('Acceso denegado','No tiene permiso para utilizar éste proceso','error');
+                        }
+                    });                    
                     break;
                 //# *************************** #
                 case "cmd_USUARIOS_SUSPENDER":
+                    $.when(check_privilegios(1002, 115)).done(function(result){
+                        if(result === 'true'){
+
+
+
+                        }else{
+                            $.messager.alert('Acceso denegado','No tiene permiso para utilizar éste proceso','error');
+                        }
+                    });                    
                     break;
                 //# *************************** #
 

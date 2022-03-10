@@ -66,6 +66,7 @@ $(document).ready(function(){
     document.title = "goPAC® - Empresas.";
     //console.clear();
     //# ************************************************ #
+    //# ************************************************ #
     var winEMPRESAS = $('#winEMPRESAS').window({
         title: 'goPAC® - Seleccione la empresa.',
         iconCls: 'icon-file-invoice-dollar',

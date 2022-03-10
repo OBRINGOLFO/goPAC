@@ -1,0 +1,78 @@
+<?php
+/**
+ * @autor Rixio Danilo Iguarán Chourio.
+ * @cédula-profesional 12196442
+ * @correo-eletrónico atencion.clientes@obringolfo.com
+ * @denominacion OBRAS INFORMÁTICAS DEL GOLFO
+ * @empresa OBRINGOLFO S.A.S. DE C.V.
+ * @proyecto  goPAC.
+ * @copyright 2021
+ */
+
+
+class Usuarios_Privilegios extends ModeloBase{
+    private $table;
+
+    private $uid_usuario;
+    private $modulo;
+    private $funcion;
+    private $acceso;
+    
+    # ********************************************************** #
+    public function __construct($adapter) {
+        try {
+
+            $this->table = "c_usuarios_privilegios";
+            parent::__construct($this->table, $adapter);
+
+        } catch (Exception $e) {
+            mostrar_error($e);
+        }
+    }
+    # ********************************************************** #
+    public function getUid_usuario(){ return $this->uid_usuario; }
+    public function setUid_usuario($uid_usuario){ $this->uid_usuario = $uid_usuario; }
+    # ********************************************************** #
+    public function getModulo(){ return $this->modulo; }
+    public function setModulo($modulo){ $this->modulo = $modulo; }
+    # ********************************************************** #
+    public function getFuncion(){ return $this->funcion; }
+    public function setFuncion($funcion){ $this->funcion = $funcion; }
+    # ********************************************************** #
+    public function getAcceso(){ return $this->acceso; }
+    public function setAcceso($acceso){ $this->acceso = $acceso; }
+
+    /** ********************************************************
+     * 
+     * ***************************************************** **/
+    function get_permiso($modulo, $funcion){
+        try {
+            if($_SESSION["usuario"]['uid_usuario'] == '5b661da4-5e66-4925-bdb3-e1f2c61ec549'){ //Es el usuario Administrador
+                return 'true'; //Concedemos el acceso
+            }else{ //Evaluamos el acceso al sistema
+                $xQuery = 'SELECT * FROM '.$this->table.' WHERE 
+                        (uid_usuario="'.$_SESSION["usuario"]['uid_usuario'].'") AND
+                        (modulo='.$modulo.') AND
+                        (funcion='.$funcion.');';
+                //$this->auditar("xQuery: ".$xQuery);
+                $xRespuesta = $this->db()->query($xQuery);
+                $xRespuesta = $xRespuesta->fetch_assoc();
+                if($xRespuesta){
+                    if($xRespuesta['acceso'] == 0){ 
+                        return 'false';
+                    }else{
+                        return 'true';
+                    }
+                }else{
+                    return 'false';
+                }
+            }
+
+        } catch (Exception $e) {
+            mostrar_error($e);
+        }
+    }
+
+
+}
+?>

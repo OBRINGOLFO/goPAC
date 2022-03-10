@@ -165,6 +165,19 @@
         return true; //Validado
     }
      /** ****************************************************** **/
+    function check_privilegios(_modulo, _funcion){
+        //VERIFICANDO PERMISOS DEL USUARIO
+        var xData = { modulo: _modulo, funcion: _funcion };
+        return $.ajax({
+            type: 'POST',
+            url: '/index.php?goExec=Usuarios&goAcc=check_privilegio',
+            data: xData,
+            cache: false,            
+            success:function(respuesta){
+                //console.log('respuesta: '+respuesta);   
+            }
+        });
+    }     
     /** ****************************************************** **/
     /** ****************************************************** **/
     /** ****************************************************** **/

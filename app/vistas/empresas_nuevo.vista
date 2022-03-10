@@ -9,7 +9,6 @@
  * @copyright 2021
  */
 
-
 ?>
 
     <div id="ifaceWINDOW_empresas_nuevo" name="ifaceWINDOW_empresas_nuevo" class="easyui-layout" style="width:99%; height:99%; margin: 5px 5px 5px 5px;">
