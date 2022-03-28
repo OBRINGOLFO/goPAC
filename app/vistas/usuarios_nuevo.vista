@@ -13,8 +13,37 @@
 ?>
 
     <div id="ifaceWINDOW_usuarios_nuevo" name="ifaceWINDOW_usuarios_nuevo" class="easyui-layout" style="width:99%; height:99%; margin: 5px 5px 5px 5px;">
-        <div data-options="region: 'center'" style="padding: 6px; background: #eee;">
+        <div data-options="region: 'center'" style="padding: 6px; background: #eee;  overflow: hidden;">
+            <form id="Frm_EMPRESAS_NUEVO" method="post">
+                <div class="row no-gutters">
+                    <div id="panel_01" class="easyui-panel" style="width:100%; height:350px; padding:10px; background:#fafafa; overflow: hidden;"
+                        data-options="iconCls:'', closable:false, collapsible:false, minimizable:false, maximizable:false">
+                            <input id="txt_USUARIO_NOMBRE" name="txt_USUARIO_NOMBRE" class="easyui-textbox" style="width: 100%; height: 40px;"
+                                data-options="required: true, validType: 'length[3,30]', prompt: 'Nombre de usuario', iconCls: 'icon-user', iconWidth: 16"
+                            >
+                            <input id="txt_USUARIO_SECRETO" name="txt_USUARIO_SECRETO" class="easyui-textbox" style="width: 49.5%; height: 40px;"
+                                data-options="required: true, validType: 'length[3,50]', prompt: 'Contraseña', iconCls: 'icon-rss', iconWidth: 16"
+                            >
+                            <input id="txt_USUARIO_SECRETO2" name="txt_USUARIO_SECRETO2" class="easyui-textbox" style="width: 49.5%; height: 40px;"
+                                data-options="required: true, validType: 'length[3,50]', prompt: 'Confirmación', iconCls: 'icon-rss', iconWidth: 16"
+                            >
+                            <select id="txt_USUARIO_ROL" class="easyui-combobox" name="txt_USUARIO_ROL" style="width: 100%; height: 40px;"
+                                    data-options="required: true, iconCls: 'icon-id-card', iconWidth: 16"
+                                >
+                                    <?php
+                                        //foreach($RegimenFiscal as $xRegimen) {
+                                            //echo '<option value="' . $xRegimen->c_RegimenFiscal . '">[' . $xRegimen->c_RegimenFiscal . '] ' . $xRegimen->Descripcion . '</option>';
+                                        //}
+                                    ?>
+                            </select>                                
+                            <input id="txt_USUARIO_OBSERVACIONES" name="txt_USUARIO_OBSERVACIONES" class="easyui-textbox" style="width: 100%; height: 100px;"
+                                data-options="required: false, validType: 'length[0,1000]', prompt: 'Observaciones', iconCls: 'icon-chalkboard-user', iconWidth: 16, multiline: true"
+                            >
+                    </div>
+                </div>
 
+
+            </form>
         </div>
         <div data-options="region: 'north', split: true,  minHeight: 82, maxHeight: 82" style="display: flex; align-items: flex-end; height: 82px;">
             <a class="easyui-menubutton" data-options="
@@ -22,7 +51,7 @@
                         iconCls: 'icon-floppy-disk',
                         iconAlign: 'top',
                         size: 'small'"
-                        id="cmd_SAVE_NEW_USUARIO";
+                        id="cmd_SAVE_NEW_USUARIO"
                         style="width: 70px; margin: 5px 0px 5px 5px; background: #eee; border-width: 1px;"
                         onmouseover='statusMSG("Crea y guarda toda la información del usuario.");'
                         onmouseout='statusMSG_clear();'
@@ -32,7 +61,7 @@
                         iconCls: 'icon-question',
                         iconAlign: 'top',
                         size: 'small'"
-                        id="cmd_HELP_NEW_USUARIO";
+                        id="cmd_HELP_NEW_USUARIO"
                         style="width: 70px; margin: 5px 0px 5px 5px; background: #eee; border-width: 1px;"
                         onmouseover='statusMSG("Abre el manual de ayuda.");'
                         onmouseout='statusMSG_clear();'
@@ -42,7 +71,7 @@
                         iconCls: 'icon-arrow-up-right-from-square',
                         iconAlign: 'top',
                         size: 'small'"
-                        id="cmd_CLOSE_NEW_USUARIO";
+                        id="cmd_CLOSE_NEW_USUARIO"
                         style="width: 70px; margin: 5px 5px 5px auto; background: #eee; border-width: 1px;"
                         onmouseover='statusMSG("Cierra ésta ventana.");'
                         onmouseout='statusMSG_clear();'
@@ -67,7 +96,15 @@
                     break;
                 //# **************************************************** #
                 case "cmd_SAVE_NEW_USUARIO":
-                    alert(this.id+" -> onClick()");
+                    $.when(check_privilegios(1001, 102)).done(function(result){
+                        if(result === 'true'){
+
+                            alert(this.id+" -> onClick()");                            
+
+                        }else{
+                            $.messager.alert('Acceso denegado','No tiene permiso para utilizar éste proceso','error');
+                        }
+                    });                    
                     break;
                 //# **************************************************** #
                 //# **************************************************** #
